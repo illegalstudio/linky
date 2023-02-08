@@ -1,0 +1,29 @@
+{
+    "name": "illegal/linky",
+    "description": "Linky is a free and open source URL shortener and manager.",
+    "type": "library",
+    "license": "GPL-3.0-only",
+    "authors": [
+        {
+            "name": "Vincenzo Petrucci",
+            "email": "vincenzo.petrucci@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": { },
+    "autoload": {
+        "psr-4": {
+            "Illegal\\Linky\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Illegal\\Linky\\ServiceProvider",
+                "Illegal\\Linky\\AuthServiceProvider",
+                "Illegal\\Linky\\EventServiceProvider",
+                "Illegal\\Linky\\RouteServiceProvider"
+            ]
+        }
+    }
+}
