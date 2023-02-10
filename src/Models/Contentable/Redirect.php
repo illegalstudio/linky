@@ -10,7 +10,7 @@ class Redirect extends AbstractModel
     use Contentable;
 
     /**
-     * @var string $table The table associated with the model.
+     * @var string $tableName The table associated with the model.
      */
-    protected $table = 'redirects';
+    protected $tableName = 'redirects';
 }

@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 class Content extends AbstractModel
 {
     /**
-     * @var string $table The table associated with the model.
+     * @var string $tableName The table associated with the model.
      */
-    protected $table = 'contents';
+    protected $tableName = 'contents';
 
     /**
      * @return MorphTo
