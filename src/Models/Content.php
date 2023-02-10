@@ -2,9 +2,10 @@
 
 namespace Illegal\Linky\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illegal\Linky\Abstracts\AbstractModel;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
-class Content extends Model
+class Content extends AbstractModel
 {
     /**
      * @var string $table The table associated with the model.
@@ -12,12 +13,10 @@ class Content extends Model
     protected $table = 'contents';
 
     /**
-     * Returns the table name with the prefix.
-     *
-     * @return string
+     * @return MorphTo
      */
-    public function getTable(): string
+    public function contentable(): MorphTo
     {
-        return config('linky.db.prefix') . $this->table;
+        return $this->morphTo();
     }
 }
