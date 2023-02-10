@@ -1,16 +1,16 @@
 <?php
 
-namespace Illegal\Linky\Models;
+namespace Illegal\Linky\Models\Contentable;
 
 use Illegal\Linky\Abstracts\AbstractModel;
 use Illegal\Linky\Traits\Contentable;
 
-class Page extends AbstractModel
+class Collection extends AbstractModel
 {
     use Contentable;
 
     /**
      * @var string $table The table associated with the model.
      */
-    protected $table = 'pages';
+    protected $table = 'collections';
 }
