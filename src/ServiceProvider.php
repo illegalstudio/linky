@@ -12,7 +12,7 @@ class ServiceProvider extends IlluminateServiceProvider
     public function register(): void
     {
         /**
-         * Bennu config file
+         * Linky config file
          */
         $this->mergeConfigFrom(__DIR__ . "/../config/linky.php", "linky");
     }
