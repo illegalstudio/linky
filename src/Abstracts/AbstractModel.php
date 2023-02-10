@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class AbstractModel extends Model
 {
-    protected $table;
+    protected $tableName;
 
     /**
      * Returns the table name with the prefix.
@@ -15,6 +15,6 @@ abstract class AbstractModel extends Model
      */
     public function getTable(): string
     {
-        return config('linky.db.prefix') . $this->table;
+        return config('linky.db.prefix') . $this->tableName;
     }
 }
