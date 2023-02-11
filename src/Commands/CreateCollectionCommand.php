@@ -30,9 +30,13 @@ class CreateCollectionCommand extends Command
     {
         $this->info('Create a new collection');
 
+        $title = $this->ask('What is the title of the collection?');
+
         /**
          * Create the collection.
          */
-        CollectionRepository::create();
+        CollectionRepository::create([
+            'title' => $title
+        ]);
     }
 }

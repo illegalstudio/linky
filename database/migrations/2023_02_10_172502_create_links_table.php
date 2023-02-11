@@ -8,7 +8,7 @@ return new class extends Migration {
 
     public static function up(): void
     {
-        Schema::create(config('linky.db.prefix') . 'redirects', function (Blueprint $table) {
+        Schema::create(config('linky.db.prefix') . 'links', function (Blueprint $table) {
             $table->id();
             $table->string('url', 2048);
             $table->timestamps();
@@ -17,6 +17,6 @@ return new class extends Migration {
 
     public static function down(): void
     {
-        Schema::dropIfExists(config('linky.db.prefix') . 'redirects');
+        Schema::dropIfExists(config('linky.db.prefix') . 'links');
     }
 };

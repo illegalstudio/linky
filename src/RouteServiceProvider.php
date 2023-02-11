@@ -4,7 +4,7 @@ namespace Illegal\Linky;
 
 use Illegal\Linky\Commands\CreateCollectionCommand;
 use Illegal\Linky\Commands\CreatePageCommand;
-use Illegal\Linky\Commands\CreateRedirectCommand;
+use Illegal\Linky\Commands\CreateLinkCommand;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as IlluminateRouteServiceProvider;
 
 class RouteServiceProvider extends IlluminateRouteServiceProvider
@@ -15,7 +15,7 @@ class RouteServiceProvider extends IlluminateRouteServiceProvider
         $this->commands([
             CreateCollectionCommand::class,
             CreatePageCommand::class,
-            CreateRedirectCommand::class
+            CreateLinkCommand::class
         ]);
     }
 }

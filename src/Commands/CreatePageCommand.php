@@ -30,9 +30,15 @@ class CreatePageCommand extends Command
     {
         $this->info('Create a new page');
 
+        $title = $this->ask('What is the title of the page?');
+        $body  = $this->ask('What is the body of the page?');
+
         /**
          * Create the page.
          */
-        PageRepository::create();
+        PageRepository::create([
+            'title' => $title,
+            'body'  => $body
+        ]);
     }
 }
