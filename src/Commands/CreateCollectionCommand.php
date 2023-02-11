@@ -2,9 +2,6 @@
 
 namespace Illegal\Linky\Commands;
 
-use Illegal\Linky\Enums\ContentType;
-use Illegal\Linky\Models\Content;
-use Illegal\Linky\Models\Contentable\Collection;
 use Illegal\Linky\Repositories\CollectionRepository;
 use Illuminate\Console\Command;
 
