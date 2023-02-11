@@ -5,6 +5,7 @@ namespace Illegal\Linky\Commands;
 use Illegal\Linky\Enums\ContentType;
 use Illegal\Linky\Models\Content;
 use Illegal\Linky\Models\Contentable\Collection;
+use Illegal\Linky\Repositories\CollectionRepository;
 use Illuminate\Console\Command;
 
 class CreateCollectionCommand extends Command
@@ -32,12 +33,9 @@ class CreateCollectionCommand extends Command
     {
         $this->info('Create a new collection');
 
-        $content = new Content();
-        $content->forceFill([
-            'type' => ContentType::Collection,
-            'slug' => \Str::random(),
-        ]);
-        $content->contentable()->associate(Collection::forceCreate([]));
-        $content->save();
+        /**
+         * Create the collection.
+         */
+        CollectionRepository::create();
     }
 }

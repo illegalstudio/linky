@@ -5,6 +5,7 @@ namespace Illegal\Linky\Commands;
 use Illegal\Linky\Enums\ContentType;
 use Illegal\Linky\Models\Content;
 use Illegal\Linky\Models\Contentable\Redirect;
+use Illegal\Linky\Repositories\RedirectRepository;
 use Illuminate\Console\Command;
 
 class CreateRedirectCommand extends Command
@@ -32,12 +33,9 @@ class CreateRedirectCommand extends Command
     {
         $this->info('Create a new redirect');
 
-        $content = new Content();
-        $content->forceFill([
-            'type' => ContentType::Redirect,
-            'slug' => \Str::random(),
-        ]);
-        $content->contentable()->associate(Redirect::forceCreate([]));
-        $content->save();
+        /**
+         * Create the redirect.
+         */
+        RedirectRepository::create();
     }
 }
