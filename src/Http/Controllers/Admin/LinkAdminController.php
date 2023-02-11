@@ -10,7 +10,7 @@ class LinkAdminController extends Controller
 {
     public function index(Request $request)
     {
-        $links = Link::paginate();
+        $links = Link::with('content')->paginate();
 
         return view('linky::admin.link.index',  [
             'links' => $links
@@ -42,8 +42,9 @@ class LinkAdminController extends Controller
         return redirect()->route('linky.admin.link.index');
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request, Link $link)
     {
+        $link->delete();
         return redirect()->route('linky.admin.link.index');
     }
 }

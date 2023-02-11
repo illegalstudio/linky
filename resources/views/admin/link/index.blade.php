@@ -11,6 +11,7 @@
                 <thead>
                     <tr>
                         <th class="px-4 py-2">Name</th>
+                        <th class="px-4 py-2">Slug</th>
                         <th class="px-4 py-2">Url</th>
                         <th class="px-4 py-2">Actions</th>
                     </tr>
@@ -18,7 +19,8 @@
                 <tbody>
                     @foreach ($links as $link)
                         <tr>
-                            <td class="border px-4 py-2">{{ $link->name }}</td>
+                            <td class="border px-4 py-2">{{ $link->content->name }}</td>
+                            <td class="border px-4 py-2">{{ $link->content->slug }}</td>
                             <td class="border px-4 py-2">{{ $link->url }}</td>
                             <td class="border px-4 py-2">
                                 <a href="{{ route('linky.admin.link.edit', $link) }}" class="btn btn-primary">Edit</a>
