@@ -19,7 +19,7 @@ final class LinkRepository extends AbstractRepository
     {
         return parent::createContent(
             Link::forceCreate($data),
-            ContentType::Redirect
+            ContentType::Link
         );
     }
 }

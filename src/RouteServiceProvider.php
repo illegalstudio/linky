@@ -17,5 +17,9 @@ class RouteServiceProvider extends IlluminateRouteServiceProvider
             CreatePageCommand::class,
             CreateLinkCommand::class
         ]);
+
+        $this->routes(function () {
+            $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+        });
     }
 }

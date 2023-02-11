@@ -4,7 +4,7 @@ namespace Illegal\Linky\Enums;
 
 enum ContentType: string
 {
-    case Redirect = "redirect";
+    case Link = "link";
     case Collection = "collection";
     case Page = "page";
 }
