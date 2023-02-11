@@ -10,6 +10,7 @@ return new class extends Migration {
     {
         Schema::create(config('linky.db.prefix') . 'redirects', function (Blueprint $table) {
             $table->id();
+            $table->string('url', 2048);
             $table->timestamps();
         });
     }
