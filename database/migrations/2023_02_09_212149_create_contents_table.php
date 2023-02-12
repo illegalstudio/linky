@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create(config('linky.db.prefix') . 'contents', function (Blueprint $table) {
             $table->id();
-            $table->string('type', 10)->default(ContentType::Redirect->value);
+            $table->string('type', 10)->default(ContentType::Link->value);
             $table->string('status', 10)->default(ContentStatus::Draft->value);
             $table->string('slug')->index()->unique();
             $table->string('name')->nullable();
