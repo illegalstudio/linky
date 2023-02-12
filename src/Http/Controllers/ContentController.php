@@ -26,7 +26,7 @@ class ContentController extends Controller
         /**
          * If the content is not found, abort with a 404.
          */
-        if(!$content) {
+        if (!$content) {
             abort(404);
         }
 
