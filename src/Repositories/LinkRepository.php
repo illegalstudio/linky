@@ -46,8 +46,8 @@ final class LinkRepository extends AbstractRepository
      * @param array $data
      * @param ContentStatus $status
      * @param string $slug
-     * @param string $name
-     * @param string $description
+     * @param string|null $name
+     * @param string|null $description
      * @return Content
      */
     public static function update(
@@ -55,8 +55,8 @@ final class LinkRepository extends AbstractRepository
         array         $data,
         ContentStatus $status,
         string        $slug,
-        string        $name,
-        string        $description
+        string        $name = null,
+        string        $description = null
     ): Content
     {
         $link->fill($data);

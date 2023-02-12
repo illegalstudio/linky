@@ -59,16 +59,16 @@ abstract class AbstractRepository
      * @param Content $content
      * @param ContentStatus $status
      * @param string $slug
-     * @param string $name
-     * @param string $description
+     * @param string|null $name
+     * @param string|null $description
      * @return Content
      */
     public static function updateContent(
         Content       $content,
         ContentStatus $status,
         string        $slug,
-        string        $name,
-        string        $description
+        string        $name = null,
+        string        $description = null
     ): Content
     {
         $content->forceFill([

@@ -18,10 +18,9 @@ class LinkAdminController extends Controller
     /**
      * List all links.
      *
-     * @param Request $request
      * @return Application|Factory|View
      */
-    public function index(Request $request)
+    public function index()
     {
         $links = Link::with('content')->paginate();
 
@@ -33,10 +32,9 @@ class LinkAdminController extends Controller
     /**
      * Show form to create a new link.
      *
-     * @param Request $request
      * @return Application|Factory|View
      */
-    public function create(Request $request)
+    public function create()
     {
         return view('linky::admin.link.create');
     }
@@ -49,6 +47,14 @@ class LinkAdminController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'url' => 'required|url',
+            'status' => 'required|in:draft,active,archived',
+            'slug' => 'nullable|string',
+            'name' => 'nullable|string',
+            'description' => 'nullable|string'
+        ]);
+
         LinkRepository::create(
             $request->only(['url']),
             ContentStatus::from($request->get('status')),
@@ -63,11 +69,10 @@ class LinkAdminController extends Controller
     /**
      * Not implemented, redirect to edit.
      *
-     * @param Request $request
      * @param Link $link
      * @return Application|RedirectResponse|Redirector
      */
-    public function show(Request $request, Link $link)
+    public function show(Link $link)
     {
         return redirect(route('linky.admin.link.edit', $link));
     }
@@ -75,11 +80,10 @@ class LinkAdminController extends Controller
     /**
      * Show form to edit a link.
      *
-     * @param Request $request
      * @param Link $link
      * @return Application|Factory|View
      */
-    public function edit(Request $request, Link $link)
+    public function edit(Link $link)
     {
         return view('linky::admin.link.edit', [
             'link' => $link
@@ -95,6 +99,14 @@ class LinkAdminController extends Controller
      */
     public function update(Request $request, Link $link)
     {
+        $request->validate([
+            'url' => 'required|url',
+            'status' => 'required|in:draft,active,archived',
+            'slug' => 'nullable|string',
+            'name' => 'nullable|string',
+            'description' => 'nullable|string'
+        ]);
+
         LinkRepository::update(
             $link,
             $request->only(['url']),
@@ -110,11 +122,10 @@ class LinkAdminController extends Controller
     /**
      * Delete a link.
      *
-     * @param Request $request
      * @param Link $link
      * @return RedirectResponse
      */
-    public function destroy(Request $request, Link $link)
+    public function destroy(Link $link)
     {
         $link->delete();
         return redirect()->route('linky.admin.link.index');

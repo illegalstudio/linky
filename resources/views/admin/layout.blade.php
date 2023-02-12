@@ -12,11 +12,11 @@
         <div class="flex w-full items-center justify-between border-b border-indigo-500 py-6 lg:border-none">
             <div class="flex items-center">
                 <a href="#">
-                    <span class="sr-only">Your Company</span>
+                    <img class="h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=white" alt="">
                     <img class="h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=white" alt="">
                 </a>
                 <div class="ml-10 hidden space-x-8 lg:block">
-                    <a href="#" class="text-base font-medium text-white hover:text-indigo-50">Links</a>
+                    <a href="{{ route('linky.admin.link.index') }}" class="text-base font-medium text-white hover:text-indigo-50">Links</a>
                     <a href="#" class="text-base font-medium text-white hover:text-indigo-50">Collections</a>
                     <a href="#" class="text-base font-medium text-white hover:text-indigo-50">Pages</a>
                 </div>
@@ -34,7 +34,7 @@
     </nav>
 </header>
 
-<div class="mx-auto max-w-7xl">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     @yield('content')
 </div>
 
