@@ -59,8 +59,7 @@ final class LinkRepository extends AbstractRepository
         string        $description = null
     ): Content
     {
-        $link->fill($data);
-        $link->save();
+        $link->update($data);
 
         return parent::updateContent($link->content, $status, $slug, $name, $description);
     }
