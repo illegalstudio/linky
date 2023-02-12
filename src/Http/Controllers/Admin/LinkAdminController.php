@@ -11,7 +11,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Routing\Redirector;
 
 class LinkAdminController extends Controller
 {
@@ -70,7 +69,7 @@ class LinkAdminController extends Controller
      * Not implemented, redirect to edit.
      *
      * @param Link $link
-     * @return Application|RedirectResponse|Redirector
+     * @return RedirectResponse
      */
     public function show(Link $link)
     {

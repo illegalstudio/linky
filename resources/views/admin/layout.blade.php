@@ -13,12 +13,11 @@
             <div class="flex items-center">
                 <a href="#">
                     <img class="h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=white" alt="">
-                    <img class="h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=white" alt="">
                 </a>
                 <div class="ml-10 hidden space-x-8 lg:block">
                     <a href="{{ route('linky.admin.link.index') }}" class="text-base font-medium text-white hover:text-indigo-50">Links</a>
-                    <a href="#" class="text-base font-medium text-white hover:text-indigo-50">Collections</a>
-                    <a href="#" class="text-base font-medium text-white hover:text-indigo-50">Pages</a>
+                    <a href="{{ route('linky.admin.collection.index') }}" class="text-base font-medium text-white hover:text-indigo-50">Collections</a>
+                    <a href="{{ route('linky.admin.page.index') }}" class="text-base font-medium text-white hover:text-indigo-50">Pages</a>
                 </div>
             </div>
             <div class="ml-10 space-x-4">
