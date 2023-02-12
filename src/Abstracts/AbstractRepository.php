@@ -52,4 +52,33 @@ abstract class AbstractRepository
 
         return $content;
     }
+
+    /**
+     * Update content, given the provided data.
+     *
+     * @param Content $content
+     * @param ContentStatus $status
+     * @param string $slug
+     * @param string $name
+     * @param string $description
+     * @return Content
+     */
+    public static function updateContent(
+        Content       $content,
+        ContentStatus $status,
+        string        $slug,
+        string        $name,
+        string        $description
+    ): Content
+    {
+        $content->forceFill([
+            'status'      => $status,
+            'slug'        => $slug,
+            'name'        => $name,
+            'description' => $description,
+        ]);
+        $content->save();
+
+        return $content;
+    }
 }

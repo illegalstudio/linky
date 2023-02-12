@@ -38,4 +38,30 @@ final class LinkRepository extends AbstractRepository
             $description
         );
     }
+
+    /**
+     * Update the link and content.
+     *
+     * @param Link $link
+     * @param array $data
+     * @param ContentStatus $status
+     * @param string $slug
+     * @param string $name
+     * @param string $description
+     * @return Content
+     */
+    public static function update(
+        Link          $link,
+        array         $data,
+        ContentStatus $status,
+        string        $slug,
+        string        $name,
+        string        $description
+    ): Content
+    {
+        $link->fill($data);
+        $link->save();
+
+        return parent::updateContent($link->content, $status, $slug, $name, $description);
+    }
 }

@@ -11,6 +11,21 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 trait Contentable
 {
     /**
+     * Boot the Contentable model.
+     *
+     * @return void
+     */
+    public static function bootContentable(): void
+    {
+        /**
+         * Delete the content when the model is deleted.
+         */
+        static::deleting(function ($model) {
+            $model->content()->delete();
+        });
+    }
+
+    /**
      * @return MorphOne
      */
     public function content(): MorphOne
