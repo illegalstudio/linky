@@ -5,8 +5,11 @@ namespace Illegal\Linky\Http\Controllers\Admin;
 use Illegal\Linky\Enums\ContentStatus;
 use Illegal\Linky\Models\Contentable\Link;
 use Illegal\Linky\Repositories\LinkRepository;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Routing\Redirector;
 
 class LinkAdminController extends Controller
 {
@@ -37,14 +40,23 @@ class LinkAdminController extends Controller
         return redirect()->route('linky.admin.link.index');
     }
 
-    public function show(Request $request, $id)
+    /**
+     * Not implemented, redirect to edit.
+     *
+     * @param Request $request
+     * @param Link $link
+     * @return Application|RedirectResponse|Redirector
+     */
+    public function show(Request $request, Link $link)
     {
-        return view('linky::admin.link.show');
+        return redirect(route('linky.admin.link.edit', $link));
     }
 
-    public function edit(Request $request, $id)
+    public function edit(Request $request, Link $link)
     {
-        return view('linky::admin.link.edit');
+        return view('linky::admin.link.edit', [
+            'link' => $link
+        ]);
     }
 
     public function update(Request $request, $id)

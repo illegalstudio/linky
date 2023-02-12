@@ -1,5 +1,6 @@
 <form class="px-4 sm:px-6 lg:px-8 space-y-6" action="{{ $action }}" method="POST">
     @csrf
+    @method($method)
     <div class="bg-white px-4 py-5 shadow sm:rounded-lg sm:p-6">
         <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="md:col-span-1">
@@ -12,6 +13,7 @@
                     <div class="mt-1">
                         <input type="text" name="name" id="name"
                                class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                               value="{{ $link->content->name ?? "" }}"
                                placeholder="">
                     </div>
                 </div>
@@ -21,6 +23,7 @@
                     <div class="mt-1">
                         <input type="text" name="url" id="url"
                                class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                               value="{{ $link->url ?? "" }}"
                                placeholder="https://">
                     </div>
                 </div>
@@ -30,6 +33,7 @@
                     <div class="mt-1">
                         <input type="text" name="slug" id="slug"
                                class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                               value="{{ $link->content->slug ?? "" }}"
                                placeholder="">
                     </div>
                     <p class="mt-2 text-sm text-gray-500">Leave empty to get auto-generated slug</p>
@@ -40,7 +44,7 @@
                     <div class="mt-1">
                             <textarea id="description" name="description" rows="3"
                                       class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                      placeholder="you@example.com"></textarea>
+                                      placeholder="you@example.com">{{ $link->content->description ?? "" }}</textarea>
                     </div>
                     <p class="mt-2 text-sm text-gray-500">Brief description for your link</p>
                 </div>
@@ -51,17 +55,17 @@
                         <div class="mt-4 space-y-4">
                             <div class="flex items-center">
                                 <input id="status-draft" name="status" type="radio" value="draft"
-                                       class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                       class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500" @if (($link->content->status->value ?? "draft") == "draft") checked @endif>
                                 <label for="status-draft" class="ml-3 block text-sm font-medium text-gray-700">Draft</label>
                             </div>
                             <div class="flex items-center">
                                 <input id="status-active" name="status" type="radio" value="active"
-                                       class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                       class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500" @if (($link->content->status->value ?? "draft") == "active") checked @endif>
                                 <label for="status-active" class="ml-3 block text-sm font-medium text-gray-700">Active</label>
                             </div>
                             <div class="flex items-center">
                                 <input id="status-archived" name="status" type="radio" value="archived"
-                                       class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                       class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500" @if (($link->content->status->value ?? "draft") == "archived") checked @endif>
                                 <label for="status-archived" class="ml-3 block text-sm font-medium text-gray-700">Archived</label>
                             </div>
                         </div>
