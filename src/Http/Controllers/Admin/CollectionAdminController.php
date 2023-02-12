@@ -2,7 +2,10 @@
 
 namespace Illegal\Linky\Http\Controllers\Admin;
 
+use Illegal\Linky\Enums\ContentStatus;
+use Illegal\Linky\Models\Content;
 use Illegal\Linky\Models\Contentable\Collection;
+use Illegal\Linky\Repositories\CollectionRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -44,6 +47,16 @@ class CollectionAdminController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(array_merge(Content::$validationRules, []));
+
+        CollectionRepository::create(
+            [],
+            ContentStatus::from($request->get('status')),
+            $request->get('slug'),
+            $request->get('name'),
+            $request->get('description')
+        );
+
         return redirect()->route('linky.admin.collection.index');
     }
 
@@ -66,17 +79,31 @@ class CollectionAdminController extends Controller
      */
     public function edit(Collection $collection)
     {
-        return view('linky::admin.collection.edit');
+        return view('linky::admin.collection.edit', [
+            'collection' => $collection
+        ]);
     }
 
     /**
      * Update an existing collection.
      *
+     * @param Request $request
      * @param Collection $collection
      * @return RedirectResponse
      */
-    public function update(Collection $collection)
+    public function update(Request $request, Collection $collection)
     {
+        $request->validate(array_merge(Content::$validationRules, []));
+
+        CollectionRepository::update(
+            $collection,
+            [],
+            ContentStatus::from($request->get('status')),
+            $request->get('slug'),
+            $request->get('name'),
+            $request->get('description')
+        );
+
         return redirect()->route('linky.admin.collection.index');
     }
 
