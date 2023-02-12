@@ -19,4 +19,4 @@ Route::prefix('linky/admin')->middleware('web')->group(function () {
     ]);
 });
 
-Route::get('/{slug}', [ContentController::class, 'catchAll']);
+Route::fallback([ContentController::class, 'catchAll']);
