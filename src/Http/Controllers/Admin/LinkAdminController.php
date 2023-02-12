@@ -2,7 +2,9 @@
 
 namespace Illegal\Linky\Http\Controllers\Admin;
 
+use Illegal\Linky\Enums\ContentStatus;
 use Illegal\Linky\Models\Contentable\Link;
+use Illegal\Linky\Repositories\LinkRepository;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -24,6 +26,14 @@ class LinkAdminController extends Controller
 
     public function store(Request $request)
     {
+        LinkRepository::create(
+            $request->except(['_token', '_method', 'name', 'status', 'slug', 'description']),
+            ContentStatus::from($request->get('status')),
+            $request->get('slug'),
+            $request->get('name'),
+            $request->get('description')
+        );
+
         return redirect()->route('linky.admin.link.index');
     }
 
