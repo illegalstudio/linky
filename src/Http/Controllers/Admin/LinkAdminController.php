@@ -3,6 +3,7 @@
 namespace Illegal\Linky\Http\Controllers\Admin;
 
 use Illegal\Linky\Enums\ContentStatus;
+use Illegal\Linky\Models\Content;
 use Illegal\Linky\Models\Contentable\Link;
 use Illegal\Linky\Repositories\LinkRepository;
 use Illuminate\Contracts\Foundation\Application;
@@ -46,13 +47,9 @@ class LinkAdminController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'url' => 'required|url',
-            'status' => 'required|in:draft,active,archived',
-            'slug' => 'nullable|string',
-            'name' => 'nullable|string',
-            'description' => 'nullable|string'
-        ]);
+        $request->validate(array_merge(Content::$validationRules, [
+            'url' => 'required|url'
+        ]));
 
         LinkRepository::create(
             $request->only(['url']),
@@ -98,13 +95,9 @@ class LinkAdminController extends Controller
      */
     public function update(Request $request, Link $link)
     {
-        $request->validate([
-            'url' => 'required|url',
-            'status' => 'required|in:draft,active,archived',
-            'slug' => 'nullable|string',
-            'name' => 'nullable|string',
-            'description' => 'nullable|string'
-        ]);
+        $request->validate(array_merge(Content::$validationRules, [
+            'url' => 'required|url'
+        ]));
 
         LinkRepository::update(
             $link,
