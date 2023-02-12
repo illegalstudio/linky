@@ -20,6 +20,19 @@ class Content extends AbstractModel
     ];
 
     /**
+     * Common validation rules for all content types.
+     *
+     * @var array|string[]
+     */
+    public static array $validationRules = [
+        'status'      => 'required|in:draft,active,archived',
+        'slug'        => 'nullable|string|unique:Illegal\Linky\Models\Content',
+        'name'        => 'nullable|string',
+        'description' => 'nullable|string'
+    ];
+
+
+    /**
      * @return MorphTo
      */
     public function contentable(): MorphTo
