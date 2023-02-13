@@ -4,6 +4,7 @@ namespace Illegal\Linky\Http\Controllers;
 
 use Illegal\Linky\Enums\ContentType;
 use Illegal\Linky\Models\Content;
+use Illegal\Linky\Repositories\HitRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -30,6 +31,8 @@ class ContentController extends Controller
         if (!$content) {
             abort(404);
         }
+
+        HitRepository::create($request, $content);
 
         switch ($content->type) {
             case ContentType::Link:

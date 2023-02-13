@@ -1,0 +1,44 @@
+<?php
+
+use Illegal\Linky\Models\Content;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    public static function up(): void
+    {
+        Schema::create(config('linky.db.prefix') . 'hits', function (Blueprint $table) {
+            $table->id();
+            $table->foreignIdFor(Content::class)->constrained(Content::getTableName())->cascadeOnDelete();
+            $table->string('user_agent')->nullable();
+            $table->string('ip_address')->nullable();
+            $table->string('referer')->nullable();
+            $table->string('country')->nullable();
+            $table->string('city')->nullable();
+            $table->string('region')->nullable();
+            $table->string('postal_code')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
+            $table->string('timezone')->nullable();
+            $table->string('continent')->nullable();
+            $table->string('currency')->nullable();
+            $table->string('languages')->nullable();
+            $table->string('asn')->nullable();
+            $table->string('org')->nullable();
+            $table->string('isp')->nullable();
+            $table->string('connection_type')->nullable();
+            $table->string('domain')->nullable();
+            $table->string('device')->nullable();
+            $table->string('os')->nullable();
+            $table->string('browser')->nullable();
+            $table->string('browser_version')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    public static function down(): void
+    {
+        Schema::dropIfExists(config('linky.db.prefix') . 'hits');
+    }
+};

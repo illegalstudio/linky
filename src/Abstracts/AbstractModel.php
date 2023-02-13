@@ -17,4 +17,14 @@ abstract class AbstractModel extends Model
     {
         return config('linky.db.prefix') . $this->tableName;
     }
+
+    /**
+     * A static method to get the table name.
+     *
+     * @return string
+     */
+    public static function getTableName(): string
+    {
+        return (new static)->getTable();
+    }
 }
