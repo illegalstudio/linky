@@ -47,7 +47,7 @@ class LinkAdminController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(array_merge(Content::$validationRules, [
+        $request->validate(array_merge(Content::getValidationRules(), [
             'url' => 'required|url'
         ]));
 
@@ -95,7 +95,7 @@ class LinkAdminController extends Controller
      */
     public function update(Request $request, Link $link)
     {
-        $request->validate(array_merge(Content::$validationRules, [
+        $request->validate(array_merge(Content::getValidationRules($link->content->id), [
             'url' => 'required|url'
         ]));
 

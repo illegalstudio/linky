@@ -48,7 +48,7 @@ class PageAdminController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(array_merge(Content::$validationRules, [
+        $request->validate(array_merge(Content::getValidationRules(), [
             'body' => 'required'
         ]));
 
@@ -96,7 +96,7 @@ class PageAdminController extends Controller
      */
     public function update(Request $request, Page $page)
     {
-        $request->validate(array_merge(Content::$validationRules, [
+        $request->validate(array_merge(Content::getValidationRules($page->content->id), [
             'body' => 'required'
         ]));
 

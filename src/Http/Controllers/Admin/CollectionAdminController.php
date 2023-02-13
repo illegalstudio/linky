@@ -47,7 +47,7 @@ class CollectionAdminController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(array_merge(Content::$validationRules, []));
+        $request->validate(array_merge(Content::getValidationRules(), []));
 
         CollectionRepository::create(
             [],
@@ -93,7 +93,7 @@ class CollectionAdminController extends Controller
      */
     public function update(Request $request, Collection $collection)
     {
-        $request->validate(array_merge(Content::$validationRules, []));
+        $request->validate(array_merge(Content::getValidationRules($collection->content->id), []));
 
         CollectionRepository::update(
             $collection,

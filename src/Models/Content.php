@@ -24,13 +24,24 @@ class Content extends AbstractModel
      *
      * @var array|string[]
      */
-    public static array $validationRules = [
+    protected static array $validationRules = [
         'status'      => 'required|in:draft,active,archived',
         'slug'        => 'nullable|string|unique:Illegal\Linky\Models\Content',
         'name'        => 'nullable|string',
         'description' => 'nullable|string'
     ];
 
+
+    public static function getValidationRules(int $contentId = null): array
+    {
+        $validationRules = self::$validationRules;
+
+        if ($contentId) {
+            $validationRules['slug'] = 'nullable|string|unique:Illegal\Linky\Models\Content,slug,' . $contentId;
+        }
+
+        return $validationRules;
+    }
 
     /**
      * @return MorphTo

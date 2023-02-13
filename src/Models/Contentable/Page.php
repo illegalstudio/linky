@@ -13,4 +13,11 @@ class Page extends AbstractModel
      * @var string $tableName The table associated with the model.
      */
     protected $tableName = 'pages';
+
+    /**
+     * @var array $fillable The attributes that are mass assignable.
+     */
+    protected $fillable = [
+        'body'
+    ];
 }

@@ -7,6 +7,7 @@ use Illegal\Linky\Models\Content;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 
@@ -17,7 +18,7 @@ class ContentController extends Controller
      *
      * @param Request $request
      * @param string $slug
-     * @return Application|RedirectResponse|Redirector
+     * @return Application|RedirectResponse|Response|Redirector
      */
     public function catchAll(Request $request, string $slug)
     {
@@ -33,6 +34,8 @@ class ContentController extends Controller
         switch ($content->type) {
             case ContentType::Link:
                 return redirect($content->contentable->url);
+            case ContentType::Page:
+                return new Response($content->contentable->body);
             default:
                 abort(404);
         }
