@@ -37,4 +37,24 @@ final class PageRepository extends AbstractRepository
             $description
         );
     }
+
+    public static function update(
+        Page          $page,
+        array         $data,
+        ContentStatus $status,
+        string        $slug,
+        string        $name = null,
+        string        $description = null
+    ): Content
+    {
+        $page->update($data);
+
+        return parent::updateContent(
+            $page->content,
+            $status,
+            $slug,
+            $name,
+            $description
+        );
+    }
 }
