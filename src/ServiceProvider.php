@@ -2,7 +2,9 @@
 
 namespace Illegal\Linky;
 
+use Illegal\Linky\Http\Livewire\LinkList;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
+use Livewire\Livewire;
 
 class ServiceProvider extends IlluminateServiceProvider
 {
@@ -28,5 +30,10 @@ class ServiceProvider extends IlluminateServiceProvider
         $this->loadMigrationsFrom([
             __DIR__ . '/../database/migrations/'
         ]);
+
+        /**
+         * LiveWire components
+         */
+        Livewire::component('linky::link-list', LinkList::class);
     }
 }
