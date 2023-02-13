@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
 
-    public static function up(): void
+    public function up(): void
     {
-        Schema::create(config('linky.db.prefix') . 'contents', function (Blueprint $table) {
+        Schema::create(config('linky.db.prefix') . 'contents', static function (Blueprint $table) {
             $table->id();
             $table->string('type', 10)->default(ContentType::Link->value);
             $table->string('status', 10)->default(ContentStatus::Draft->value);
@@ -22,7 +22,7 @@ return new class extends Migration {
         });
     }
 
-    public static function down(): void
+    public function down(): void
     {
         Schema::dropIfExists(config('linky.db.prefix') . 'contents');
     }

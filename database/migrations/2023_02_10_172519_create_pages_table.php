@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
 
-    public static function up(): void
+    public function up(): void
     {
         Schema::create(config('linky.db.prefix') . 'pages', function (Blueprint $table) {
             $table->id();
@@ -15,7 +15,7 @@ return new class extends Migration {
         });
     }
 
-    public static function down(): void
+    public function down(): void
     {
         Schema::dropIfExists(config('linky.db.prefix') . 'pages');
     }
