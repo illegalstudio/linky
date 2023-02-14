@@ -18,11 +18,13 @@ class ContentController extends Controller
      * The main route, catches all the requests and handles them
      *
      * @param Request $request
-     * @param string $slug
+     * @param string|null $slug
      * @return Application|RedirectResponse|Response|Redirector
      */
-    public function catchAll(Request $request, string $slug)
+    public function catchAll(Request $request, string $slug = null)
     {
+        $slug = $slug ?? config('linky.home_slug');
+
         $content = Content::where('slug', $slug)->with('contentable')->first();
 
         /**
