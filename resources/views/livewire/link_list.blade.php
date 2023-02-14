@@ -6,13 +6,13 @@
                 <table class="min-w-full divide-y divide-gray-300">
                     <thead class="bg-gray-50">
                     <tr>
-                        <th scope="col" wire:click.prevent="sortBy('{{ \Illegal\Linky\Models\Content::getField('name')  }}')"
+                        <th scope="col" wire:click.prevent="sortBy('{{ $sortFields['name']  }}')"
                             class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name
                         </th>
-                        <th scope="col" wire:click.prevent="sortBy('{{ \Illegal\Linky\Models\Content::getField('slug') }}')"
+                        <th scope="col" wire:click.prevent="sortBy('{{ $sortFields['slug'] }}')"
                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Slug
                         </th>
-                        <th scope="col" wire:click.prevent="sortBy('{{ \Illegal\Linky\Models\Contentable\Link::getField('url') }}')"
+                        <th scope="col" wire:click.prevent="sortBy('{{ $sortFields['url'] }}')"
                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">URL
                         </th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status

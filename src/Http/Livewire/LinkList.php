@@ -24,10 +24,10 @@ class LinkList extends Component
     {
         $this->sortField  = Link::getField('created_at');
         $this->sortFields = [
-            Link::getField('created_at'),
-            Link::getField('url'),
-            Content::getField('name'),
-            Content::getField('slug'),
+            'created_at' => Link::getField('created_at'),
+            'url'        => Link::getField('url'),
+            'name'       => Content::getField('name'),
+            'slug'       => Content::getField('slug'),
         ];
 
         parent::__construct($id);
