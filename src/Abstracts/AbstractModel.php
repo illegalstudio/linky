@@ -27,4 +27,15 @@ abstract class AbstractModel extends Model
     {
         return (new static)->getTable();
     }
+
+    /**
+     * This method returns the table name with the field name.
+     *
+     * @param string $field
+     * @return string
+     */
+    public static function getField(string $field): string
+    {
+        return self::getTableName() . '.' . $field;
+    }
 }
