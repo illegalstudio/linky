@@ -6,6 +6,8 @@
                 <table class="min-w-full divide-y divide-gray-300">
                     <thead class="bg-gray-50">
                     <tr>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                        </th>
                         <th scope="col"
                             class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name
                         </th>
@@ -20,6 +22,9 @@
                     <tbody class="divide-y divide-gray-200 bg-white">
                     @foreach ($collections as $collection)
                         <tr>
+                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-xs sm:pl-6 text-gray-400">
+                                {{ $collection->id }}
+                            </td>
                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                                 <div class="font-medium text-gray-900">{{ $collection->content->name }}</div>
                             </td>
