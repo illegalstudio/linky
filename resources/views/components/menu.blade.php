@@ -1,12 +1,3 @@
-<html lang="en">
-<head>
-    <title>Linky</title>
-
-    @vite('resources/js/app.js')
-    @livewireStyles
-</head>
-<body>
-
 <header class="bg-indigo-600 mb-10">
     <nav class="mx-auto max-w-7xl px-6 lg:px-8" aria-label="Top">
         <div class="flex w-full items-center justify-between border-b border-indigo-500 py-6 lg:border-none">
@@ -26,17 +17,9 @@
             </div>
         </div>
         <div class="flex flex-wrap justify-center gap-x-6 py-4 lg:hidden">
-            <a href="#" class="text-base font-medium text-white hover:text-indigo-50">Links</a>
-            <a href="#" class="text-base font-medium text-white hover:text-indigo-50">Collections</a>
-            <a href="#" class="text-base font-medium text-white hover:text-indigo-50">Pages</a>
+            <a href="{{ route('linky.admin.link.index') }}" class="text-base font-medium text-white hover:text-indigo-50">Links</a>
+            <a href="{{ route('linky.admin.collection.index') }}" class="text-base font-medium text-white hover:text-indigo-50">Collections</a>
+            <a href="{{ route('linky.admin.page.index') }}" class="text-base font-medium text-white hover:text-indigo-50">Pages</a>
         </div>
     </nav>
 </header>
-
-<div class="mx-auto mb-10 max-w-7xl px-4 sm:px-6 lg:px-8">
-    @yield('content')
-</div>
-
-@livewireScripts
-</body>
-</html>

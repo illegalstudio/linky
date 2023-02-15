@@ -1,10 +1,8 @@
-@extends('linky::admin.layout')
-
-@section('content')
+<x-linky::layout>
     @include('linky::admin.collection._parts.form', [
         'action' => route('linky.admin.collection.store'),
         'method' => 'POST',
         'title' => 'Create collection',
         'subtitle' => 'Create a new collection',
     ])
-@endsection
+</x-linky::layout>

@@ -1,6 +1,4 @@
-@extends('linky::admin.layout')
-
-@section('content')
+<x-linky::layout>
     <div class="sm:flex sm:items-center">
         <div class="sm:flex-auto">
             <h1 class="text-xl font-semibold text-gray-900">Pages</h1>
@@ -14,4 +12,4 @@
     </div>
 
     @livewire('linky::page-list')
-@endsection
+</x-linky::layout>
