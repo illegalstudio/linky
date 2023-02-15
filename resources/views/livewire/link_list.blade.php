@@ -6,14 +6,19 @@
                 <table class="min-w-full divide-y divide-gray-300">
                     <thead class="bg-gray-50">
                     <tr>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                        </th>
                         <th scope="col" wire:click.prevent="sortBy('{{ $sortFields['name']  }}')"
-                            class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name
+                            class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 cursor-pointer hover:bg-gray-100">
+                            Name
                         </th>
                         <th scope="col" wire:click.prevent="sortBy('{{ $sortFields['slug'] }}')"
-                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Slug
+                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 cursor-pointer hover:bg-gray-100">
+                            Slug
                         </th>
                         <th scope="col" wire:click.prevent="sortBy('{{ $sortFields['url'] }}')"
-                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">URL
+                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 cursor-pointer hover:bg-gray-100">
+                            URL
                         </th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status
                         </th>
@@ -25,6 +30,9 @@
                     <tbody class="divide-y divide-gray-200 bg-white">
                     @foreach ($links as $link)
                         <tr>
+                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-xs sm:pl-6 text-gray-400">
+                                {{ $link->id }}
+                            </td>
                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                                 <div class="font-medium text-gray-900">{{ $link->content->name }}</div>
                             </td>

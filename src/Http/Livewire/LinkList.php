@@ -20,6 +20,8 @@ class LinkList extends Component
 
     public $sortFields = [];
 
+    protected $queryString = [];
+
     public function __construct($id = null)
     {
         $this->sortField  = Link::getField('created_at');
@@ -30,6 +32,11 @@ class LinkList extends Component
             'slug'       => Content::getField('slug'),
         ];
 
+        $this->queryString = [
+            'sortField'     => ['except' => $this->sortField],
+            'sortDirection' => ['except' => $this->sortDirection]
+        ];
+
         parent::__construct($id);
     }
 
@@ -37,7 +44,7 @@ class LinkList extends Component
     {
         if ($this->sortField === $field) {
             $this->sortDirection = $this->sortDirection == 'asc' ? 'desc' : 'asc';
-        } elseif (in_array($field, $this->sortFields)) {
+        } else {
             $this->sortField     = $field;
             $this->sortDirection = 'asc';
         }
@@ -45,6 +52,12 @@ class LinkList extends Component
 
     public function render(): Factory|View|Application
     {
+        /**
+         * Allow only fields that are in the $sortFields array and direction can only be asc or desc
+         */
+        $this->sortField     = in_array($this->sortField, $this->sortFields) ? $this->sortField : Link::getField('created_at');
+        $this->sortDirection = in_array($this->sortDirection, ['asc', 'desc']) ? $this->sortDirection : 'desc';
+
         return view('linky::livewire.link_list', [
             'links' => Link::with('content')
                 ->select(Link::getField('*'))
