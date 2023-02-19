@@ -8,6 +8,9 @@
                     <tr>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                         </th>
+                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                            Public
+                        </th>
                         <th scope="col" wire:click.prevent="sortBy('{{ $sortFields['name']  }}')"
                             class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 cursor-pointer hover:bg-gray-100">
                             Name
@@ -15,9 +18,6 @@
                         <th scope="col" wire:click.prevent="sortBy('{{ $sortFields['slug']  }}')"
                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 cursor-pointer hover:bg-gray-100">
                             Slug
-                        </th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                            Public
                         </th>
                         <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                             <span class="sr-only">Actions</span>
@@ -30,15 +30,18 @@
                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-xs sm:pl-6 text-gray-400">
                                 {{ $collection->id }}
                             </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                <span class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" role="switch" aria-checked="false">
+                                    <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-white"></span>
+                                    <span aria-hidden="true" class="{{ $collection->content->public ? 'bg-indigo-600' : 'bg-gray-200' }} pointer-events-none absolute mx-auto h-4 w-9 rounded-full transition-colors duration-200 ease-in-out"></span>
+                                    <span aria-hidden="true" class="{{ $collection->content->public ? 'translate-x-5' : 'translate-x-0' }} pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border border-gray-200 bg-white shadow ring-0 transition-transform duration-200 ease-in-out"></span>
+                                </span>
+                            </td>
                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                                 <div class="font-medium text-gray-900">{{ $collection->content->name }}</div>
                             </td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                 <div class="text-gray-900">{{ $collection->content->slug }}</div>
-                            </td>
-                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                    <span
-                                        class="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">{{ $collection->content->public }}</span>
                             </td>
                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                 <a href="{{ route('linky.admin.collection.edit', $collection)  }}"

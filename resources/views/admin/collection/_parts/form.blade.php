@@ -14,7 +14,7 @@
                     <fieldset>
                         <legend class="contents text-base font-medium text-gray-900">Public</legend>
                         <div class="mt-4 space-y-4">
-                            <button x-data="{toggle: {{ (old('public') ?? $page->content->public ?? 1) ? 'true' : 'false' }} }" @click="toggle = !toggle" type="button" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" role="switch" aria-checked="false">
+                            <button x-data="{toggle: {{ (old('public') ?? $collection->content->public ?? 1) ? 'true' : 'false' }} }" @click="toggle = !toggle" type="button" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" role="switch" aria-checked="false">
                                 <input type="hidden" name="public" :value="toggle ? 1 : 0">
                                 <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-white"></span>
                                 <span aria-hidden="true" :class="toggle ? 'bg-indigo-600' : 'bg-gray-200'" class="pointer-events-none absolute mx-auto h-4 w-9 rounded-full transition-colors duration-200 ease-in-out"></span>
