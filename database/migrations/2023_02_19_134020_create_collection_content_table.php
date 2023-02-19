@@ -22,6 +22,8 @@ return new class extends Migration {
                 ->cascadeOnDelete()
             ;
 
+            $table->integer('position')->default(0);
+
             $table->timestamps();
         });
     }

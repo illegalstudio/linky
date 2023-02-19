@@ -29,7 +29,7 @@ class Collection extends AbstractModel
             config('linky.db.prefix') . 'collection_content',
             'collection_id',
             'content_id'
-        );
+        )->withPivot('position')->orderBy('position', 'asc');
     }
 
     public function filterContents(string $filterString): EloquentCollection

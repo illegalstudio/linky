@@ -60,6 +60,6 @@ class Content extends AbstractModel
             config('linky.db.prefix') . 'collection_content',
             'content_id',
             'collection_id'
-        );
+        )->withPivot('position');
     }
 }

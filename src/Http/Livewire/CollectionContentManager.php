@@ -47,16 +47,34 @@ class CollectionContentManager extends Component
 
     public function addContentAction(Content $content): void
     {
+        /**
+         * Attach the new content
+         */
+        $this->collection->contents()->attach($content, [
+            'position' => $this->collection->contents()->with('pivot')->max('position') + 1,
+        ]);
+        /**
+         * Reset the view
+         */
         $this->filterCurrentContentsString = '';
-        $this->collection->contents()->attach($content);
         $this->searchAvailableContentsAction();
         $this->filterCurrentContentsAction();
     }
 
     public function removeContentAction(Content $content): void
     {
-        $this->filterCurrentContentsString = '';
+        /**
+         * Detach the content and reorder
+         */
         $this->collection->contents()->detach($content);
+        $this->collection->contents()->get()->each(function (Content $content, int $index) {
+            $content->pivot->position = $index + 1;
+            $content->pivot->save();
+        });
+        /**
+         * Reset the view
+         */
+        $this->filterCurrentContentsString = '';
         $this->searchAvailableContentsAction();
         $this->filterCurrentContentsAction();
     }
