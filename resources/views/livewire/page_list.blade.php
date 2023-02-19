@@ -8,10 +8,14 @@
                     <tr>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                         </th>
-                        <th scope="col"
-                            class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name
+                        <th scope="col" wire:click.prevent="sortBy('{{ $sortFields['name']  }}')"
+                            class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 cursor-pointer hover:bg-gray-100">
+                            Name
                         </th>
-                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Slug</th>
+                        <th scope="col" wire:click.prevent="sortBy('{{ $sortFields['slug']  }}')"
+                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 cursor-pointer hover:bg-gray-100">
+                            Slug
+                        </th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status
                         </th>
                         <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
@@ -37,12 +41,15 @@
                             </td>
                             <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                 <a href="{{ route('linky.admin.page.edit', $page)  }}"
-                                   class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                   class="inline-block text-indigo-600 hover:text-indigo-900">
+                                    <x-linky::icons.pencil-square/>
+                                </a>
                                 <form action="{{ route('linky.admin.page.destroy', $page) }}" method="POST"
                                       class="inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-indigo-600 hover:text-indigo-900">Delete
+                                    <button type="submit" class="text-indigo-600 hover:text-indigo-900">
+                                        <x-linky::icons.trash/>
                                     </button>
                                 </form>
                             </td>
