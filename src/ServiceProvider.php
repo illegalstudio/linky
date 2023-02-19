@@ -2,6 +2,7 @@
 
 namespace Illegal\Linky;
 
+use Illegal\Linky\Http\Livewire\CollectionContentManager;
 use Illegal\Linky\Http\Livewire\CollectionList;
 use Illegal\Linky\Http\Livewire\LinkList;
 use Illegal\Linky\Http\Livewire\PageList;
@@ -38,6 +39,7 @@ class ServiceProvider extends IlluminateServiceProvider
          */
         Livewire::component('linky::link-list', LinkList::class);
         Livewire::component('linky::collection-list', CollectionList::class);
+        Livewire::component('linky::collection-content-manager', CollectionContentManager::class);
         Livewire::component('linky::page-list', PageList::class);
     }
 }
