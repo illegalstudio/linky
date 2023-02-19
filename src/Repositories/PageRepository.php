@@ -6,7 +6,9 @@ use Illegal\Linky\Abstracts\AbstractRepository;
 use Illegal\Linky\Enums\ContentStatus;
 use Illegal\Linky\Enums\ContentType;
 use Illegal\Linky\Models\Content;
+use Illegal\Linky\Models\Contentable\Collection;
 use Illegal\Linky\Models\Contentable\Page;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 final class PageRepository extends AbstractRepository
 {
@@ -56,5 +58,22 @@ final class PageRepository extends AbstractRepository
             $name,
             $description
         );
+    }
+
+    public static function paginateWithContent($perPage = 10, array $sort = []): LengthAwarePaginator|array
+    {
+        $query = Page::with('content')
+            ->select(Page::getField('*'))
+            ->join(Content::getTableName(), function ($join) {
+                $join
+                    ->on(Content::getField('contentable_id'), '=', Page::getField('id'))
+                    ->where(Content::getField('type'), '=', ContentType::Link->value);
+            });
+
+        if(!empty($sort)) {
+            $query->orderBy(...$sort);
+        }
+
+        return $query->paginate($perPage);
     }
 }

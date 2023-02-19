@@ -7,6 +7,8 @@ use Illegal\Linky\Enums\ContentStatus;
 use Illegal\Linky\Enums\ContentType;
 use Illegal\Linky\Models\Content;
 use Illegal\Linky\Models\Contentable\Collection;
+use Illegal\Linky\Models\Contentable\Link;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 final class CollectionRepository extends AbstractRepository
 {
@@ -56,5 +58,22 @@ final class CollectionRepository extends AbstractRepository
             $name,
             $description
         );
+    }
+
+    public static function paginateWithContent($perPage = 10, array $sort = []): LengthAwarePaginator|array
+    {
+        $query = Collection::with('content')
+            ->select(Collection::getField('*'))
+            ->join(Content::getTableName(), function ($join) {
+                $join
+                    ->on(Content::getField('contentable_id'), '=', Collection::getField('id'))
+                    ->where(Content::getField('type'), '=', ContentType::Link->value);
+            });
+
+        if(!empty($sort)) {
+            $query->orderBy(...$sort);
+        }
+
+        return $query->paginate($perPage);
     }
 }
