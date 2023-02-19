@@ -24,7 +24,7 @@
                             <p class="text-xs text-gray-600">{{ $content->type }} - <a href="#" target="_blank">/{{ $content->slug }}</a></p>
                         </div>
                         <div class="my-auto pl-4">
-                            <button type="button"
+                            <button type="button" wire:click="addContentAction({{ $content }})"
                                     class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                 <x-linky::icons.double-arrow-right/>
                             </button>
@@ -42,6 +42,7 @@
                 <label for="filter" class="block text-sm font-medium text-gray-700">Filter</label>
                 <div class="mt-1">
                     <input type="text" name="filter" id="filter"
+                           wire:model.defer="filterCurrentContentsString" wire:keydown.enter="filterCurrentContentsAction"
                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                            placeholder="Press enter after your search">
                 </div>
@@ -56,7 +57,7 @@
                             <p class="text-xs text-gray-600">{{ $content->type }} - <a href="#" target="_blank">/{{ $content->slug }}</a></p>
                         </div>
                         <div class="my-auto pl-4">
-                            <button type="button"
+                            <button type="button" wire:click="removeContentAction({{ $content }})"
                                     class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                 <x-linky::icons.x-mark/>
                             </button>

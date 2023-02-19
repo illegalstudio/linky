@@ -6,5 +6,5 @@
         'subtitle' => 'Update existing collection',
     ])
 
-    @livewire('linky::collection-content-manager')
+    @livewire('linky::collection-content-manager', ['collection' => $collection])
 </x-linky::layout>

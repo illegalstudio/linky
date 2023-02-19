@@ -5,6 +5,8 @@ namespace Illegal\Linky\Models;
 use Illegal\Linky\Abstracts\AbstractModel;
 use Illegal\Linky\Enums\ContentStatus;
 use Illegal\Linky\Enums\ContentType;
+use Illegal\Linky\Models\Contentable\Collection;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Content extends AbstractModel
@@ -49,5 +51,15 @@ class Content extends AbstractModel
     public function contentable(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    public function collections(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Collection::class,
+            config('linky.db.prefix') . 'collection_content',
+            'content_id',
+            'collection_id'
+        );
     }
 }
