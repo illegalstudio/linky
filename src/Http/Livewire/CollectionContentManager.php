@@ -3,6 +3,7 @@
 namespace Illegal\Linky\Http\Livewire;
 
 use Illegal\Linky\Models\Content;
+use Illegal\Linky\Repositories\ContentRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -22,7 +23,7 @@ class CollectionContentManager extends Component
 
     public function __construct($id = null)
     {
-        $this->availableContents = Content::all();
+        $this->availableContents = ContentRepository::search($this->searchAvailableContentsString);
         $this->currentContents   = Content::all();
 
         parent::__construct($id);
@@ -35,6 +36,7 @@ class CollectionContentManager extends Component
 
     public function searchAvailableContentsAction(): void
     {
+        $this->availableContents = ContentRepository::search($this->searchAvailableContentsString);
     }
 
     public function filterCurrentContentsAction(): void
