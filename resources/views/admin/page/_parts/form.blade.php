@@ -11,6 +11,20 @@
             </div>
             <div class="mt-5 space-y-6 md:col-span-2 md:mt-0">
                 <div>
+                    <fieldset>
+                        <legend class="contents text-base font-medium text-gray-900">Public</legend>
+                        <div class="mt-4 space-y-4">
+                            <button x-data="{toggle: {{ (old('public') ?? $page->content->public ?? 1) ? 'true' : 'false' }} }" @click="toggle = !toggle" type="button" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" role="switch" aria-checked="false">
+                                <input type="hidden" name="public" :value="toggle ? 1 : 0">
+                                <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-white"></span>
+                                <span aria-hidden="true" :class="toggle ? 'bg-indigo-600' : 'bg-gray-200'" class="pointer-events-none absolute mx-auto h-4 w-9 rounded-full transition-colors duration-200 ease-in-out"></span>
+                                <span aria-hidden="true" :class="toggle ? 'translate-x-5' : 'translate-x-0'" class="pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border border-gray-200 bg-white shadow ring-0 transition-transform duration-200 ease-in-out"></span>
+                            </button>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div>
                     <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
                     <div class="mt-1">
                         <input type="text" name="name" id="name"
@@ -49,29 +63,6 @@
                                       placeholder="...">{{ old('body') ?? $page->body ?? "" }}</textarea>
                     </div>
                     <p class="mt-2 text-sm text-gray-500">The body or your page</p>
-                </div>
-
-                <div>
-                    <fieldset>
-                        <legend class="contents text-base font-medium text-gray-900">Status</legend>
-                        <div class="mt-4 space-y-4">
-                            <div class="flex items-center">
-                                <input id="status-draft" name="status" type="radio" value="draft"
-                                       class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500" @if ((old('status') ?? $page->content->status->value ?? "draft") == "draft") checked @endif>
-                                <label for="status-draft" class="ml-3 block text-sm font-medium text-gray-700">Draft</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input id="status-active" name="status" type="radio" value="active"
-                                       class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500" @if ((old('status') ?? $page->content->status->value ?? "draft") == "active") checked @endif>
-                                <label for="status-active" class="ml-3 block text-sm font-medium text-gray-700">Active</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input id="status-archived" name="status" type="radio" value="archived"
-                                       class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500" @if ((old('status') ?? $page->content->status->value ?? "draft") == "archived") checked @endif>
-                                <label for="status-archived" class="ml-3 block text-sm font-medium text-gray-700">Archived</label>
-                            </div>
-                        </div>
-                    </fieldset>
                 </div>
 
             </div>

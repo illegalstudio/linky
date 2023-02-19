@@ -2,7 +2,6 @@
 
 namespace Illegal\Linky\Abstracts;
 
-use Illegal\Linky\Enums\ContentStatus;
 use Illegal\Linky\Enums\ContentType;
 use Illegal\Linky\Models\Content;
 use Illuminate\Database\Eloquent\Model;
@@ -22,19 +21,19 @@ abstract class AbstractRepository
      *
      * @param Model $contentable
      * @param ContentType $type
-     * @param ContentStatus $status
+     * @param bool $public
      * @param string|null $slug
      * @param string|null $name
      * @param string|null $description
      * @return Content
      */
     public static function createContent(
-        Model         $contentable,
-        ContentType   $type,
-        ContentStatus $status = ContentStatus::Draft,
-        string        $slug = null,
-        string        $name = null,
-        string        $description = null
+        Model       $contentable,
+        ContentType $type,
+        bool        $public = true,
+        string      $slug = null,
+        string      $name = null,
+        string      $description = null
     ): Content
     {
         $slug = $slug ?? \Str::random();
@@ -43,7 +42,7 @@ abstract class AbstractRepository
         $content->forceFill([
             'type'        => $type,
             'slug'        => $slug,
-            'status'      => $status,
+            'public'      => $public,
             'name'        => $name,
             'description' => $description,
         ]);
@@ -57,22 +56,22 @@ abstract class AbstractRepository
      * Update content, given the provided data.
      *
      * @param Content $content
-     * @param ContentStatus $status
+     * @param bool $public
      * @param string $slug
      * @param string|null $name
      * @param string|null $description
      * @return Content
      */
     public static function updateContent(
-        Content       $content,
-        ContentStatus $status,
-        string        $slug,
-        string        $name = null,
-        string        $description = null
+        Content $content,
+        bool    $public,
+        string  $slug,
+        string  $name = null,
+        string  $description = null
     ): Content
     {
         $content->forceFill([
-            'status'      => $status,
+            'public'      => $public,
             'slug'        => $slug,
             'name'        => $name,
             'description' => $description,

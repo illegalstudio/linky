@@ -2,7 +2,6 @@
 
 namespace Illegal\Linky\Http\Controllers\Admin;
 
-use Illegal\Linky\Enums\ContentStatus;
 use Illegal\Linky\Models\Content;
 use Illegal\Linky\Models\Contentable\Page;
 use Illegal\Linky\Repositories\PageRepository;
@@ -23,11 +22,7 @@ class PageAdminController extends Controller
      */
     public function index()
     {
-        $pages = Page::with('content')->paginate();
-
-        return view('linky::admin.page.index', [
-            'pages' => $pages
-        ]);
+        return view('linky::admin.page.index');
     }
 
     /**
@@ -54,7 +49,7 @@ class PageAdminController extends Controller
 
         PageRepository::create(
             $request->only(['body']),
-            ContentStatus::from($request->get('status')),
+            $request->get('public'),
             $request->get('slug'),
             $request->get('name'),
             $request->get('description')
@@ -103,7 +98,7 @@ class PageAdminController extends Controller
         PageRepository::update(
             $page,
             $request->only(['body']),
-            ContentStatus::from($request->get('status')),
+            $request->get('public'),
             $request->get('slug'),
             $request->get('name'),
             $request->get('description')

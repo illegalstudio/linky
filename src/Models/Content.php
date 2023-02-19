@@ -3,7 +3,6 @@
 namespace Illegal\Linky\Models;
 
 use Illegal\Linky\Abstracts\AbstractModel;
-use Illegal\Linky\Enums\ContentStatus;
 use Illegal\Linky\Enums\ContentType;
 use Illegal\Linky\Models\Contentable\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -17,8 +16,7 @@ class Content extends AbstractModel
     protected $tableName = 'contents';
 
     public $casts = [
-        'status' => ContentStatus::class,
-        'type'   => ContentType::class
+        'type' => ContentType::class
     ];
 
     /**
@@ -27,12 +25,11 @@ class Content extends AbstractModel
      * @var array|string[]
      */
     protected static array $validationRules = [
-        'status'      => 'required|in:draft,active,archived',
+        'public'      => 'required|boolean',
         'slug'        => 'nullable|string|unique:Illegal\Linky\Models\Content',
         'name'        => 'nullable|string',
         'description' => 'nullable|string'
     ];
-
 
     public static function getValidationRules(int $contentId = null): array
     {

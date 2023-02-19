@@ -3,7 +3,6 @@
 namespace Illegal\Linky\Repositories;
 
 use Illegal\Linky\Abstracts\AbstractRepository;
-use Illegal\Linky\Enums\ContentStatus;
 use Illegal\Linky\Enums\ContentType;
 use Illegal\Linky\Models\Content;
 use Illegal\Linky\Models\Contentable\Collection;
@@ -16,24 +15,24 @@ final class PageRepository extends AbstractRepository
      * Create a new page.
      *
      * @param array $data
-     * @param ContentStatus $status
+     * @param bool $public
      * @param string|null $slug
      * @param string|null $name
      * @param string|null $description
      * @return Content
      */
     public static function create(
-        array         $data = [],
-        ContentStatus $status = ContentStatus::Draft,
-        string        $slug = null,
-        string        $name = null,
-        string        $description = null
+        array  $data = [],
+        bool   $public = true,
+        string $slug = null,
+        string $name = null,
+        string $description = null
     ): Content
     {
         return parent::createContent(
             Page::forceCreate($data),
             ContentType::Page,
-            $status,
+            $public,
             $slug,
             $name,
             $description
@@ -41,19 +40,19 @@ final class PageRepository extends AbstractRepository
     }
 
     public static function update(
-        Page          $page,
-        array         $data,
-        ContentStatus $status,
-        string        $slug,
-        string        $name = null,
-        string        $description = null
+        Page   $page,
+        array  $data,
+        bool   $public,
+        string $slug,
+        string $name = null,
+        string $description = null
     ): Content
     {
         $page->update($data);
 
         return parent::updateContent(
             $page->content,
-            $status,
+            $public,
             $slug,
             $name,
             $description
@@ -67,10 +66,10 @@ final class PageRepository extends AbstractRepository
             ->join(Content::getTableName(), function ($join) {
                 $join
                     ->on(Content::getField('contentable_id'), '=', Page::getField('id'))
-                    ->where(Content::getField('type'), '=', ContentType::Link->value);
+                    ->where(Content::getField('type'), '=', ContentType::Page->value);
             });
 
-        if(!empty($sort)) {
+        if (!empty($sort)) {
             $query->orderBy(...$sort);
         }
 

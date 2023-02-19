@@ -2,7 +2,6 @@
 
 namespace Illegal\Linky\Http\Controllers\Admin;
 
-use Illegal\Linky\Enums\ContentStatus;
 use Illegal\Linky\Models\Content;
 use Illegal\Linky\Models\Contentable\Link;
 use Illegal\Linky\Repositories\LinkRepository;
@@ -22,11 +21,7 @@ class LinkAdminController extends Controller
      */
     public function index()
     {
-        $links = Link::with('content')->paginate();
-
-        return view('linky::admin.link.index', [
-            'links' => $links
-        ]);
+        return view('linky::admin.link.index');
     }
 
     /**
@@ -53,7 +48,7 @@ class LinkAdminController extends Controller
 
         LinkRepository::create(
             $request->only(['url']),
-            ContentStatus::from($request->get('status')),
+            $request->get('public'),
             $request->get('slug'),
             $request->get('name'),
             $request->get('description')
@@ -102,7 +97,7 @@ class LinkAdminController extends Controller
         LinkRepository::update(
             $link,
             $request->only(['url']),
-            ContentStatus::from($request->get('status')),
+            $request->get('public'),
             $request->get('slug'),
             $request->get('name'),
             $request->get('description')

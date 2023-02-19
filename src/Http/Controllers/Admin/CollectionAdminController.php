@@ -2,7 +2,6 @@
 
 namespace Illegal\Linky\Http\Controllers\Admin;
 
-use Illegal\Linky\Enums\ContentStatus;
 use Illegal\Linky\Models\Content;
 use Illegal\Linky\Models\Contentable\Collection;
 use Illegal\Linky\Repositories\CollectionRepository;
@@ -22,11 +21,7 @@ class CollectionAdminController extends Controller
      */
     public function index()
     {
-        $collections = Collection::with('content')->paginate();
-
-        return view('linky::admin.collection.index', [
-            'collections' => $collections
-        ]);
+        return view('linky::admin.collection.index');
     }
 
     /**
@@ -51,7 +46,7 @@ class CollectionAdminController extends Controller
 
         CollectionRepository::create(
             [],
-            ContentStatus::from($request->get('status')),
+            $request->get('public'),
             $request->get('slug'),
             $request->get('name'),
             $request->get('description')
@@ -98,7 +93,7 @@ class CollectionAdminController extends Controller
         CollectionRepository::update(
             $collection,
             [],
-            ContentStatus::from($request->get('status')),
+            $request->get('public'),
             $request->get('slug'),
             $request->get('name'),
             $request->get('description')
