@@ -1,9 +1,9 @@
-@include('linky::admin._parts.errors')
+<x-linky::errors  />
 
 <form class="space-y-6" action="{{ $action }}" method="POST">
     @csrf
     @method($method)
-    <div class="bg-white px-4 py-5 shadow sm:rounded-lg sm:p-6">
+    <div class="bg-white px-4 py-5 border shadow  sm:rounded-lg sm:p-6">
         <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="md:col-span-1">
                 <h3 class="text-lg font-medium leading-6 text-gray-900">{{ $title }}</h3>
@@ -14,7 +14,7 @@
                     <fieldset>
                         <legend class="contents text-base font-medium text-gray-900">Public</legend>
                         <div class="mt-4 space-y-4">
-                            <button x-data="{toggle: {{ (old('public') ?? $page->content->public ?? 1) ? 'true' : 'false' }} }" @click="toggle = !toggle" type="button" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" role="switch" aria-checked="false">
+                            <button x-data="{toggle: {{ (old('public') ?? $content->public ?? 1) ? 'true' : 'false' }} }" @click="toggle = !toggle" type="button" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" role="switch" aria-checked="false">
                                 <input type="hidden" name="public" :value="toggle ? 1 : 0">
                                 <span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-white"></span>
                                 <span aria-hidden="true" :class="toggle ? 'bg-indigo-600' : 'bg-gray-200'" class="pointer-events-none absolute mx-auto h-4 w-9 rounded-full transition-colors duration-200 ease-in-out"></span>
@@ -29,7 +29,7 @@
                     <div class="mt-1">
                         <input type="text" name="name" id="name"
                                class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                               value="{{ old('name') ?? $page->content->name ?? "" }}"
+                               value="{{ old('name') ?? $content->name ?? "" }}"
                                placeholder="">
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                     <div class="mt-1">
                         <input type="text" name="slug" id="slug"
                                class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                               value="{{ old('slug') ?? $page->content->slug ?? "" }}"
+                               value="{{ old('slug') ?? $content->slug ?? "" }}"
                                placeholder="">
                     </div>
                     <p class="mt-2 text-sm text-gray-500">Leave empty to get auto-generated slug</p>
@@ -50,27 +50,18 @@
                     <div class="mt-1">
                             <textarea id="description" name="description" rows="3"
                                       class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                      placeholder="...">{{ old('description') ?? $page->content->description ?? "" }}</textarea>
+                                      placeholder="...">{{ old('description') ?? $content->description ?? "" }}</textarea>
                     </div>
-                    <p class="mt-2 text-sm text-gray-500">Brief description for your page</p>
+                    <p class="mt-2 text-sm text-gray-500">Brief description for this content</p>
                 </div>
 
-                <div>
-                    <label for="body" class="block text-sm font-medium text-gray-700">Body</label>
-                    <div class="mt-1">
-                            <textarea id="body" name="body" rows="3"
-                                      class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                      placeholder="...">{{ old('body') ?? $page->body ?? "" }}</textarea>
-                    </div>
-                    <p class="mt-2 text-sm text-gray-500">The body or your page</p>
-                </div>
-
+                {{ $slot }}
             </div>
         </div>
     </div>
 
     <div class="flex justify-end">
-        <a href="{{ route('linky.admin.page.index') }}"
+        <a href="{{ $backUrl }}"
            class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Back</a>
         <button type="submit"
                 class="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">

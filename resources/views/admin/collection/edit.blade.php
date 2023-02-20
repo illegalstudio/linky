@@ -1,10 +1,17 @@
 <x-linky::layout>
-    @include('linky::admin.collection._parts.form', [
-        'action' => route('linky.admin.collection.update', $collection),
-        'method' => 'PUT',
-        'title' => 'Update collection',
-        'subtitle' => 'Update existing collection',
-    ])
+    <x-linky::content-form
+        method="PUT"
+        title="Update collection"
+        subtitle="Update existing collection"
+        :action="route('linky.admin.collection.update', $collection)"
+        :backUrl="route('linky.admin.collection.index')"
+        :content="$collection->content ?? null"
+    >
+
+        @include('linky::admin.collection.form')
+
+    </x-linky::content-form>
 
     @livewire('linky::collection-content-manager', ['collection' => $collection])
+
 </x-linky::layout>
