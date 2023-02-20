@@ -2,6 +2,7 @@
 
 namespace Illegal\Linky;
 
+use Blade;
 use Illegal\Linky\Http\Livewire\CollectionContentManager;
 use Illegal\Linky\Http\Livewire\CollectionList;
 use Illegal\Linky\Http\Livewire\LinkList;
@@ -33,6 +34,11 @@ class ServiceProvider extends IlluminateServiceProvider
         $this->loadMigrationsFrom([
             __DIR__ . '/../database/migrations/'
         ]);
+
+        /**
+         * Blade components
+         */
+        Blade::componentNamespace('Illegal\\Linky\\View\\Components', 'linky');
 
         /**
          * LiveWire components
