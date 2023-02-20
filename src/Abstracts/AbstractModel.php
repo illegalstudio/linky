@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class AbstractModel extends Model
 {
+    /**
+     * @var string $tableName The table name without the prefix.
+     */
     protected $tableName = '';
 
     /**

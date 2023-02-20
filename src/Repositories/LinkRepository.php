@@ -13,11 +13,11 @@ final class LinkRepository extends AbstractRepository
     /**
      * Create a new redirect.
      *
-     * @param array $data
-     * @param bool $public
-     * @param string|null $slug
-     * @param string|null $name
-     * @param string|null $description
+     * @param array $data The data of the link.
+     * @param bool $public The visibility of the content.
+     * @param string|null $slug The slug of the content.
+     * @param string|null $name The name of the content.
+     * @param string|null $description The description of the content.
      * @return Content
      */
     public static function create(
@@ -41,12 +41,12 @@ final class LinkRepository extends AbstractRepository
     /**
      * Update the link and content.
      *
-     * @param Link $link
-     * @param array $data
-     * @param bool $public
-     * @param string $slug
-     * @param string|null $name
-     * @param string|null $description
+     * @param Link $link The link to update.
+     * @param array $data The data of the link.
+     * @param bool $public The visibility of the content.
+     * @param string $slug The slug of the content.
+     * @param string|null $name The name of the content.
+     * @param string|null $description The description of the content.
      * @return Content
      */
     public static function update(
@@ -64,6 +64,13 @@ final class LinkRepository extends AbstractRepository
     }
 
 
+    /**
+     * Paginate the links with their content.
+     *
+     * @param int $perPage The amount of links per page.
+     * @param array $sort The sort order.
+     * @return LengthAwarePaginator|array
+     */
     public static function paginateWithContent($perPage = 10, array $sort = []): LengthAwarePaginator|array
     {
         $query = Link::with('content')

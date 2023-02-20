@@ -14,11 +14,11 @@ final class CollectionRepository extends AbstractRepository
     /**
      * Create a new collection.
      *
-     * @param array $data
-     * @param boolean $public
-     * @param string|null $slug
-     * @param string|null $name
-     * @param string|null $description
+     * @param array $data The data of the collection.
+     * @param boolean $public The visibility of the content.
+     * @param string|null $slug The slug of the content.
+     * @param string|null $name The name of the content.
+     * @param string|null $description The description of the content.
      * @return Content
      */
     public static function create(
@@ -39,6 +39,17 @@ final class CollectionRepository extends AbstractRepository
         );
     }
 
+    /**
+     * Update an existing collection.
+     *
+     * @param Collection $collection The collection to update.
+     * @param array $data The data of the collection.
+     * @param boolean $public The visibility of the content.
+     * @param string $slug The slug of the content.
+     * @param string|null $name The name of the content.
+     * @param string|null $description The description of the content.
+     * @return Content
+     */
     public static function update(
         Collection $collection,
         array      $data,
@@ -59,6 +70,13 @@ final class CollectionRepository extends AbstractRepository
         );
     }
 
+    /**
+     * Paginate the collections with their content.
+     *
+     * @param $perPage int The amount of items per page.
+     * @param array $sort The sort order.
+     * @return LengthAwarePaginator|array
+     */
     public static function paginateWithContent($perPage = 10, array $sort = []): LengthAwarePaginator|array
     {
         $query = Collection::with('content')

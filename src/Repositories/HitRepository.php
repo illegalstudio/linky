@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class HitRepository
 {
+    /**
+     * Create a new hit.
+     *
+     * @param Request $request The request, used to get the extra user information
+     * @param Content $content The content to create the hit for
+     * @return Hit
+     */
     public static function create(Request $request, Content $content): Hit
     {
         return Hit::forceCreate(

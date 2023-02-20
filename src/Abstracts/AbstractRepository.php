@@ -11,7 +11,7 @@ abstract class AbstractRepository
     /**
      * This function must be implemented by the child class.
      *
-     * @param array $data
+     * @param array $data The data to create the content with
      * @return Content
      */
     abstract public static function create(array $data = []): Content;
@@ -19,12 +19,12 @@ abstract class AbstractRepository
     /**
      * This function creates a new content, assigning the given contentable to it.
      *
-     * @param Model $contentable
-     * @param ContentType $type
-     * @param bool $public
-     * @param string|null $slug
-     * @param string|null $name
-     * @param string|null $description
+     * @param Model $contentable The contentable
+     * @param ContentType $type The content type
+     * @param bool $public The content public status
+     * @param string|null $slug The content slug
+     * @param string|null $name The content name
+     * @param string|null $description The content description
      * @return Content
      */
     public static function createContent(
@@ -55,11 +55,11 @@ abstract class AbstractRepository
     /**
      * Update content, given the provided data.
      *
-     * @param Content $content
-     * @param bool $public
-     * @param string $slug
-     * @param string|null $name
-     * @param string|null $description
+     * @param Content $content The content to update
+     * @param bool $public The content public status
+     * @param string $slug The content slug
+     * @param string|null $name The content name
+     * @param string|null $description The content description
      * @return Content
      */
     public static function updateContent(

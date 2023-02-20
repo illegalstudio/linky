@@ -26,6 +26,8 @@ trait Contentable
     }
 
     /**
+     * Get the content for the model.
+     *
      * @return MorphOne
      */
     public function content(): MorphOne

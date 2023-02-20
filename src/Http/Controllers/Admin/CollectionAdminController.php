@@ -37,7 +37,7 @@ class CollectionAdminController extends Controller
     /**
      * Save a newly created collection.
      *
-     * @param Request $request
+     * @param Request $request The request
      * @return RedirectResponse
      */
     public function store(Request $request)
@@ -58,7 +58,7 @@ class CollectionAdminController extends Controller
     /**
      * Show form to edit an existing collection.
      *
-     * @param Collection $collection
+     * @param Collection $collection The collection to show
      * @return RedirectResponse
      */
     public function show(Collection $collection)
@@ -69,7 +69,7 @@ class CollectionAdminController extends Controller
     /**
      * Show form to edit an existing collection.
      *
-     * @param Collection $collection
+     * @param Collection $collection The collection to edit
      * @return Application|Factory|View
      */
     public function edit(Collection $collection)
@@ -82,8 +82,8 @@ class CollectionAdminController extends Controller
     /**
      * Update an existing collection.
      *
-     * @param Request $request
-     * @param Collection $collection
+     * @param Request $request The request
+     * @param Collection $collection The collection to update
      * @return RedirectResponse
      */
     public function update(Request $request, Collection $collection)
@@ -106,7 +106,7 @@ class CollectionAdminController extends Controller
     /**
      * Delete an existing collection.
      *
-     * @param Collection $collection
+     * @param Collection $collection The collection to delete
      * @return RedirectResponse
      */
     public function destroy(Collection $collection)

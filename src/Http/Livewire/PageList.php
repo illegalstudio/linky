@@ -16,8 +16,16 @@ class PageList extends Component
 {
     use WithPagination, Sortable;
 
+    /**
+     * @var array $queryString The query string to persist
+     */
     protected $queryString = [];
 
+    /**
+     * PageList constructor.
+     *
+     * @param null $id
+     */
     public function __construct($id = null)
     {
         $this->sortDefaultField = Page::getField('created_at');
@@ -28,13 +36,18 @@ class PageList extends Component
         ];
 
         $this->queryString = [
-            'sortField'     => ['except' => $this->sortField],
+            'sortField'     => ['except' => $this->sortDefaultField],
             'sortDirection' => ['except' => $this->sortDirection]
         ];
 
         parent::__construct($id);
     }
 
+    /**
+     * Render the view.
+     *
+     * @return Factory|View|Application
+     */
     public function render(): Factory|View|Application
     {
         return view('linky::livewire.page_list', [
@@ -42,6 +55,11 @@ class PageList extends Component
         ]);
     }
 
+    /**
+     * Get the pagination view.
+     *
+     * @return string
+     */
     public function paginationView(): string
     {
         return 'linky::livewire._parts.paginator';

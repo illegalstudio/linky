@@ -17,8 +17,8 @@ class ContentController extends Controller
     /**
      * The main route, catches all the requests and handles them
      *
-     * @param Request $request
-     * @param string|null $slug
+     * @param Request $request The request
+     * @param string|null $slug The slug
      * @return Application|RedirectResponse|Response|Redirector
      */
     public function catchAll(Request $request, string $slug = null)

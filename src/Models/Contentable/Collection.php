@@ -32,6 +32,12 @@ class Collection extends AbstractModel
         )->withPivot('position')->orderBy('position', 'asc');
     }
 
+    /**
+     * Get the contents associated with this collection.
+     *
+     * @param string $filterString The string to filter the contents
+     * @return EloquentCollection
+     */
     public function filterContents(string $filterString): EloquentCollection
     {
         if (empty($filterString)) {

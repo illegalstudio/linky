@@ -37,7 +37,7 @@ class LinkAdminController extends Controller
     /**
      * Save a newly created link.
      *
-     * @param Request $request
+     * @param Request $request The request
      * @return RedirectResponse
      */
     public function store(Request $request)
@@ -60,7 +60,7 @@ class LinkAdminController extends Controller
     /**
      * Not implemented, redirect to edit.
      *
-     * @param Link $link
+     * @param Link $link The link to show
      * @return RedirectResponse
      */
     public function show(Link $link)
@@ -71,7 +71,7 @@ class LinkAdminController extends Controller
     /**
      * Show form to edit a link.
      *
-     * @param Link $link
+     * @param Link $link The link to edit
      * @return Application|Factory|View
      */
     public function edit(Link $link)
@@ -84,8 +84,8 @@ class LinkAdminController extends Controller
     /**
      * Update a link.
      *
-     * @param Request $request
-     * @param Link $link
+     * @param Request $request The request
+     * @param Link $link The link to update
      * @return RedirectResponse
      */
     public function update(Request $request, Link $link)
@@ -109,7 +109,7 @@ class LinkAdminController extends Controller
     /**
      * Delete a link.
      *
-     * @param Link $link
+     * @param Link $link The link to delete
      * @return RedirectResponse
      */
     public function destroy(Link $link)

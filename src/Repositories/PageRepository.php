@@ -14,11 +14,11 @@ final class PageRepository extends AbstractRepository
     /**
      * Create a new page.
      *
-     * @param array $data
-     * @param bool $public
-     * @param string|null $slug
-     * @param string|null $name
-     * @param string|null $description
+     * @param array $data The data of the page.
+     * @param bool $public The visibility of the content.
+     * @param string|null $slug The slug of the content.
+     * @param string|null $name The name of the content.
+     * @param string|null $description The description of the content.
      * @return Content
      */
     public static function create(
@@ -39,6 +39,17 @@ final class PageRepository extends AbstractRepository
         );
     }
 
+    /**
+     * Update the page and content.
+     *
+     * @param Page $page The page to update.
+     * @param array $data The data of the page.
+     * @param bool $public The visibility of the content.
+     * @param string $slug The slug of the content.
+     * @param string|null $name The name of the content.
+     * @param string|null $description The description of the content.
+     * @return Content
+     */
     public static function update(
         Page   $page,
         array  $data,
@@ -59,7 +70,14 @@ final class PageRepository extends AbstractRepository
         );
     }
 
-    public static function paginateWithContent($perPage = 10, array $sort = []): LengthAwarePaginator|array
+    /**
+     * Paginate all pages with their content.
+     *
+     * @param int $perPage The number of items per page.
+     * @param array $sort The sort order.
+     * @return LengthAwarePaginator|array
+     */
+    public static function paginateWithContent(int $perPage = 10, array $sort = []): LengthAwarePaginator|array
     {
         $query = Page::with('content')
             ->select(Page::getField('*'))

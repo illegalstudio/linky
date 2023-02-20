@@ -8,6 +8,16 @@ use Illuminate\View\Component;
 
 class ContentForm extends Component
 {
+    /**
+     * Create a new component instance.
+     *
+     * @param string $action The form action.
+     * @param string $method The form method.
+     * @param string $title The title of the form.
+     * @param string $subtitle The subtitle of the form.
+     * @param string $backUrl The back url.
+     * @param Content|null $content The content.
+     */
     public function __construct(
         public string $action,
         public string $method,
@@ -18,6 +28,11 @@ class ContentForm extends Component
     )
     { }
 
+    /**
+     * Render the component.
+     *
+     * @return View
+     */
     public function render(): View
     {
         return view('linky::components.content-form');

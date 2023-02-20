@@ -17,8 +17,16 @@ class LinkList extends Component
 {
     use WithPagination, Sortable;
 
+    /**
+     * @var array $queryString The query string to persist
+     */
     protected $queryString = [];
 
+    /**
+     * LinkList constructor.
+     *
+     * @param null $id
+     */
     public function __construct($id = null)
     {
         $this->sortDefaultField = Link::getField('created_at');
@@ -37,6 +45,11 @@ class LinkList extends Component
         parent::__construct($id);
     }
 
+    /**
+     * Render the view.
+     *
+     * @return Factory|View|Application
+     */
     public function render(): Factory|View|Application
     {
         return view('linky::livewire.link_list', [
@@ -44,6 +57,11 @@ class LinkList extends Component
         ]);
     }
 
+    /**
+     * Get the pagination view.
+     *
+     * @return string
+     */
     public function paginationView(): string
     {
         return 'linky::livewire._parts.paginator';

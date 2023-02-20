@@ -8,16 +8,12 @@ use Illuminate\Console\Command;
 class CreatePageCommand extends Command
 {
     /**
-     * The signature of the console command.
-     *
-     * @var string
+     * @var string $signature The signature of the console command.
      */
     protected $signature = 'linky:create:page';
 
     /**
-     * The description of the console command.
-     *
-     * @var string
+     * @var string $description The description of the console command.
      */
     protected $description = 'Create a new page';
 

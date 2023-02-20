@@ -8,16 +8,12 @@ use Illuminate\Console\Command;
 class CreateLinkCommand extends Command
 {
     /**
-     * The signature of the console command.
-     *
-     * @var string
+     * @var string $signature The signature of the console command.
      */
     protected $signature = 'linky:create:link';
 
     /**
-     * The description of the console command.
-     *
-     * @var string
+     * @var string The description of the console command.
      */
     protected $description = 'Create a new link';
 

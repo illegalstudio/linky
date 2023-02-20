@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class ContentRepository
 {
+    /**
+     * Search within all contents.
+     *
+     * @param string $searchString The string to search for
+     * @param array|int|null $excludeCollectionsIds The collections to exclude
+     * @param int $limit The limit of results
+     * @return EloquentCollection
+     */
     public static function search(string $searchString, array|int $excludeCollectionsIds = null, int $limit = 10): EloquentCollection
     {
         if (empty($searchString)) {

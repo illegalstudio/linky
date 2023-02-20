@@ -38,7 +38,7 @@ class PageAdminController extends Controller
     /**
      * Save a newly created page.
      *
-     * @param Request $request
+     * @param Request $request The request
      * @return RedirectResponse
      */
     public function store(Request $request)
@@ -61,7 +61,7 @@ class PageAdminController extends Controller
     /**
      * Show form to edit an existing page.
      *
-     * @param Page $page
+     * @param Page $page The page to show
      * @return RedirectResponse
      */
     public function show(Page $page)
@@ -72,7 +72,7 @@ class PageAdminController extends Controller
     /**
      * Show form to edit an existing page.
      *
-     * @param Page $page
+     * @param Page $page The page to edit
      * @return Application|Factory|View
      */
     public function edit(Page $page)
@@ -85,8 +85,8 @@ class PageAdminController extends Controller
     /**
      * Update an existing page.
      *
-     * @param Request $request
-     * @param Page $page
+     * @param Request $request The request
+     * @param Page $page The page to update
      * @return RedirectResponse
      */
     public function update(Request $request, Page $page)
@@ -110,7 +110,7 @@ class PageAdminController extends Controller
     /**
      * Delete an existing page.
      *
-     * @param Page $page
+     * @param Page $page The page to delete
      * @return RedirectResponse
      */
     public function destroy(Page $page)

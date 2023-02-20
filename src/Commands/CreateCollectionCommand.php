@@ -8,16 +8,12 @@ use Illuminate\Console\Command;
 class CreateCollectionCommand extends Command
 {
     /**
-     * The signature of the console command.
-     *
-     * @var string
+     * @var string The signature of the console command.
      */
     protected $signature = 'linky:create:collection';
 
     /**
-     * The description of the console command.
-     *
-     * @var string
+     * @var string The description of the console command.
      */
     protected $description = 'Create a new collection';
 

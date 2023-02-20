@@ -31,6 +31,12 @@ class Content extends AbstractModel
         'description' => 'nullable|string'
     ];
 
+    /**
+     * Get the common validation rules for the content.
+     *
+     * @param int|null $contentId The content id
+     * @return array
+     */
     public static function getValidationRules(int $contentId = null): array
     {
         $validationRules = self::$validationRules;
@@ -43,6 +49,8 @@ class Content extends AbstractModel
     }
 
     /**
+     * Relation to the contentable model.
+     *
      * @return MorphTo
      */
     public function contentable(): MorphTo
@@ -50,6 +58,11 @@ class Content extends AbstractModel
         return $this->morphTo();
     }
 
+    /**
+     * Relation to the collections associated with this content.
+     *
+     * @return BelongsToMany
+     */
     public function collections(): BelongsToMany
     {
         return $this->belongsToMany(
