@@ -41,4 +41,10 @@ Route::prefix('linky/admin')->middleware('web')->group(function () {
     ]);
 });
 
-Route::fallback([ContentController::class, 'catchAll'])->name('linky.catch-all');
+/**
+ * The main fallback route
+ */
+Route::any('{any}', [ContentController::class, 'catchAll'])
+    ->where('any', '.*')
+    ->name('linky.catch-all')
+    ->fallback();
