@@ -12,11 +12,11 @@ class ContentRepository
      * Search within all contents.
      *
      * @param string $searchString The string to search for
-     * @param array|int|null $excludeCollectionsIds The collections to exclude
+     * @param array|Collection|null $excludeCollections The collections to exclude
      * @param int $limit The limit of results
      * @return EloquentCollection
      */
-    public static function search(string $searchString, array|int $excludeCollectionsIds = null, int $limit = 10): EloquentCollection
+    public static function search(string $searchString, array|Collection $excludeCollections = null, int $limit = 10): EloquentCollection
     {
         if (empty($searchString)) {
             $query = Content::orderBy('created_at', 'DESC');
@@ -27,8 +27,15 @@ class ContentRepository
             })->orderBy('created_at', 'DESC');
         }
 
-        if ($excludeCollectionsIds) {
-            $excludeCollectionsIds = is_array($excludeCollectionsIds) ? $excludeCollectionsIds : [$excludeCollectionsIds];
+        if ($excludeCollections) {
+            $excludeCollections = is_array($excludeCollections) ? $excludeCollections: [$excludeCollections];
+
+            /**
+             * Get the collection ids.
+             */
+            $excludeCollectionsIds = array_map(function ($collection) {
+                return is_object($collection) ? $collection->id : $collection;
+            }, $excludeCollections);
 
             $query->whereDoesntHave('collections', function ($query) use ($excludeCollectionsIds) {
                 $query

@@ -68,7 +68,7 @@ class CollectionContentManager extends Component
      */
     public function searchAvailableContentsAction(): void
     {
-        $this->availableContents = ContentRepository::search($this->searchAvailableContentsString, $this->collection->id);
+        $this->availableContents = ContentRepository::search($this->searchAvailableContentsString, $this->collection);
     }
 
     /**
