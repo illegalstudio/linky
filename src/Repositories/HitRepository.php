@@ -20,9 +20,18 @@ class HitRepository
         return Hit::forceCreate(
             [
                 'content_id' => $content->id,
-                'ip_address' => $request->ip(),
+                'url'        => $request->fullUrl(),
+                'scheme'     => $request->getScheme(),
+                'host'       => $request->getHost(),
+                'path'       => $request->path(),
+                'method'     => $request->method(),
                 'user_agent' => $request->userAgent(),
+                'ip_address' => $request->ip(),
                 'referer'    => $request->header('referer'),
+                // ...
+                'headers'    => $request->headers->all(),
+                'get'        => $request->query->all(),
+                'post'       => $request->request->all(),
             ]
         );
     }

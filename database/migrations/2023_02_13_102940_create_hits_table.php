@@ -11,6 +11,11 @@ return new class extends Migration {
         Schema::create(config('linky.db.prefix') . 'hits', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Content::class)->constrained(Content::getTableName())->cascadeOnDelete();
+            $table->string('url')->nullable();
+            $table->string('scheme')->nullable();
+            $table->string('host')->nullable();
+            $table->string('path')->nullable();
+            $table->string('method')->nullable();
             $table->string('user_agent')->nullable();
             $table->string('ip_address')->nullable();
             $table->string('referer')->nullable();
@@ -28,11 +33,13 @@ return new class extends Migration {
             $table->string('org')->nullable();
             $table->string('isp')->nullable();
             $table->string('connection_type')->nullable();
-            $table->string('domain')->nullable();
             $table->string('device')->nullable();
             $table->string('os')->nullable();
             $table->string('browser')->nullable();
             $table->string('browser_version')->nullable();
+            $table->json('headers')->nullable();
+            $table->json('get')->nullable();
+            $table->json('post')->nullable();
             $table->timestamps();
         });
     }
