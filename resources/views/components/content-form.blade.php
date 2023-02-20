@@ -25,16 +25,6 @@
                 </div>
 
                 <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                    <div class="mt-1">
-                        <input type="text" name="name" id="name"
-                               class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                               value="{{ old('name') ?? $content->name ?? "" }}"
-                               placeholder="">
-                    </div>
-                </div>
-
-                <div>
                     <label for="slug" class="block text-sm font-medium text-gray-700">Slug</label>
                     <div class="mt-1">
                         <input type="text" name="slug" id="slug"
@@ -43,6 +33,16 @@
                                placeholder="">
                     </div>
                     <p class="mt-2 text-sm text-gray-500">Leave empty to get auto-generated slug</p>
+                </div>
+
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                    <div class="mt-1">
+                        <input type="text" name="name" id="name"
+                               class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                               value="{{ old('name') ?? $content->name ?? "" }}"
+                               placeholder="">
+                    </div>
                 </div>
 
                 <div>
