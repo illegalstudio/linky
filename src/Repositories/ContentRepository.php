@@ -13,12 +13,13 @@ class ContentRepository
         if (empty($searchString)) {
             $query = Content::orderBy('created_at', 'DESC');
         } else {
-            $query = Content::where('name', 'LIKE', '%' . $searchString . '%')
-                ->orWhere('slug', 'LIKE', '%' . $searchString . '%')
-                ->orderBy('created_at', 'DESC');
+            $query = Content::where(function ($query) use ($searchString) {
+                $query->where('name', 'LIKE', '%' . $searchString . '%')
+                    ->orWhere('slug', 'LIKE', '%' . $searchString . '%');
+            })->orderBy('created_at', 'DESC');
         }
 
-        if($excludeCollectionsIds) {
+        if ($excludeCollectionsIds) {
             $excludeCollectionsIds = is_array($excludeCollectionsIds) ? $excludeCollectionsIds : [$excludeCollectionsIds];
 
             $query->whereDoesntHave('collections', function ($query) use ($excludeCollectionsIds) {
