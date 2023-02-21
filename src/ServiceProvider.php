@@ -31,6 +31,7 @@ class ServiceProvider extends IlluminateServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'linky');
         $this->loadTranslationsFrom(__DIR__ . '/../lang', 'linky');
 
+        $this->registerPublishing();
         $this->loadMigrationsFrom([
             __DIR__ . '/../database/migrations/'
         ]);
@@ -47,5 +48,19 @@ class ServiceProvider extends IlluminateServiceProvider
         Livewire::component('linky::collection-list', CollectionList::class);
         Livewire::component('linky::collection-content-manager', CollectionContentManager::class);
         Livewire::component('linky::page-list', PageList::class);
+    }
+
+    /**
+     * Register the package's publishable resources.
+     *
+     * @return void
+     */
+    private function registerPublishing()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../public/' => public_path('vendor/linky'),
+            ], ['linky-assets','laravel-assets']);
+        }
     }
 }

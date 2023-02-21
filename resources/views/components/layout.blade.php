@@ -1,8 +1,13 @@
+<!doctype html>
 <html lang="en">
 <head>
     <title>Linky</title>
 
-    @vite('resources/js/app.js')
+    {{
+       Vite::useHotFile(app_path('vendor/linky/hot'))
+           ->useBuildDirectory('vendor/linky/build')
+           ->withEntryPoints(['resources/js/app.js'])
+    }}
     @livewireStyles
 </head>
 <body>
