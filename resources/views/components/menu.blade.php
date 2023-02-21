@@ -21,7 +21,7 @@
                         <img class="h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=white" alt="">
                     </a>
                 </div>
-                <div class="ml-10 hidden space-x-8 sm:flex flex-row">
+                <div class="hidden space-x-8 sm:flex flex-row">
                     <a href="{{ route('linky.admin.link.index') }}"
                        class="text-base font-medium text-white hover:text-indigo-50">Links</a>
                     <a href="{{ route('linky.admin.collection.index') }}"
