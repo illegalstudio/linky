@@ -10,7 +10,7 @@ return new class extends Migration {
     {
         Schema::create(config('linky.db.prefix') . 'pages', function (Blueprint $table) {
             $table->id();
-            $table->text('body');
+            $table->longText('body');
             $table->timestamps();
         });
     }
