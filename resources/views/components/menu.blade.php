@@ -28,12 +28,17 @@
                        class="text-base font-medium text-white hover:text-indigo-50">Collections</a>
                     <a href="{{ route('linky.admin.page.index') }}"
                        class="text-base font-medium text-white hover:text-indigo-50">Pages</a>
+                    <a href="{{ route('profile.edit') }}"
+                       class="text-base font-medium text-white hover:text-indigo-50">Profile</a>
                 </div>
                 <div class="">
-                    <a href="#"
-                       class="inline-block rounded-md border border-transparent bg-indigo-500 py-2 px-4 text-base font-medium text-white hover:bg-opacity-75">
-                        Logout
-                    </a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit"
+                                class="inline-block rounded-md border border-transparent bg-indigo-500 py-2 px-4 text-base font-medium text-white hover:bg-opacity-75">
+                            Logout
+                        </button>
+                    </form>
                     <!--<a href="#" class="inline-block rounded-md border border-transparent bg-white py-2 px-4 text-base font-medium text-indigo-600 hover:bg-indigo-50">Logout</a>-->
                 </div>
             </div>
@@ -47,7 +52,7 @@
          x-transition:leave="transition ease-in duration-300"
          x-transition:leave-start="opacity-100 "
          x-transition:leave-end="opacity-0 "
-         >
+    >
         <nav class="flex flex-col text-right gap-2">
             <a href="{{ route('linky.admin.link.index') }}"
                class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">Links</a>
@@ -55,6 +60,8 @@
                class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">Collections</a>
             <a href="{{ route('linky.admin.page.index') }}"
                class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">Pages</a>
+            <a href="{{ route('profile.edit') }}"
+               class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">Profile</a>
         </nav>
     </div>
 </header>

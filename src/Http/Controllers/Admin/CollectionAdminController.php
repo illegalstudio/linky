@@ -2,6 +2,7 @@
 
 namespace Illegal\Linky\Http\Controllers\Admin;
 
+use Illegal\Linky\Http\Controllers\Controller;
 use Illegal\Linky\Models\Content;
 use Illegal\Linky\Models\Contentable\Collection;
 use Illegal\Linky\Repositories\CollectionRepository;
@@ -10,7 +11,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 
 class CollectionAdminController extends Controller
 {
