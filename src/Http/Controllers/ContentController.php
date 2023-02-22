@@ -8,8 +8,9 @@ use Illegal\Linky\Repositories\HitRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 
 class ContentController extends Controller
 {
@@ -37,9 +38,9 @@ class ContentController extends Controller
 
         switch ($content->type) {
             case ContentType::Link:
-                return redirect($content->contentable->url);
+                return Redirect::to($content->contentable->url);
             case ContentType::Page:
-                return new Response($content->contentable->body);
+                return Response::make($content->contentable->body);
             default:
                 abort(404);
         }
