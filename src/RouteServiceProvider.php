@@ -42,8 +42,12 @@ class RouteServiceProvider extends IlluminateRouteServiceProvider
             CreateLinkCommand::class
         ]);
 
+        if (config('linky.auth.use_linky_auth') && config('linky.auth.require_valid_user')) {
+            Route::middleware('linky-web')
+                ->group(__DIR__ . '/../routes/auth.php');
+        }
+
         Route::middleware('linky-web')
-            ->group(__DIR__ . '/../routes/auth.php')
             ->group(__DIR__ . '/../routes/web.php');
     }
 }

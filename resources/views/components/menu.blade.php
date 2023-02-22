@@ -28,18 +28,22 @@
                        class="text-base font-medium text-white hover:text-indigo-50">Collections</a>
                     <a href="{{ route('linky.admin.page.index') }}"
                        class="text-base font-medium text-white hover:text-indigo-50">Pages</a>
-                    <a href="{{ route('profile.edit') }}"
-                       class="text-base font-medium text-white hover:text-indigo-50">Profile</a>
+                    @if(Route::has('profile.edit'))
+                        <a href="{{ route('profile.edit') }}"
+                           class="text-base font-medium text-white hover:text-indigo-50">Profile</a>
+                    @endif
                 </div>
                 <div class="">
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit"
-                                class="inline-block rounded-md border border-transparent bg-indigo-500 py-2 px-4 text-base font-medium text-white hover:bg-opacity-75">
-                            Logout
-                        </button>
-                    </form>
-                    <!--<a href="#" class="inline-block rounded-md border border-transparent bg-white py-2 px-4 text-base font-medium text-indigo-600 hover:bg-indigo-50">Logout</a>-->
+                    @if(Route::has('profile.edit'))
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit"
+                                    class="inline-block rounded-md border border-transparent bg-indigo-500 py-2 px-4 text-base font-medium text-white hover:bg-opacity-75">
+                                Logout
+                            </button>
+                        </form>
+                        <!--<a href="#" class="inline-block rounded-md border border-transparent bg-white py-2 px-4 text-base font-medium text-indigo-600 hover:bg-indigo-50">Logout</a>-->
+                    @endif
                 </div>
             </div>
         </nav>
@@ -60,8 +64,10 @@
                class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">Collections</a>
             <a href="{{ route('linky.admin.page.index') }}"
                class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">Pages</a>
-            <a href="{{ route('profile.edit') }}"
-               class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">Profile</a>
+            @if(Route::has('profile.edit'))
+                <a href="{{ route('profile.edit') }}"
+                   class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">Profile</a>
+            @endif
         </nav>
     </div>
 </header>
