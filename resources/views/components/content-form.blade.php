@@ -25,10 +25,10 @@
                 </div>
 
                 <div>
-                    <label for="slug" class="block text-sm font-medium text-gray-700">Slug</label>
+                    <label for="slug" class="text-sm font-medium text-gray-700">Slug</label>
                     <div class="mt-1">
                         <input type="text" name="slug" id="slug"
-                               class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                               class="w-full flex-1 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                value="{{ old('slug') ?? $content->slug ?? "" }}"
                                placeholder="">
                     </div>
@@ -36,20 +36,20 @@
                 </div>
 
                 <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                    <label for="name" class="text-sm font-medium text-gray-700">Name</label>
                     <div class="mt-1">
                         <input type="text" name="name" id="name"
-                               class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                               class="w-full flex-1 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                value="{{ old('name') ?? $content->name ?? "" }}"
                                placeholder="">
                     </div>
                 </div>
 
                 <div>
-                    <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                    <label for="description" class="text-sm font-medium text-gray-700">Description</label>
                     <div class="mt-1">
                             <textarea id="description" name="description" rows="3"
-                                      class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                      class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                       placeholder="...">{{ old('description') ?? $content->description ?? "" }}</textarea>
                     </div>
                     <p class="mt-2 text-sm text-gray-500">Brief description for this content</p>

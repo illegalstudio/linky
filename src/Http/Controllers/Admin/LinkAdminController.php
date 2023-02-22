@@ -2,6 +2,7 @@
 
 namespace Illegal\Linky\Http\Controllers\Admin;
 
+use Illegal\Linky\Http\Controllers\Controller;
 use Illegal\Linky\Models\Content;
 use Illegal\Linky\Models\Contentable\Link;
 use Illegal\Linky\Repositories\LinkRepository;
@@ -10,7 +11,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 
 class LinkAdminController extends Controller
 {

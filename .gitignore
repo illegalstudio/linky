@@ -1,3 +1,6 @@
 node_modules
 public/hot
 public/build
+.idea/
+composer.lock
+vendor/

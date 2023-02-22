@@ -3,6 +3,8 @@
     <title>Linky</title>
 
     @vite('resources/js/app.js')
+
+    @livewireScripts
     @livewireStyles
 </head>
 <body>
@@ -13,6 +15,5 @@
     {{ $slot }}
 </div>
 
-@livewireScripts
 </body>
 </html>
