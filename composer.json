@@ -6,7 +6,23 @@
     "authors": [
         {
             "name": "Vincenzo Petrucci",
-            "email": "vincenzo.petrucci@gmail.com"
+            "email": "vincenzo.petrucci@gmail.com",
+            "role": "maintainer"
+        },
+        {
+            "name": "Andrea Pavone",
+            "email": "info@andreapavone.com",
+            "role": "developer"
+        },
+        {
+            "name": "Mircha Emanuel D'Angelo",
+            "email": "mirchaemanuel@gmail.com",
+            "role": "developer"
+        },
+        {
+            "name": "Fabrizio Bosica",
+            "email": "fabrizio.bosica88@gmail.com",
+            "role": "graphic designer"
         }
     ],
     "minimum-stability": "stable",
