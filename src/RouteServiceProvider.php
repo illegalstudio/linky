@@ -6,7 +6,9 @@ use Illegal\Linky\Commands\CreateCollectionCommand;
 use Illegal\Linky\Commands\CreatePageCommand;
 use Illegal\Linky\Commands\CreateLinkCommand;
 use Illegal\Linky\Http\Middleware\Authenticate;
+use Illegal\Linky\Http\Middleware\EncryptCookies;
 use Illegal\Linky\Http\Middleware\RedirectIfAuthenticated;
+use Illegal\Linky\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as IlluminateRouteServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -28,11 +30,11 @@ class RouteServiceProvider extends IlluminateRouteServiceProvider
         $this->aliasMiddleware('linky-auth', Authenticate::class);
 
         $this->middlewareGroup('linky-web', [
-            \App\Http\Middleware\EncryptCookies::class,
+            EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \App\Http\Middleware\VerifyCsrfToken::class,
+            VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ]);
 

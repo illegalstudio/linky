@@ -11,6 +11,15 @@
 |
 */
 
+//function getTestFile($fileName): string
+//{
+//    return __DIR__."/Feature/{$fileName}";
+//}
+
+
+use Illegal\Linky\Tests\TestCase;
+
+uses(TestCase::class)->in('Feature');
 // uses(Tests\TestCase::class)->in('Feature');
 
 /*
@@ -23,6 +32,7 @@
 | to assert different things. Of course, you may extend the Expectation API at any time.
 |
 */
+
 
 expect()->extend('toBeOne', function () {
     return $this->toBe(1);
@@ -38,8 +48,3 @@ expect()->extend('toBeOne', function () {
 | global functions to help you to reduce the number of lines of code in your test files.
 |
 */
-
-function something()
-{
-    // ..
-}
