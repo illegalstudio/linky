@@ -21,10 +21,11 @@
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^6.4",
+        "nunomaduro/collision": "^6.1",
         "pestphp/pest": "^1.22",
         "pestphp/pest-plugin-laravel": "^1.2",
-        "spatie/laravel-ignition": "^1.0"
+        "spatie/laravel-ignition": "^1.0",
+        "phpunit/phpunit": "^9.6"
     },
     "autoload": {
         "psr-4": {
@@ -44,6 +45,11 @@
                 "Illegal\\Linky\\EventServiceProvider",
                 "Illegal\\Linky\\RouteServiceProvider"
             ]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
         }
     }
 }
