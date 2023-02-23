@@ -23,7 +23,7 @@
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
         "pestphp/pest": "^1.22",
-        "pestphp/pest-plugin-laravel": "^1.2",
+        "pestphp/pest-plugin-laravel": "^1.4",
         "spatie/laravel-ignition": "^1.0",
         "phpunit/phpunit": "^9.6"
     },
