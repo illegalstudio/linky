@@ -100,3 +100,4 @@ test('link slug must be unique and return a validation error', function () {
     //we expect validation error
     $response->assertSessionHasErrors();
 });
+

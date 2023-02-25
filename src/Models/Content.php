@@ -26,8 +26,8 @@ class Content extends AbstractModel
      */
     protected static array $validationRules = [
         'public'      => 'required|boolean',
-        'slug'        => 'nullable|string|unique:Illegal\Linky\Models\Content',
-        'name'        => 'nullable|string',
+        'slug'        => 'nullable|max:255|string|unique:Illegal\Linky\Models\Content',
+        'name'        => 'nullable|max:255|string',
         'description' => 'nullable|string'
     ];
 
