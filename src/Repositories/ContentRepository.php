@@ -27,6 +27,13 @@ class ContentRepository
             })->orderBy('created_at', 'DESC');
         }
 
+        /**
+         * If multi tenant is enabled, only show the contents of the current user.
+         */
+        if(config('linky.auth.multi_tenant')) {
+            $query->where('user_id', '=', auth()->id());
+        }
+
         if ($excludeCollections) {
             $excludeCollections = is_array($excludeCollections) ? $excludeCollections: [$excludeCollections];
 

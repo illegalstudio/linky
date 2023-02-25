@@ -10,7 +10,7 @@ return new class extends Migration {
     {
         Schema::create(config('linky.db.prefix') . 'hits', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Content::class)->constrained(Content::getTableName())->cascadeOnDelete();
+            $table->foreignIdFor(Content::class)->constrained(Content::getTableName());
             $table->string('url')->nullable();
             $table->string('scheme')->nullable();
             $table->string('host')->nullable();

@@ -2,18 +2,25 @@
 
 namespace Illegal\Linky\Models;
 
-use Illegal\Linky\Abstracts\AbstractModel;
 use Illegal\Linky\Enums\ContentType;
+use Illegal\Linky\Models\Auth\User;
 use Illegal\Linky\Models\Contentable\Collection;
+use Illegal\Linky\Models\Statistics\Hit;
+use Illegal\Linky\Traits\HasLinkyTablePrefix;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
-class Content extends AbstractModel
+class Content extends Model
 {
+    use HasLinkyTablePrefix;
+
     /**
      * @var string $tableName The table associated with the model.
      */
-    protected $tableName = 'contents';
+    protected string $tableName = 'contents';
 
     public $casts = [
         'type' => ContentType::class
@@ -30,6 +37,25 @@ class Content extends AbstractModel
         'name'        => 'nullable|max:255|string',
         'description' => 'nullable|string'
     ];
+
+    protected static function boot()
+    {
+        static::deleting(function ($content) {
+            /**
+             * Detaching from all collections.
+             */
+            $content->collections()->detach();
+
+            /**
+             * Deleting related models
+             * Using queries so that no events are fired.
+             */
+            $content->hits()->delete();
+            $content->contentable()->delete();
+        });
+
+        parent::boot();
+    }
 
     /**
      * Get the common validation rules for the content.
@@ -71,5 +97,25 @@ class Content extends AbstractModel
             'content_id',
             'collection_id'
         )->withPivot('position');
+    }
+
+    /**
+     * Relation to the hits associated with this content.
+     *
+     * @return HasMany
+     */
+    public function hits(): HasMany
+    {
+        return $this->hasMany(Hit::class);
+    }
+
+    /**
+     * Relation to the user that created the content.
+     *
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

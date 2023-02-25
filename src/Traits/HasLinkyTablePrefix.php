@@ -1,23 +1,23 @@
 <?php
 
-namespace Illegal\Linky\Abstracts;
+namespace Illegal\Linky\Traits;
 
-use Illuminate\Database\Eloquent\Model;
+use Exception;
 
-abstract class AbstractModel extends Model
+trait HasLinkyTablePrefix
 {
-    /**
-     * @var string $tableName The table name without the prefix.
-     */
-    protected $tableName = '';
-
     /**
      * Returns the table name with the prefix.
      *
      * @return string
+     * @throws Exception
      */
     public function getTable(): string
     {
+        if(empty($this->tableName)) {
+            throw new Exception('The table name is not set.');
+        }
+
         return config('linky.db.prefix') . $this->tableName;
     }
 
@@ -25,6 +25,7 @@ abstract class AbstractModel extends Model
      * A static method to get the table name.
      *
      * @return string
+     * @throws Exception
      */
     public static function getTableName(): string
     {
@@ -36,9 +37,11 @@ abstract class AbstractModel extends Model
      *
      * @param string $field
      * @return string
+     * @throws Exception
      */
     public static function getField(string $field): string
     {
         return self::getTableName() . '.' . $field;
     }
+
 }

@@ -13,14 +13,10 @@ return new class extends Migration {
             $table->id();
             $table
                 ->foreignIdFor(Collection::class, 'collection_id')
-                ->constrained(Collection::getTableName())
-                ->cascadeOnDelete()
-            ;
+                ->constrained(Collection::getTableName());
             $table
                 ->foreignIdFor(Content::class, 'content_id')
-                ->constrained(Content::getTableName())
-                ->cascadeOnDelete()
-            ;
+                ->constrained(Content::getTableName());
 
             $table->integer('position')->default(0);
 
