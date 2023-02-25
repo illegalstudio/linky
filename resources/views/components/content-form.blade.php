@@ -11,24 +11,20 @@
             </div>
             <div class="mt-5 space-y-6 md:col-span-2 md:mt-0">
                 <div>
-                    <fieldset>
-                        <legend class="contents text-base font-medium text-gray-900">Public</legend>
-                        <div class="mt-4 space-y-4">
-                            <button
-                                x-data="{toggle: {{ (old('public') ?? $content->public ?? 1) ? 'true' : 'false' }} }"
-                                @click="toggle = !toggle" type="button"
-                                class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                                role="switch" aria-checked="false">
-                                <input type="hidden" name="public" :value="toggle ? 1 : 0">
-                                <span aria-hidden="true"
-                                      class="pointer-events-none absolute h-full w-full rounded-md bg-white"></span>
-                                <span aria-hidden="true" :class="toggle ? 'bg-indigo-600' : 'bg-gray-200'"
-                                      class="pointer-events-none absolute mx-auto h-4 w-9 rounded-full transition-colors duration-200 ease-in-out"></span>
-                                <span aria-hidden="true" :class="toggle ? 'translate-x-5' : 'translate-x-0'"
-                                      class="pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border border-gray-200 bg-white shadow ring-0 transition-transform duration-200 ease-in-out"></span>
-                            </button>
-                        </div>
-                    </fieldset>
+                    <x-linky::input-label class="block">Public</x-linky::input-label>
+                    <button
+                        x-data="{toggle: {{ (old('public') ?? $content->public ?? 1) ? 'true' : 'false' }} }"
+                        @click="toggle = !toggle" type="button"
+                        class="mt-3 group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        role="switch" aria-checked="false">
+                        <input type="hidden" name="public" :value="toggle ? 1 : 0">
+                        <span aria-hidden="true"
+                              class="pointer-events-none absolute h-full w-full rounded-md bg-white"></span>
+                        <span aria-hidden="true" :class="toggle ? 'bg-indigo-600' : 'bg-gray-200'"
+                              class="pointer-events-none absolute mx-auto h-4 w-9 rounded-full transition-colors duration-200 ease-in-out"></span>
+                        <span aria-hidden="true" :class="toggle ? 'translate-x-5' : 'translate-x-0'"
+                              class="pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border border-gray-200 bg-white shadow ring-0 transition-transform duration-200 ease-in-out"></span>
+                    </button>
                 </div>
 
                 <div>
@@ -55,11 +51,7 @@
     </div>
 
     <div class="flex justify-end">
-        <a href="{{ $backUrl }}"
-           class="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Back</a>
-        <button type="submit"
-                class="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-            Save
-        </button>
+        <x-linky::button-a-white :href="$backUrl">Back</x-linky::button-a-white>
+        <x-linky::button-primary class="ml-3">Save</x-linky::button-primary>
     </div>
 </form>

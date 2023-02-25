@@ -44,9 +44,9 @@
                 {{ __('Already registered?') }}
             </a>
 
-            <x-linky::primary-button class="ml-4">
+            <x-linky::button-primary class="ml-4">
                 {{ __('Register') }}
-            </x-linky::primary-button>
+            </x-linky::button-primary>
         </div>
     </form>
 </x-linky::layout>

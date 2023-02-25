@@ -48,7 +48,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-linky::primary-button>{{ __('Save') }}</x-linky::primary-button>
+            <x-linky::button-primary>{{ __('Save') }}</x-linky::button-primary>
 
             @if (session('status') === 'profile-updated')
                 <p

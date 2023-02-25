@@ -31,9 +31,9 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <x-linky::primary-button>
+            <x-linky::button-primary>
                 {{ __('Reset Password') }}
-            </x-linky::primary-button>
+            </x-linky::button-primary>
         </div>
     </form>
 </x-linky::layout>

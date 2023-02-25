@@ -36,9 +36,9 @@
                 </a>
             @endif
 
-            <x-linky::primary-button class="ml-3">
+            <x-linky::button-primary class="ml-3">
                 {{ __('Log in') }}
-            </x-linky::primary-button>
+            </x-linky::button-primary>
         </div>
     </form>
 </x-linky::layout>
