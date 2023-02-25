@@ -5,14 +5,14 @@
         <!-- Name -->
         <div>
             <x-linky::input-label for="name" :value="__('Name')" />
-            <x-linky::text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required="" autofocus="" autocomplete="name" />
+            <x-linky::input-text id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required="" autofocus="" autocomplete="name" />
             <x-linky::input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
         <!-- Email Address -->
         <div class="mt-4">
             <x-linky::input-label for="email" :value="__('Email')" />
-            <x-linky::text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required="" autocomplete="username" />
+            <x-linky::input-text id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required="" autocomplete="username" />
             <x-linky::input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
@@ -20,7 +20,7 @@
         <div class="mt-4">
             <x-linky::input-label for="password" :value="__('Password')" />
 
-            <x-linky::text-input id="password" class="block mt-1 w-full"
+            <x-linky::input-text id="password" class="block mt-1 w-full"
                             type="password"
                             name="password"
                             required="" autocomplete="new-password" />
@@ -32,7 +32,7 @@
         <div class="mt-4">
             <x-linky::input-label for="password_confirmation" :value="__('Confirm Password')" />
 
-            <x-linky::text-input id="password_confirmation" class="block mt-1 w-full"
+            <x-linky::input-text id="password_confirmation" class="block mt-1 w-full"
                             type="password"
                             name="password_confirmation" required="" autocomplete="new-password" />
 
@@ -44,9 +44,9 @@
                 {{ __('Already registered?') }}
             </a>
 
-            <x-linky::primary-button class="ml-4">
+            <x-linky::button-primary class="ml-4">
                 {{ __('Register') }}
-            </x-linky::primary-button>
+            </x-linky::button-primary>
         </div>
     </form>
 </x-linky::layout>

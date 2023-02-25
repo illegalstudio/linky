@@ -30,7 +30,7 @@
             <div class="mt-6">
                 <x-linky::input-label for="password" value="{{ __('Password') }}" class="sr-only" />
 
-                <x-linky::text-input
+                <x-linky::input-text
                     id="password"
                     name="password"
                     type="password"

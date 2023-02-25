@@ -19,7 +19,9 @@
 
 use Illegal\Linky\Tests\TestCase;
 
+uses(TestCase::class)->in('Http');
 uses(TestCase::class)->in('Feature');
+uses(\Illegal\Linky\Tests\NoAuthRequiredTestCase::class)->in('FeatureNoAuth');
 // uses(Tests\TestCase::class)->in('Feature');
 
 /*
@@ -48,3 +50,6 @@ expect()->extend('toBeOne', function () {
 | global functions to help you to reduce the number of lines of code in your test files.
 |
 */
+function login() : TestCase {
+    return test()->actingAs(\Illegal\Linky\Tests\Authenticated::user());
+}

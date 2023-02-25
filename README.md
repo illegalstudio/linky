@@ -19,11 +19,11 @@ If false, the authentication will be handled by the linky package.
 Configure to false if yu want to use the linky package in another project that
 has its own authentication.
 
-#### LINKY_AUTH_REQUIRE_VALID_USER=true
+#### LINKY_AUTH_REQUIRE_VALID_USER
 True or false. If true, a valid user is required to access the application.  
 If false, the application will be accessible without authentication.
 
-#### LINKY_AUTH_LOGIN_ROUTE_NAME=login
+#### LINKY_AUTH_LOGIN_ROUTE_NAME
 The route path of the login page.
 
 Configure the route path of the login page of your application, if you have

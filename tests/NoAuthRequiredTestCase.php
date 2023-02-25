@@ -17,7 +17,7 @@ use Psr\Container\NotFoundExceptionInterface;
  *
  * @package Illegal\Linky\Tests
  */
-class TestCase extends \Orchestra\Testbench\TestCase
+class NoAuthRequiredTestCase extends \Orchestra\Testbench\TestCase
 {
     use InteractsWithViews, RefreshDatabase;
 
@@ -59,6 +59,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function getEnvironmentSetUp($app)
     {
         $config = $app->get('config');
+
+        $config->set('linky.auth.require_valid_user', false);
 
         $config->set('logging.default', 'errorlog');
 

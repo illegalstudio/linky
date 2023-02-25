@@ -10,7 +10,7 @@
         <div>
             <x-linky::input-label for="password" :value="__('Password')" />
 
-            <x-linky::text-input id="password" class="block mt-1 w-full"
+            <x-linky::input-text id="password" class="block mt-1 w-full"
                             type="password"
                             name="password"
                             required="" autocomplete="current-password"/>
@@ -19,9 +19,9 @@
         </div>
 
         <div class="flex justify-end mt-4">
-            <x-linky::primary-button>
+            <x-linky::button-primary>
                 {{ __('Confirm') }}
-            </x-linky::primary-button>
+            </x-linky::button-primary>
         </div>
     </form>
 </x-linky::layout>

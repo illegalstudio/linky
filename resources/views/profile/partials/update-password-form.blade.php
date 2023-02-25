@@ -15,24 +15,24 @@
 
         <div>
             <x-linky::input-label for="current_password" :value="__('Current Password')" />
-            <x-linky::text-input id="current_password" name="current_password" type="password" class="mt-1 block w-full" autocomplete="current-password" />
+            <x-linky::input-text id="current_password" name="current_password" type="password" class="mt-1 block w-full" autocomplete="current-password" />
             <x-linky::input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
         </div>
 
         <div>
             <x-linky::input-label for="password" :value="__('New Password')" />
-            <x-linky::text-input id="password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
+            <x-linky::input-text id="password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
             <x-linky::input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
         </div>
 
         <div>
             <x-linky::input-label for="password_confirmation" :value="__('Confirm Password')" />
-            <x-linky::text-input id="password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" />
+            <x-linky::input-text id="password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" />
             <x-linky::input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
         </div>
 
         <div class="flex items-center gap-4">
-            <x-linky::primary-button>{{ __('Save') }}</x-linky::primary-button>
+            <x-linky::button-primary>{{ __('Save') }}</x-linky::button-primary>
 
             @if (session('status') === 'password-updated')
                 <p
