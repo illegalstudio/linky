@@ -9,7 +9,7 @@
         <!-- Email Address -->
         <div>
             <x-linky::input-label for="email" :value="__('Email')" />
-            <x-linky::text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required="" autofocus=""/>
+            <x-linky::input-text id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required="" autofocus=""/>
             <x-linky::input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 

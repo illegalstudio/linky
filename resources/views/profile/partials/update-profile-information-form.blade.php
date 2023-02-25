@@ -19,13 +19,13 @@
 
         <div>
             <x-linky::input-label for="name" :value="__('Name')" />
-            <x-linky::text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required="" autofocus="" autocomplete="name" />
+            <x-linky::input-text id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required="" autofocus="" autocomplete="name" />
             <x-linky::input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
         <div>
             <x-linky::input-label for="email" :value="__('Email')" />
-            <x-linky::text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required="" autocomplete="username" />
+            <x-linky::input-text id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required="" autocomplete="username" />
             <x-linky::input-error class="mt-2" :messages="$errors->get('email')" />
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())

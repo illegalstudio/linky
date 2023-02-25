@@ -8,14 +8,14 @@
         <!-- Email Address -->
         <div>
             <x-linky::input-label for="email" :value="__('Email')" />
-            <x-linky::text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required="" autofocus="" autocomplete="username" />
+            <x-linky::input-text id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required="" autofocus="" autocomplete="username" />
             <x-linky::input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Password -->
         <div class="mt-4">
             <x-linky::input-label for="password" :value="__('Password')" />
-            <x-linky::text-input id="password" class="block mt-1 w-full" type="password" name="password" required="" autocomplete="new-password" />
+            <x-linky::input-text id="password" class="block mt-1 w-full" type="password" name="password" required="" autocomplete="new-password" />
             <x-linky::input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
@@ -23,7 +23,7 @@
         <div class="mt-4">
             <x-linky::input-label for="password_confirmation" :value="__('Confirm Password')" />
 
-            <x-linky::text-input id="password_confirmation" class="block mt-1 w-full"
+            <x-linky::input-text id="password_confirmation" class="block mt-1 w-full"
                                 type="password"
                                 name="password_confirmation" required="" autocomplete="new-password" />
 
