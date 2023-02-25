@@ -23,6 +23,10 @@ has its own authentication.
 True or false. If true, a valid user is required to access the application.  
 If false, the application will be accessible without authentication.
 
+#### LINKY_AUTH_MULTI_TENANT
+True or false. If true, the application will be multi-tenant.
+Each user will only be able to access his own contents.
+
 #### LINKY_AUTH_LOGIN_ROUTE_NAME
 The route path of the login page.
 
