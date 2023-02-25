@@ -2,18 +2,21 @@
 
 namespace Illegal\Linky\Models;
 
-use Illegal\Linky\Abstracts\AbstractModel;
 use Illegal\Linky\Enums\ContentType;
 use Illegal\Linky\Models\Contentable\Collection;
+use Illegal\Linky\Traits\HasLinkyTablePrefix;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
-class Content extends AbstractModel
+class Content extends Model
 {
+    use HasLinkyTablePrefix;
+
     /**
      * @var string $tableName The table associated with the model.
      */
-    protected $tableName = 'contents';
+    protected string $tableName = 'contents';
 
     public $casts = [
         'type' => ContentType::class
