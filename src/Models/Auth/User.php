@@ -3,8 +3,10 @@
 namespace Illegal\Linky\Models\Auth;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illegal\Linky\Models\Content;
 use Illegal\Linky\Traits\HasLinkyTablePrefix;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -47,4 +49,32 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected static function boot()
+    {
+        self::deleting(function ($user) {
+            /**
+             * Delete all tokens associated with the user.
+             */
+            $user->tokens()->delete();
+
+            /**
+             * Delete all contents owned by the user.
+             */
+            $user->contents->map(function ($content) {
+                $content->delete();
+            });
+        });
+        parent::boot();
+    }
+
+    /**
+     * Contents owned by the user.
+     *
+     * @return HasMany
+     */
+    public function contents(): HasMany
+    {
+        return $this->hasMany(Content::class);
+    }
 }

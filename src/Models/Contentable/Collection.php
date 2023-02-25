@@ -18,6 +18,18 @@ class Collection extends Model
      */
     protected string $tableName = 'collections';
 
+    protected static function boot()
+    {
+        self::deleting(function ($collection) {
+            /**
+             * Detaching all contents
+             */
+            $collection->contents()->detach();
+        });
+
+        parent::boot();
+    }
+
     /**
      * Relation to contents associated with this collection.
      *

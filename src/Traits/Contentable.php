@@ -21,7 +21,10 @@ trait Contentable
          * Delete the content when the model is deleted.
          */
         static::deleting(function ($model) {
-            $model->content()->delete();
+            /**
+             * Deleting the content, event will be fired
+             */
+            $model->content->delete();
         });
     }
 
