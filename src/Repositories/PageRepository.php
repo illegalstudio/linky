@@ -2,10 +2,10 @@
 
 namespace Illegal\Linky\Repositories;
 
+use Exception;
 use Illegal\Linky\Abstracts\AbstractRepository;
 use Illegal\Linky\Enums\ContentType;
 use Illegal\Linky\Models\Content;
-use Illegal\Linky\Models\Contentable\Collection;
 use Illegal\Linky\Models\Contentable\Page;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
@@ -76,6 +76,7 @@ final class PageRepository extends AbstractRepository
      * @param int $perPage The number of items per page.
      * @param array $sort The sort order.
      * @return LengthAwarePaginator|array
+     * @throws Exception
      */
     public static function paginateWithContent(int $perPage = 10, array $sort = []): LengthAwarePaginator|array
     {
@@ -85,6 +86,13 @@ final class PageRepository extends AbstractRepository
                 $join
                     ->on(Content::getField('contentable_id'), '=', Page::getField('id'))
                     ->where(Content::getField('type'), '=', ContentType::Page->value);
+
+                /**
+                 * If multi-tenant is enabled, only show the pages of the current user.
+                 */
+                if(config('linky.auth.multi_tenant')) {
+                    $join->where(Content::getField('user_id'), '=', auth()->id());
+                }
             });
 
         if (!empty($sort)) {
