@@ -45,7 +45,6 @@ class LinkAdminController extends Controller
         $request->validate(array_merge(Content::getValidationRules(), [
             'url' => 'required|url'
         ]));
-
         LinkRepository::create(
             $request->only(['url']),
             $request->get('public'),
