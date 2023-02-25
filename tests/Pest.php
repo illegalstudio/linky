@@ -19,6 +19,7 @@
 
 use Illegal\Linky\Tests\TestCase;
 
+uses(TestCase::class)->in('Http');
 uses(TestCase::class)->in('Feature');
 // uses(Tests\TestCase::class)->in('Feature');
 

@@ -9,6 +9,8 @@ use Illegal\Linky\ServiceProvider;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 /**
  * Class TestCase
@@ -32,12 +34,15 @@ class TestCase extends \Orchestra\Testbench\TestCase
      */
     protected function getPackageProviders($app)
     {
-        return [
-            ServiceProvider::class,
-            RouteServiceProvider::class,
-            EventServiceProvider::class,
-            AuthServiceProvider::class,
-        ];
+        return array_merge(
+            parent::getPackageProviders($app),
+            [
+                ServiceProvider::class,
+                RouteServiceProvider::class,
+                EventServiceProvider::class,
+                AuthServiceProvider::class,
+            ]
+        );
     }
 
     public function ignorePackageDiscoveriesFrom()
@@ -48,6 +53,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
     /**
      * @param Application $app
      * @return void
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     protected function getEnvironmentSetUp($app)
     {
