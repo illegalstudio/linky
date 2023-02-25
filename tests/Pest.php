@@ -21,6 +21,7 @@ use Illegal\Linky\Tests\TestCase;
 
 uses(TestCase::class)->in('Http');
 uses(TestCase::class)->in('Feature');
+uses(\Illegal\Linky\Tests\NoAuthRequiredTestCase::class)->in('FeatureNoAuth');
 // uses(Tests\TestCase::class)->in('Feature');
 
 /*
