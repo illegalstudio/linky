@@ -101,3 +101,22 @@ test('link slug must be unique and return a validation error', function () {
     $response->assertSessionHasErrors();
 });
 
+test('link with name length gt 255 returns a validation error', function () {
+    $response = $this->actingAs(Authenticated::user())
+        ->post(route('linky.admin.link.store'), [
+            'public' => $this->faker->boolean(),
+            'name'   => $this->faker->realTextBetween(256,300),
+            'url'    => $this->faker->url()
+        ]);
+    $response->assertSessionHasErrors();
+});
+
+test('lin with slug length gt 255 returns a validation error', function () {
+    $response = $this->actingAs(Authenticated::user())
+        ->post(route('linky.admin.link.store'), [
+            'public' => $this->faker->boolean(),
+            'slug'   => $this->faker->realTextBetween(256,300),
+            'url'    => $this->faker->url()
+        ]);
+    $response->assertSessionHasErrors();
+});
