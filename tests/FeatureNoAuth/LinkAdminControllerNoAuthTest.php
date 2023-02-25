@@ -2,6 +2,7 @@
 
 use Illegal\Linky\Http\Middleware\EncryptCookies;
 use Illegal\Linky\Http\Middleware\VerifyCsrfToken;
+use Illegal\Linky\Repositories\LinkRepository;
 use Illegal\Linky\Tests\Authenticated;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -97,3 +98,36 @@ test('post a link with slug length gt 255 returns a validation error', function 
         ]);
     $response->assertSessionHasErrors();
 });
+
+/*--------------------------------------------------------------------------------
+ * EDIT
+ * - edit a link
+ * - validation tests
+ * -------------------------------------------------------------------------------
+ */
+test('link edit page is accessible without auth', function () {
+    $link = LinkRepository::create(
+        ['url' => $this->faker->url()],
+        $this->faker->boolean(),
+        $this->faker->slug(),
+        $this->faker->text(200),
+        $this->faker->text(200)
+    );
+
+    $this->get(route('linky.admin.link.edit', ['link' => 1]))
+        ->assertStatus(200);
+
+    $link->delete();
+});
+
+test('link edit page throw an exception if no link id provided', function () {
+    expect(fn() => $this->get(route('linky.admin.link.edit' )))
+        ->toThrow(\Illuminate\Routing\Exceptions\UrlGenerationException::class);
+});
+
+test('link edit page return 404 if no link found', function () {
+    $this
+        ->get(route('linky.admin.link.edit', ['link' => 1]))
+        ->assertStatus(404);
+});
+
