@@ -4,3 +4,4 @@ public/build
 .idea/
 composer.lock
 vendor/
+.phpunit.*
