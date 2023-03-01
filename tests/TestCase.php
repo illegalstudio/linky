@@ -71,6 +71,28 @@ class TestCase extends \Orchestra\Testbench\TestCase
         ]);
     }
 
+    /**
+     * Resolve application core configuration implementation.
+     *
+     * @param Application $app
+     *
+     * @return void
+     */
+    protected function resolveApplicationConfiguration($app): void
+    {
+        parent::resolveApplicationConfiguration($app);
+
+        /**
+         * using linky auth
+         */
+        $app['config']['linky'] = require __DIR__ . '/../config/linky.php';
+
+        /**
+         * loading Linky auth config
+         */
+        $app['config']['auth'] = require __DIR__ . '/../config/auth.php';
+    }
+
     protected function resolveApplicationCore($app)
     {
         parent::resolveApplicationCore($app);
