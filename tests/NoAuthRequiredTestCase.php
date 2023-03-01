@@ -9,6 +9,7 @@ use Illegal\Linky\ServiceProvider;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\LivewireServiceProvider;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
@@ -41,6 +42,7 @@ class NoAuthRequiredTestCase extends \Orchestra\Testbench\TestCase
                 RouteServiceProvider::class,
                 EventServiceProvider::class,
                 AuthServiceProvider::class,
+                LivewireServiceProvider::class
             ]
         );
     }
