@@ -9,10 +9,8 @@ use Illegal\Linky\ServiceProvider;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Livewire\Livewire;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use Termwind\Components\Li;
 
 /**
  * Class TestCase
@@ -29,18 +27,6 @@ class TestCase extends \Orchestra\Testbench\TestCase
      * @var bool
      */
     protected $enablesPackageDiscoveries = true;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        Livewire::component('linky::collection-list', \Illegal\Linky\Http\Livewire\CollectionList::class);
-        Livewire::component('linky::collection-content-manager', \Illegal\Linky\Http\Livewire\CollectionContentManager::class);
-        Livewire::component('linky::link-list', \Illegal\Linky\Http\Livewire\LinkList::class);
-        Livewire::component('linky::page-list', \Illegal\Linky\Http\Livewire\PageList::class);
-
-    }
-
 
     /**
      * @param $app
@@ -115,5 +101,6 @@ class TestCase extends \Orchestra\Testbench\TestCase
             return 'self-testing';
         });
     }
+
 
 }

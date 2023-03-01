@@ -4,16 +4,11 @@ namespace Illegal\Linky\Tests;
 
 use Illegal\Linky\AuthServiceProvider;
 use Illegal\Linky\EventServiceProvider;
-use Illegal\Linky\Http\Livewire\CollectionContentManager;
-use Illegal\Linky\Http\Livewire\CollectionList;
-use Illegal\Linky\Http\Livewire\LinkList;
-use Illegal\Linky\Http\Livewire\PageList;
 use Illegal\Linky\RouteServiceProvider;
 use Illegal\Linky\ServiceProvider;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Livewire\Livewire;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
@@ -32,16 +27,6 @@ class NoAuthRequiredTestCase extends \Orchestra\Testbench\TestCase
      * @var bool
      */
     protected $enablesPackageDiscoveries = true;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        Livewire::component('linky::collection-list', CollectionList::class);
-        Livewire::component('linky::collection-content-manager', CollectionContentManager::class);
-        Livewire::component('linky::link-list', LinkList::class);
-        Livewire::component('linky::page-list', PageList::class);
-    }
 
     /**
      * @param $app
