@@ -5,3 +5,4 @@ public/build
 composer.lock
 vendor/
 .phpunit.*
+.phpunit.result.cache
