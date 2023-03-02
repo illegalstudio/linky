@@ -4,3 +4,5 @@ public/build
 .idea/
 composer.lock
 vendor/
+.phpunit.*
+.phpunit.result.cache

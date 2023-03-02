@@ -17,6 +17,6 @@ jobs:
           php-version: '8.1'
       - uses: actions/checkout@v3
       - name: Install Dependencies
-        run: composer update && composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+        run: composer update && composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist && composer dump-autoload
       - name: Execute tests (Unit and Feature tests) via PEST
         run: vendor/bin/pest

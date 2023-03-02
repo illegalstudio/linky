@@ -9,6 +9,7 @@ use Illegal\Linky\ServiceProvider;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\LivewireServiceProvider;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
@@ -41,6 +42,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
                 RouteServiceProvider::class,
                 EventServiceProvider::class,
                 AuthServiceProvider::class,
+                LivewireServiceProvider::class
             ]
         );
     }
@@ -69,6 +71,28 @@ class TestCase extends \Orchestra\Testbench\TestCase
             'database' => ':memory:',
             'prefix'   => '',
         ]);
+    }
+
+    /**
+     * Resolve application core configuration implementation.
+     *
+     * @param Application $app
+     *
+     * @return void
+     */
+    protected function resolveApplicationConfiguration($app): void
+    {
+        parent::resolveApplicationConfiguration($app);
+
+        /**
+         * using linky auth
+         */
+        $app['config']['linky'] = require __DIR__ . '/../config/linky.php';
+
+        /**
+         * loading Linky auth config
+         */
+        $app['config']['auth'] = require __DIR__ . '/../config/auth.php';
     }
 
     protected function resolveApplicationCore($app)

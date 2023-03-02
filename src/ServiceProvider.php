@@ -74,5 +74,9 @@ class ServiceProvider extends IlluminateServiceProvider
         Livewire::component('linky::collection-list', CollectionList::class);
         Livewire::component('linky::collection-content-manager', CollectionContentManager::class);
         Livewire::component('linky::page-list', PageList::class);
+
+        $this->publishes([
+            __DIR__.'/../config/linky.php' => config_path('linky.php'),
+        ], 'illegal-linky-config');
     }
 }
