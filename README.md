@@ -27,7 +27,7 @@ its development and customize it to suit your needs.
 
 # Installation
 
-### Composer Package
+### Install Composer Package
 ```shell
 composer require illegal/linky
 ```
