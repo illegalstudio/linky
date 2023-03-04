@@ -12,11 +12,31 @@
     "minimum-stability": "stable",
     "require": {
         "php": "^8.1",
+        "guzzlehttp/guzzle": "^7.2",
+        "laravel/framework": "^9.19",
+        "laravel/sanctum": "^3.0",
         "livewire/livewire": "^2.11"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.9.1",
+        "laravel/pint": "^1.0",
+        "mockery/mockery": "^1.4.4",
+        "nunomaduro/collision": "^6.4",
+        "pestphp/pest": "^1.22",
+        "pestphp/pest-plugin-laravel": "^1.4",
+        "spatie/laravel-ignition": "^1.0",
+        "phpunit/phpunit": "^9.6",
+        "pestphp/pest-plugin-mock": "^1.0",
+        "orchestra/testbench": "^7.22"
     },
     "autoload": {
         "psr-4": {
             "Illegal\\Linky\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Illegal\\Linky\\Tests\\": "tests/"
         }
     },
     "extra": {
@@ -27,6 +47,11 @@
                 "Illegal\\Linky\\EventServiceProvider",
                 "Illegal\\Linky\\RouteServiceProvider"
             ]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
         }
     }
 }

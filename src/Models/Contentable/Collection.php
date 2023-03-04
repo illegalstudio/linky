@@ -2,20 +2,33 @@
 
 namespace Illegal\Linky\Models\Contentable;
 
-use Illegal\Linky\Abstracts\AbstractModel;
 use Illegal\Linky\Models\Content;
 use Illegal\Linky\Traits\Contentable;
+use Illegal\Linky\Traits\HasLinkyTablePrefix;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
-class Collection extends AbstractModel
+class Collection extends Model
 {
-    use Contentable;
+    use Contentable, HasLinkyTablePrefix;
 
     /**
      * @var string $tableName The table associated with the model.
      */
-    protected $tableName = 'collections';
+    protected string $tableName = 'collections';
+
+    protected static function boot()
+    {
+        self::deleting(function ($collection) {
+            /**
+             * Detaching all contents
+             */
+            $collection->contents()->detach();
+        });
+
+        parent::boot();
+    }
 
     /**
      * Relation to contents associated with this collection.
@@ -29,7 +42,7 @@ class Collection extends AbstractModel
             config('linky.db.prefix') . 'collection_content',
             'collection_id',
             'content_id'
-        )->withPivot('position')->orderBy('position', 'asc');
+        )->withPivot('position')->orderBy('position');
     }
 
     /**

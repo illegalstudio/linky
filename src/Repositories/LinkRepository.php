@@ -2,6 +2,7 @@
 
 namespace Illegal\Linky\Repositories;
 
+use Exception;
 use Illegal\Linky\Abstracts\AbstractRepository;
 use Illegal\Linky\Enums\ContentType;
 use Illegal\Linky\Models\Content;
@@ -70,8 +71,9 @@ final class LinkRepository extends AbstractRepository
      * @param int $perPage The amount of links per page.
      * @param array $sort The sort order.
      * @return LengthAwarePaginator|array
+     * @throws Exception
      */
-    public static function paginateWithContent($perPage = 10, array $sort = []): LengthAwarePaginator|array
+    public static function paginateWithContent(int $perPage = 10, array $sort = []): LengthAwarePaginator|array
     {
         $query = Link::with('content')
             ->select(Link::getField('*'))
@@ -79,6 +81,13 @@ final class LinkRepository extends AbstractRepository
                 $join
                     ->on(Content::getField('contentable_id'), '=', Link::getField('id'))
                     ->where(Content::getField('type'), '=', ContentType::Link->value);
+
+                /**
+                 * If multi-tenant is enabled, only show the links of the current user.
+                 */
+                if(config('linky.auth.multi_tenant')) {
+                    $join->where(Content::getField('user_id'), '=', auth()->id());
+                }
             });
 
         if (!empty($sort)) {

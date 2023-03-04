@@ -6,11 +6,11 @@
             <hr class="my-5">
 
             <div class="w-full">
-                <label for="search" class="block text-sm font-medium text-gray-700">Search</label>
+                <label for="search" class="text-sm font-medium text-gray-700">Search</label>
                 <div class="mt-1">
                     <input type="text" name="search" id="search"
                            wire:model.defer="searchAvailableContentsString" wire:keydown.enter="searchAvailableContentsAction"
-                           class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                           class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                            placeholder="Press enter after your search">
                 </div>
             </div>
@@ -39,11 +39,11 @@
             <hr class="my-5">
 
             <div class="w-full">
-                <label for="filter" class="block text-sm font-medium text-gray-700">Filter</label>
+                <label for="filter" class="text-sm font-medium text-gray-700">Filter</label>
                 <div class="mt-1">
                     <input type="text" name="filter" id="filter"
                            wire:model.defer="filterCurrentContentsString" wire:keydown.enter="filterCurrentContentsAction"
-                           class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                           class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                            placeholder="Press enter after your search">
                 </div>
             </div>

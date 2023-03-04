@@ -1,4 +1,3 @@
-<!doctype html>
 <html lang="en">
 <head>
     <title>Linky</title>
@@ -8,6 +7,7 @@
            ->useBuildDirectory('vendor/linky/build')
            ->withEntryPoints(['resources/js/app.js'])
     }}
+    @livewireScripts
     @livewireStyles
 </head>
 <body>
@@ -18,6 +18,5 @@
     {{ $slot }}
 </div>
 
-@livewireScripts
 </body>
 </html>

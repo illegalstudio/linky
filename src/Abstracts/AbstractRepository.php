@@ -3,6 +3,7 @@
 namespace Illegal\Linky\Abstracts;
 
 use Illegal\Linky\Enums\ContentType;
+use Illegal\Linky\Models\Auth\User;
 use Illegal\Linky\Models\Content;
 use Illuminate\Database\Eloquent\Model;
 
@@ -47,8 +48,19 @@ abstract class AbstractRepository
             'description' => $description,
         ]);
         $content->contentable()->associate($contentable);
-        $content->save();
 
+        /**
+         * If the system is configured to use linky auth and
+         * the user is logged in, associate the content with the user.
+         */
+        if (config('linky.auth.use_linky_auth') && auth()->user() && auth()->user() instanceof User) {
+            $content->user()->associate(auth()->user());
+        }
+
+        /**
+         * Save and return the content.
+         */
+        $content->save();
         return $content;
     }
 
@@ -76,8 +88,11 @@ abstract class AbstractRepository
             'name'        => $name,
             'description' => $description,
         ]);
-        $content->save();
 
+        /**
+         * Save and return the content.
+         */
+        $content->save();
         return $content;
     }
 }
