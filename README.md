@@ -1,4 +1,5 @@
-<img width="151" alt="Linky-w@2x" src="https://user-images.githubusercontent.com/1971953/222575552-97a0a0ac-82f6-40f6-b50e-2ebf8077bbf1.png">
+<img width="151" alt="Linky-w@2x" src="https://user-images.githubusercontent.com/1971953/222575552-97a0a0ac-82f6-40f6-b50e-2ebf8077bbf1.png#gh-dark-mode-only">
+<img width="151" alt="linky-darkgrey" src="https://user-images.githubusercontent.com/436702/222921659-7cc67321-2177-442b-8572-a76e926bdff2.png#gh-light-mode-only">
 
 ![TEST](https://github.com/Illegal-Studio/Linky/actions/workflows/test.yml/badge.svg)
 
