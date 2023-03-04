@@ -2,11 +2,8 @@
 <head>
     <title>Linky</title>
 
-    {{
-       Vite::useHotFile(app_path('vendor/linky/hot'))
-           ->useBuildDirectory('vendor/linky/build')
-           ->withEntryPoints(['resources/js/app.js'])
-    }}
+
+    @vite('resources/js/app.js', 'public/vendor/linky')
     @livewireScripts
     @livewireStyles
 </head>
