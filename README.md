@@ -27,6 +27,16 @@ its development and customize it to suit your needs.
 
 # Installation
 
+### Composer Package
+```shell
+composer require illegal/linky
+```
+
+### Assets Publish
+```shell
+php artisan vendor:publish --tag=linky-assets
+```
+
 # Usage
 
 ## Authentication
