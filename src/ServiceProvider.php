@@ -90,7 +90,7 @@ class ServiceProvider extends IlluminateServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../public/' => public_path('vendor/linky'),
+                __DIR__.'/../public/build' => public_path('vendor/linky'),
             ], ['linky-assets','laravel-assets']);
         }
     }
