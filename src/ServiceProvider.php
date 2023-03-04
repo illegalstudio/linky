@@ -58,6 +58,7 @@ class ServiceProvider extends IlluminateServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'linky');
         $this->loadTranslationsFrom(__DIR__ . '/../lang', 'linky');
 
+        $this->registerPublishing();
         $this->loadMigrationsFrom([
             __DIR__ . '/../database/migrations/'
         ]);
@@ -78,5 +79,19 @@ class ServiceProvider extends IlluminateServiceProvider
         $this->publishes([
             __DIR__.'/../config/linky.php' => config_path('linky.php'),
         ], 'illegal-linky-config');
+    }
+
+    /**
+     * Register the package's publishable resources.
+     *
+     * @return void
+     */
+    private function registerPublishing()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../public/' => public_path('vendor/linky'),
+            ], ['linky-assets','laravel-assets']);
+        }
     }
 }

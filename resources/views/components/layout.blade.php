@@ -2,8 +2,8 @@
 <head>
     <title>Linky</title>
 
-    @vite('resources/js/app.js')
 
+    @vite('resources/js/app.js', 'vendor/linky/build')
     @livewireScripts
     @livewireStyles
 </head>
