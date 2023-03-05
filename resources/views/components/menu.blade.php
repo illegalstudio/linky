@@ -22,27 +22,37 @@
                     </a>
                 </div>
                 <div class="hidden space-x-8 sm:flex flex-row">
-                    <a href="{{ route('linky.admin.link.index') }}"
-                       class="text-base font-medium text-white hover:text-indigo-50">Links</a>
-                    <a href="{{ route('linky.admin.collection.index') }}"
-                       class="text-base font-medium text-white hover:text-indigo-50">Collections</a>
-                    <a href="{{ route('linky.admin.page.index') }}"
-                       class="text-base font-medium text-white hover:text-indigo-50">Pages</a>
-                    @if(Route::has('profile.edit'))
-                        <a href="{{ route('profile.edit') }}"
-                           class="text-base font-medium text-white hover:text-indigo-50">Profile</a>
+                    <x-linky::menu-link href="{{ route('linky.admin.link.index') }}">Links</x-linky::menu-link>
+                    <x-linky::menu-link href="{{ route('linky.admin.collection.index') }}">Collections</x-linky::menu-link>
+                    <x-linky::menu-link href="{{ route('linky.admin.page.index') }}">Pages</x-linky::menu-link>
+                    @if (Route::has('linky.auth.profile.edit'))
+                        <x-linky::menu-link href="{{ route('linky.auth.profile.edit') }}">Profile</x-linky::menu-link>
                     @endif
                 </div>
                 <div class="">
-                    @if(Route::has('profile.edit'))
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit"
-                                    class="inline-block rounded-md border border-transparent bg-indigo-500 py-2 px-4 text-base font-medium text-white hover:bg-opacity-75">
-                                Logout
-                            </button>
-                        </form>
-                        <!--<a href="#" class="inline-block rounded-md border border-transparent bg-white py-2 px-4 text-base font-medium text-indigo-600 hover:bg-indigo-50">Logout</a>-->
+                    @if(config('linky.auth.use_linky_auth'))
+                        @guest()
+                            @if(Route::has('linky.auth.login'))
+                                <x-linky::menu-button-a href="{{ route('linky.auth.login') }}">Log in</x-linky::menu-button-a>
+                            @endif
+                        @endguest
+                        @auth()
+                            @if(Route::has('linky.auth.logout'))
+                                <form method="POST" action="{{ route('linky.auth.logout') }}">
+                                    @csrf
+                                    <x-linky::menu-button>Logout</x-linky::menu-button>
+                                </form>
+                            @endif
+                        @endauth
+                    @else
+                        @auth()
+                            @if(Route::has('logout'))
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <x-linky::menu-button>Logout</x-linky::menu-button>
+                                </form>
+                            @endif
+                        @endauth
                     @endif
                 </div>
             </div>
@@ -58,15 +68,11 @@
          x-transition:leave-end="opacity-0 "
     >
         <nav class="flex flex-col text-right gap-2">
-            <a href="{{ route('linky.admin.link.index') }}"
-               class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">Links</a>
-            <a href="{{ route('linky.admin.collection.index') }}"
-               class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">Collections</a>
-            <a href="{{ route('linky.admin.page.index') }}"
-               class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">Pages</a>
-            @if(Route::has('profile.edit'))
-                <a href="{{ route('profile.edit') }}"
-                   class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">Profile</a>
+            <x-linky::menu-link-mobile href="{{ route('linky.admin.link.index') }}">Links</x-linky::menu-link-mobile>
+            <x-linky::menu-link-mobile href="{{ route('linky.admin.collection.index') }}">Collections</x-linky::menu-link-mobile>
+            <x-linky::menu-link-mobile href="{{ route('linky.admin.page.index') }}">Pages</x-linky::menu-link-mobile>
+            @if (Route::has('linky.auth.profile.edit'))
+                <x-linky::menu-link-mobile href="{{ route('linky.auth.profile.edit') }}">Profile</x-linky::menu-link-mobile>
             @endif
         </nav>
     </div>

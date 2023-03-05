@@ -40,7 +40,7 @@ class Authenticate extends Middleware
     protected function redirectTo($request): ?string
     {
         if (! $request->expectsJson()) {
-            return route(config('linky.auth.login_route_name'));
+            return route('linky.auth.login');
         }
 
         return null;
