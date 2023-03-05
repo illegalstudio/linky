@@ -25,20 +25,24 @@
                     <x-linky::menu-link href="{{ route('linky.admin.link.index') }}">Links</x-linky::menu-link>
                     <x-linky::menu-link href="{{ route('linky.admin.collection.index') }}">Collections</x-linky::menu-link>
                     <x-linky::menu-link href="{{ route('linky.admin.page.index') }}">Pages</x-linky::menu-link>
-                    @if(config('linky.auth.functionalities.user_profile'))
+                    @if(Route::has('linky.auth.profile.edit'))
                         <x-linky::menu-link href="{{ route('linky.auth.profile.edit') }}">Profile</x-linky::menu-link>
                     @endif
                 </div>
                 <div class="">
                     @if(config('linky.auth.use_linky_auth'))
                         @guest()
-                            <x-linky::menu-button-a href="{{ route('linky.auth.login') }}">Log in</x-linky::menu-button-a>
+                            @if(Route::has('linky.auth.login'))
+                                <x-linky::menu-button-a href="{{ route('linky.auth.login') }}">Log in</x-linky::menu-button-a>
+                            @endif
                         @endguest
                         @auth()
-                            <form method="POST" action="{{ route('linky.auth.logout') }}">
-                                @csrf
-                                <x-linky::menu-button>Logout</x-linky::menu-button>
-                            </form>
+                            @if(Route::has('linky.auth.logout'))
+                                <form method="POST" action="{{ route('linky.auth.logout') }}">
+                                    @csrf
+                                    <x-linky::menu-button>Logout</x-linky::menu-button>
+                                </form>
+                            @endif
                         @endauth
                     @endif
                 </div>
@@ -58,7 +62,7 @@
             <x-linky::menu-link-mobile href="{{ route('linky.admin.link.index') }}">Links</x-linky::menu-link-mobile>
             <x-linky::menu-link-mobile href="{{ route('linky.admin.collection.index') }}">Collections</x-linky::menu-link-mobile>
             <x-linky::menu-link-mobile href="{{ route('linky.admin.page.index') }}">Pages</x-linky::menu-link-mobile>
-            @if(config('linky.auth.functionalities.user_profile'))
+            @if(Route::has('linky.auth.profile.edit'))
                 <x-linky::menu-link-mobile href="{{ route('linky.auth.profile.edit') }}">Profile</x-linky::menu-link-mobile>
             @endif
         </nav>
