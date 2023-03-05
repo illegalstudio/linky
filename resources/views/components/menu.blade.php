@@ -25,7 +25,7 @@
                     <x-linky::menu-link href="{{ route('linky.admin.link.index') }}">Links</x-linky::menu-link>
                     <x-linky::menu-link href="{{ route('linky.admin.collection.index') }}">Collections</x-linky::menu-link>
                     <x-linky::menu-link href="{{ route('linky.admin.page.index') }}">Pages</x-linky::menu-link>
-                    @if(Route::has('linky.auth.profile.edit'))
+                    @if (Route::has('linky.auth.profile.edit'))
                         <x-linky::menu-link href="{{ route('linky.auth.profile.edit') }}">Profile</x-linky::menu-link>
                     @endif
                 </div>
@@ -71,7 +71,7 @@
             <x-linky::menu-link-mobile href="{{ route('linky.admin.link.index') }}">Links</x-linky::menu-link-mobile>
             <x-linky::menu-link-mobile href="{{ route('linky.admin.collection.index') }}">Collections</x-linky::menu-link-mobile>
             <x-linky::menu-link-mobile href="{{ route('linky.admin.page.index') }}">Pages</x-linky::menu-link-mobile>
-            @if(Route::has('linky.auth.profile.edit'))
+            @if (Route::has('linky.auth.profile.edit'))
                 <x-linky::menu-link-mobile href="{{ route('linky.auth.profile.edit') }}">Profile</x-linky::menu-link-mobile>
             @endif
         </nav>
