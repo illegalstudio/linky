@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\Route;
  * Admin routes
  */
 Route::prefix('linky/admin')
-    ->middleware('web')
-    ->middleware('linky-auth')
+    ->middleware(config('linky.auth.use_linky_auth') ? 'linky-auth' : 'auth')
     ->group(function () {
         Route::resource('links', LinkAdminController::class)->names([
             'index'   => 'linky.admin.link.index',
