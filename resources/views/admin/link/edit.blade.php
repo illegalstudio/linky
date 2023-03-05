@@ -1,8 +1,8 @@
 <x-linky::layout>
     <x-linky::content-form
         method="PUT"
-        title="Update link"
-        subtitle="Update existing link"
+        title="{{__('Update link')}}"
+        subtitle="{{__('Update existing link'}}"
         :action="route('linky.admin.link.update', $link)"
         :backUrl="route('linky.admin.link.index')"
         :content="$link->content ?? null"

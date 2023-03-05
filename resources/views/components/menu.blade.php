@@ -23,14 +23,14 @@
                 </div>
                 <div class="hidden space-x-8 sm:flex flex-row">
                     <a href="{{ route('linky.admin.link.index') }}"
-                       class="text-base font-medium text-white hover:text-indigo-50">Links</a>
+                       class="text-base font-medium text-white hover:text-indigo-50">{{__('Links')}}</a>
                     <a href="{{ route('linky.admin.collection.index') }}"
-                       class="text-base font-medium text-white hover:text-indigo-50">Collections</a>
+                       class="text-base font-medium text-white hover:text-indigo-50">{{__('Collections')}}</a>
                     <a href="{{ route('linky.admin.page.index') }}"
-                       class="text-base font-medium text-white hover:text-indigo-50">Pages</a>
+                       class="text-base font-medium text-white hover:text-indigo-50">{{__('Pages')}}</a>
                     @if(Route::has('profile.edit'))
                         <a href="{{ route('profile.edit') }}"
-                           class="text-base font-medium text-white hover:text-indigo-50">Profile</a>
+                           class="text-base font-medium text-white hover:text-indigo-50">{{__('Profile')}}</a>
                     @endif
                 </div>
                 <div class="">
@@ -39,7 +39,7 @@
                             @csrf
                             <button type="submit"
                                     class="inline-block rounded-md border border-transparent bg-indigo-500 py-2 px-4 text-base font-medium text-white hover:bg-opacity-75">
-                                Logout
+                                {{__('Logout')}}
                             </button>
                         </form>
                         <!--<a href="#" class="inline-block rounded-md border border-transparent bg-white py-2 px-4 text-base font-medium text-indigo-600 hover:bg-indigo-50">Logout</a>-->
@@ -59,14 +59,14 @@
     >
         <nav class="flex flex-col text-right gap-2">
             <a href="{{ route('linky.admin.link.index') }}"
-               class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">Links</a>
+               class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">{{__('Links')}}</a>
             <a href="{{ route('linky.admin.collection.index') }}"
-               class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">Collections</a>
+               class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">{{__('Collections')}}</a>
             <a href="{{ route('linky.admin.page.index') }}"
-               class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">Pages</a>
+               class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">{{__('Pages')}}</a>
             @if(Route::has('profile.edit'))
                 <a href="{{ route('profile.edit') }}"
-                   class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">Profile</a>
+                   class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">{{__('Profile')}}</a>
             @endif
         </nav>
     </div>

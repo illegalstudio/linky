@@ -57,6 +57,9 @@ class ServiceProvider extends IlluminateServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'linky');
         $this->loadTranslationsFrom(__DIR__ . '/../lang', 'linky');
+        $this->publishes([
+            __DIR__.'/../lang' => $this->app->langPath('vendor/linky'),
+        ]);
 
         $this->registerPublishing();
         $this->loadMigrationsFrom([
@@ -78,7 +81,7 @@ class ServiceProvider extends IlluminateServiceProvider
 
         $this->publishes([
             __DIR__.'/../config/linky.php' => config_path('linky.php'),
-        ], 'illegal-linky-config');
+        ], 'linky-config');
     }
 
     /**

@@ -1,12 +1,12 @@
 <x-linky::layout>
     <div class="sm:flex sm:items-center">
         <div class="sm:flex-auto">
-            <h1 class="text-xl font-semibold text-gray-900">Links</h1>
-            <p class="mt-2 text-sm text-gray-700">A list of all the links in your account</p>
+            <h1 class="text-xl font-semibold text-gray-900">{{__('Links')}}</h1>
+            <p class="mt-2 text-sm text-gray-700">{{__('A list of all the links in your account')}}</p>
         </div>
         <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
             <x-linky::button-a-primary type="button" :href="route('linky.admin.link.create')">
-                Add link
+                {{__('Add link')}}
             </x-linky::button-a-primary>
         </div>
     </div>

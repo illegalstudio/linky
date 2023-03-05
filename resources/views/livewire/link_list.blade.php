@@ -9,22 +9,22 @@
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                         </th>
                         <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                            Public
+                            {{__('Public')}}
                         </th>
                         <th scope="col" wire:click.prevent="sortBy('{{ $sortFields['name']  }}')"
                             class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 cursor-pointer hover:bg-gray-100">
-                            Name
+                            {{__('Name')}}
                         </th>
                         <th scope="col" wire:click.prevent="sortBy('{{ $sortFields['slug'] }}')"
                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 cursor-pointer hover:bg-gray-100">
-                            Slug
+                            {{__('Slug')}}
                         </th>
                         <th scope="col" wire:click.prevent="sortBy('{{ $sortFields['url'] }}')"
                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 cursor-pointer hover:bg-gray-100">
-                            URL
+                            {{__('URL')}}
                         </th>
                         <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                            <span class="sr-only">Actions</span>
+                            <span class="sr-only">{{__('Actions')}}</span>
                         </th>
                     </tr>
                     </thead>
