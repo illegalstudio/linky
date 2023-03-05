@@ -53,7 +53,7 @@ Route::prefix('linky/auth')->middleware('linky-auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('linky.auth.logout');
 });
 
-Route::middleware('linky-auth')->group(function () {
+Route::prefix('linky/auth')->middleware('linky-authenticated')->group(function () {
     if (config('linky.auth.functionalities.user_profile')) {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('linky.auth.profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('linky.auth.profile.update');
