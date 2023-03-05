@@ -1,0 +1,17 @@
+v0.2.0
+
+Implements all authentication from linky module.
+Correctly support authentication from the main laravel application.
+
+v0.1.1
+
+Bug fixing
+
+v0.1
+
+First realease, with basic functionality.
+It contains:
+    - Links management
+    - Collections management
+    - Pages management
+    - Basic authentication
