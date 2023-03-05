@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 $admin = Route::prefix('linky/admin');
 
 if (config('linky.auth.use_linky_auth')) {
-    $admin->middleware('linky-auth');
+    $admin->middleware('linky-authenticated');
 } elseif (config('linky.auth.require_valid_user')) {
     $admin->middleware('auth');
 }

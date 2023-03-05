@@ -2,16 +2,21 @@
 
 namespace Illegal\Linky\Models\Auth;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illegal\Linky\Models\Content;
 use Illegal\Linky\Traits\HasLinkyTablePrefix;
+use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\URL;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, HasLinkyTablePrefix;
 
@@ -79,23 +84,47 @@ class User extends Authenticatable
     }
 
     /**
-     * @todo To be implemented.
+     * Send the password reset notification.
+     * Overriding the default implementation to use the linky custom URL.
      *
      * @param $token
-     * @return true
+     * @return void
      */
-    public function sendPasswordResetNotification($token)
+    public function sendPasswordResetNotification($token): void
     {
-        return true;
+        $notification = new ResetPasswordNotification($token);
+
+        $notification::$createUrlCallback = function ($notifiable, $token) {
+            return url(route('linky.auth.password.reset', [
+                'token' => $token,
+                'email' => $notifiable->getEmailForPasswordReset(),
+            ], false));
+        };
+
+        $this->notify($notification);
     }
 
     /**
-     * @todo To be implemented.
+     * Send the email verification notification.
+     * Overriding the default implementation to use the linky custom URL.
      *
-     * @return true
+     * @return void
      */
-    public function sendEmailVerificationNotification()
+    public function sendEmailVerificationNotification(): void
     {
-        return true;
+        $notification = new VerifyEmail;
+
+        $notification::$createUrlCallback = function ($notifiable) {
+            return URL::temporarySignedRoute(
+                'linky.auth.verification.verify',
+                Carbon::now()->addMinutes(Config::get('auth.verification.expire', 60)),
+                [
+                    'id' => $notifiable->getKey(),
+                    'hash' => sha1($notifiable->getEmailForVerification()),
+                ]
+            );
+        };
+
+        $this->notify($notification);
     }
 }
