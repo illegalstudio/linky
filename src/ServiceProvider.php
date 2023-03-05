@@ -2,8 +2,8 @@
 
 namespace Illegal\Linky;
 
-use Blade;
-use File;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\File;
 use Illegal\Linky\Http\Livewire\CollectionContentManager;
 use Illegal\Linky\Http\Livewire\CollectionList;
 use Illegal\Linky\Http\Livewire\LinkList;
@@ -29,15 +29,40 @@ class ServiceProvider extends IlluminateServiceProvider
          * Load authentication config file.
          * If the system is using linky authentication, we will use the linky auth config file, backing up the original.
          * Otherwise, we will restore the original config file.
+         *
+         * We will also try to remove the Event listener for the email verification notification, if the linky auth is enabled.
+         * Otherwise, we will add it back.
+         *
+         * @todo Move this to a command, to avoid doing this on every request.
          */
         if(config('linky.auth.use_linky_auth')) {
             if(File::exists(base_path() . "/config/auth.php")) {
                 File::move(base_path() . "/config/auth.php", base_path() . "/config/auth.php.linky");
             }
             $this->mergeConfigFrom(__DIR__ . "/../config/auth.php", "auth");
+
+            if(File::exists(base_path() . "/app/Providers/EventServiceProvider.php")) {
+                $eventServiceProvider = File::get(base_path() . "/app/Providers/EventServiceProvider.php");
+                $eventServiceProvider = str_replace(
+                    "use Illuminate\Auth\Listeners\SendEmailVerificationNotification;",
+                    "use Illegal\Linky\Listeners\DummySendEmailVerificationNotification as SendEmailVerificationNotification;",
+                    $eventServiceProvider
+                );
+                File::put(base_path() . "/app/Providers/EventServiceProvider.php", $eventServiceProvider);
+            }
         } else {
             if(File::exists(base_path() . "/config/auth.php.linky")) {
                 File::move(base_path() . "/config/auth.php.linky", base_path() . "/config/auth.php");
+            }
+
+            if(File::exists(base_path() . "/app/Providers/EventServiceProvider.php")) {
+                $eventServiceProvider = File::get(base_path() . "/app/Providers/EventServiceProvider.php");
+                $eventServiceProvider = str_replace(
+                    "use Illegal\Linky\Listeners\DummySendEmailVerificationNotification as SendEmailVerificationNotification;",
+                    "use Illuminate\Auth\Listeners\SendEmailVerificationNotification;",
+                    $eventServiceProvider
+                );
+                File::put(base_path() . "/app/Providers/EventServiceProvider.php", $eventServiceProvider);
             }
         }
     }
