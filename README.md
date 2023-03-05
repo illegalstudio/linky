@@ -58,10 +58,3 @@ If false, the application will be accessible without authentication.
 #### LINKY_AUTH_MULTI_TENANT
 True or false. If true, the application will be multi-tenant.
 Each user will only be able to access his own contents.
-
-
-#### LINKY_AUTH_LOGIN_ROUTE_NAME
-The route path of the login page.
-
-Configure the route path of the login page of your application, if you have
-configured LINKY_AUTH_USE_LINKY_AUTH to false.

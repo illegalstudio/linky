@@ -9,6 +9,7 @@ use Illegal\Linky\Http\Middleware\Authenticate;
 use Illegal\Linky\Http\Middleware\EncryptCookies;
 use Illegal\Linky\Http\Middleware\RedirectIfAuthenticated;
 use Illegal\Linky\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as IlluminateRouteServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,16 @@ class RouteServiceProvider extends IlluminateRouteServiceProvider
     {
         $this->aliasMiddleware('linky-guest', RedirectIfAuthenticated::class);
         $this->aliasMiddleware('linky-auth', Authenticate::class);
+        $this->aliasMiddleware('ensure-email-is-verified', EnsureEmailIsVerified::class);
+
+        if(config('linky.auth.functionalities.email_verification')) {
+            $this->middlewareGroup('linky-authenticated', [
+                'linky-auth',
+                'ensure-email-is-verified:linky.auth.verification.notice',
+            ]);
+        } else {
+            $this->aliasMiddleware('linky-authenticated', Authenticate::class);
+        }
 
         $this->middlewareGroup('linky-web', [
             EncryptCookies::class,

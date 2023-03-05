@@ -1,5 +1,5 @@
 <x-linky::layout>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('linky.auth.register') }}">
         @csrf
 
         <!-- Name -->
@@ -40,9 +40,11 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
+            @if (Route::has('linky.auth.login'))
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('linky.auth.login') }}">
+                    {{ __('Already registered?') }}
+                </a>
+            @endif
 
             <x-linky::button-primary class="ml-4">
                 {{ __('Register') }}
