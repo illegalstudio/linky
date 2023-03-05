@@ -22,26 +22,22 @@
                     </a>
                 </div>
                 <div class="hidden space-x-8 sm:flex flex-row">
-                    <a href="{{ route('linky.admin.link.index') }}"
-                       class="text-base font-medium text-white hover:text-indigo-50">Links</a>
-                    <a href="{{ route('linky.admin.collection.index') }}"
-                       class="text-base font-medium text-white hover:text-indigo-50">Collections</a>
-                    <a href="{{ route('linky.admin.page.index') }}"
-                       class="text-base font-medium text-white hover:text-indigo-50">Pages</a>
+                    <x-linky::menu-link href="{{ route('linky.admin.link.index') }}">Links</x-linky::menu-link>
+                    <x-linky::menu-link href="{{ route('linky.admin.collection.index') }}">Collections</x-linky::menu-link>
+                    <x-linky::menu-link href="{{ route('linky.admin.page.index') }}">Pages</x-linky::menu-link>
                     @if(config('linky.auth.functionalities.user_profile'))
-                        <a href="{{ route('profile.edit') }}"
-                           class="text-base font-medium text-white hover:text-indigo-50">Profile</a>
+                        <x-linky::menu-link href="{{ route('profile.edit') }}">Profile</x-linky::menu-link>
                     @endif
                 </div>
                 <div class="">
                     @if(config('linky.auth.use_linky_auth'))
                         @guest()
-                            <x-linky::button-a-menu href="{{ route('login') }}">Log in</x-linky::button-a-menu>
+                            <x-linky::menu-button-a href="{{ route('login') }}">Log in</x-linky::menu-button-a>
                         @endguest
                         @auth()
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <x-linky::button-menu>Logout</x-linky::button-menu>
+                                <x-linky::menu-button>Logout</x-linky::menu-button>
                             </form>
                         @endauth
                     @endif
@@ -59,15 +55,11 @@
          x-transition:leave-end="opacity-0 "
     >
         <nav class="flex flex-col text-right gap-2">
-            <a href="{{ route('linky.admin.link.index') }}"
-               class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">Links</a>
-            <a href="{{ route('linky.admin.collection.index') }}"
-               class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">Collections</a>
-            <a href="{{ route('linky.admin.page.index') }}"
-               class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">Pages</a>
+            <x-linky::menu-link-mobile href="{{ route('linky.admin.link.index') }}">Links</x-linky::menu-link-mobile>
+            <x-linky::menu-link-mobile href="{{ route('linky.admin.collection.index') }}">Collections</x-linky::menu-link-mobile>
+            <x-linky::menu-link-mobile href="{{ route('linky.admin.page.index') }}">Pages</x-linky::menu-link-mobile>
             @if(config('linky.auth.functionalities.user_profile'))
-                <a href="{{ route('profile.edit') }}"
-                   class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">Profile</a>
+                <x-linky::menu-link-mobile href="{{ route('profile.edit') }}">Profile</x-linky::menu-link-mobile>
             @endif
         </nav>
     </div>
