@@ -28,21 +28,22 @@
                        class="text-base font-medium text-white hover:text-indigo-50">Collections</a>
                     <a href="{{ route('linky.admin.page.index') }}"
                        class="text-base font-medium text-white hover:text-indigo-50">Pages</a>
-                    @if(Route::has('profile.edit'))
+                    @if(config('linky.auth.functionalities.user_profile'))
                         <a href="{{ route('profile.edit') }}"
                            class="text-base font-medium text-white hover:text-indigo-50">Profile</a>
                     @endif
                 </div>
                 <div class="">
-                    @if(Route::has('profile.edit'))
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit"
-                                    class="inline-block rounded-md border border-transparent bg-indigo-500 py-2 px-4 text-base font-medium text-white hover:bg-opacity-75">
-                                Logout
-                            </button>
-                        </form>
-                        <!--<a href="#" class="inline-block rounded-md border border-transparent bg-white py-2 px-4 text-base font-medium text-indigo-600 hover:bg-indigo-50">Logout</a>-->
+                    @if(config('linky.auth.use_linky_auth'))
+                        @guest()
+                            <x-linky::button-a-menu href="{{ route('login') }}">Log in</x-linky::button-a-menu>
+                        @endguest
+                        @auth()
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <x-linky::button-menu>Logout</x-linky::button-menu>
+                            </form>
+                        @endauth
                     @endif
                 </div>
             </div>
@@ -64,7 +65,7 @@
                class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">Collections</a>
             <a href="{{ route('linky.admin.page.index') }}"
                class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">Pages</a>
-            @if(Route::has('profile.edit'))
+            @if(config('linky.auth.functionalities.user_profile'))
                 <a href="{{ route('profile.edit') }}"
                    class="mx-4 px-4 py-2 text-base font-medium text-white hover:text-indigo-50 hover:bg-indigo-500 hover:rounded">Profile</a>
             @endif
