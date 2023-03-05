@@ -44,6 +44,15 @@
                                 </form>
                             @endif
                         @endauth
+                    @else
+                        @auth()
+                            @if(Route::has('logout'))
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <x-linky::menu-button>Logout</x-linky::menu-button>
+                                </form>
+                            @endif
+                        @endauth
                     @endif
                 </div>
             </div>
