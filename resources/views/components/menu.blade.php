@@ -26,16 +26,16 @@
                     <x-linky::menu-link href="{{ route('linky.admin.collection.index') }}">Collections</x-linky::menu-link>
                     <x-linky::menu-link href="{{ route('linky.admin.page.index') }}">Pages</x-linky::menu-link>
                     @if(config('linky.auth.functionalities.user_profile'))
-                        <x-linky::menu-link href="{{ route('profile.edit') }}">Profile</x-linky::menu-link>
+                        <x-linky::menu-link href="{{ route('linky.auth.profile.edit') }}">Profile</x-linky::menu-link>
                     @endif
                 </div>
                 <div class="">
                     @if(config('linky.auth.use_linky_auth'))
                         @guest()
-                            <x-linky::menu-button-a href="{{ route('login') }}">Log in</x-linky::menu-button-a>
+                            <x-linky::menu-button-a href="{{ route('linky.auth.login') }}">Log in</x-linky::menu-button-a>
                         @endguest
                         @auth()
-                            <form method="POST" action="{{ route('logout') }}">
+                            <form method="POST" action="{{ route('linky.auth.logout') }}">
                                 @csrf
                                 <x-linky::menu-button>Logout</x-linky::menu-button>
                             </form>
@@ -59,7 +59,7 @@
             <x-linky::menu-link-mobile href="{{ route('linky.admin.collection.index') }}">Collections</x-linky::menu-link-mobile>
             <x-linky::menu-link-mobile href="{{ route('linky.admin.page.index') }}">Pages</x-linky::menu-link-mobile>
             @if(config('linky.auth.functionalities.user_profile'))
-                <x-linky::menu-link-mobile href="{{ route('profile.edit') }}">Profile</x-linky::menu-link-mobile>
+                <x-linky::menu-link-mobile href="{{ route('linky.auth.profile.edit') }}">Profile</x-linky::menu-link-mobile>
             @endif
         </nav>
     </div>

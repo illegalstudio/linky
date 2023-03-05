@@ -77,4 +77,25 @@ class User extends Authenticatable
     {
         return $this->hasMany(Content::class);
     }
+
+    /**
+     * @todo To be implemented.
+     *
+     * @param $token
+     * @return true
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        return true;
+    }
+
+    /**
+     * @todo To be implemented.
+     *
+     * @return true
+     */
+    public function sendEmailVerificationNotification()
+    {
+        return true;
+    }
 }

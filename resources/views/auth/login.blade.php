@@ -1,5 +1,5 @@
 <x-linky::layout>
-    <form method="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{ route('linky.auth.login') }}">
         @csrf
 
         <!-- Email Address -->
@@ -31,7 +31,7 @@
 
         <div class="flex items-center justify-end mt-4">
             @if (config('linky.auth.functionalities.forgot_password'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('linky.auth.password.request') }}">
                     {{ __('Forgot your password?') }}
                 </a>
             @endif
@@ -43,7 +43,7 @@
 
         <div class="mt-10 flex flex-col items-center sm:flex-col sm:items-start sm:mt-2">
             @if (config('linky.auth.functionalities.register'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('linky.auth.register') }}">
                     {{ __('Dont\'t have an account? Register here') }}
                 </a>
             @endif
