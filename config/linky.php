@@ -10,7 +10,6 @@ return [
         'functionalities'    => [
             'register'           => env('LINKY_AUTH_FUNCTIONALITIES_REGISTER', true),
             'forgot_password'    => env('LINKY_AUTH_FUNCTIONALITIES_FORGOT_PASSWORD', true),
-            'reset_password'     => env('LINKY_AUTH_FUNCTIONALITIES_RESET_PASSWORD', true),
             'email_verification' => env('LINKY_AUTH_FUNCTIONALITIES_EMAIL_VERIFICATION', true),
             'user_profile'       => env('LINKY_AUTH_FUNCTIONALITIES_USER_PROFILE', true),
         ]

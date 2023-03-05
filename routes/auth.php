@@ -25,9 +25,7 @@ Route::prefix('linky/auth')->middleware('linky-guest')->group(function () {
     if (config('linky.auth.functionalities.forgot_password')) {
         Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])->name('linky.auth.password.request');
         Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])->name('linky.auth.password.email');
-    }
 
-    if (config('linky.auth.functionalities.reset_password')) {
         Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->name('linky.auth.password.reset');
         Route::post('reset-password', [NewPasswordController::class, 'store'])->name('linky.auth.password.store');
     }
