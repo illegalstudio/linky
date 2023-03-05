@@ -112,6 +112,10 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function sendEmailVerificationNotification(): void
     {
+        if(!config('linky.auth.functionalities.email_verification')) {
+            return;
+        }
+
         $notification = new VerifyEmail;
 
         $notification::$createUrlCallback = function ($notifiable) {

@@ -31,10 +31,14 @@ class RouteServiceProvider extends IlluminateRouteServiceProvider
         $this->aliasMiddleware('linky-auth', Authenticate::class);
         $this->aliasMiddleware('ensure-email-is-verified', EnsureEmailIsVerified::class);
 
-        $this->middlewareGroup('linky-authenticated', [
-            'linky-auth',
-            'ensure-email-is-verified:linky.auth.verification.notice',
-        ]);
+        if(config('linky.auth.functionalities.email_verification')) {
+            $this->middlewareGroup('linky-authenticated', [
+                'linky-auth',
+                'ensure-email-is-verified:linky.auth.verification.notice',
+            ]);
+        } else {
+            $this->aliasMiddleware('linky-authenticated', Authenticate::class);
+        }
 
         $this->middlewareGroup('linky-web', [
             EncryptCookies::class,
