@@ -104,7 +104,6 @@ class NoAuthRequiredTestCase extends \Orchestra\Testbench\TestCase
                 'use_linky_auth'     => env('LINKY_AUTH_USE_LINKY_AUTH', true),
                 'require_valid_user' => env('LINKY_AUTH_REQUIRE_VALID_USER', false),
                 'multi_tenant'       => env('LINKY_AUTH_MULTI_TENANT', false),
-                'login_route_name'   => env('LINKY_AUTH_LOGIN_ROUTE_NAME', 'linky.auth.login'),
             ],
             'db'        => [
                 'prefix' => env('LINKY_DB_PREFIX', 'linky_'),
