@@ -21,7 +21,7 @@ final class LinkRepository extends AbstractRepository
      * @param string|null $description The description of the content.
      * @return Content
      */
-    public static function create(
+    public function create(
         array  $data = [],
         bool   $public = true,
         string $slug = null,
@@ -29,7 +29,7 @@ final class LinkRepository extends AbstractRepository
         string $description = null
     ): Content
     {
-        return parent::createContent(
+        return $this->createContent(
             Link::create($data),
             ContentType::Link,
             $public,
@@ -50,7 +50,7 @@ final class LinkRepository extends AbstractRepository
      * @param string|null $description The description of the content.
      * @return Content
      */
-    public static function update(
+    public function update(
         Link   $link,
         array  $data,
         bool   $public,
@@ -61,7 +61,7 @@ final class LinkRepository extends AbstractRepository
     {
         $link->update($data);
 
-        return parent::updateContent($link->content, $public, $slug, $name, $description);
+        return $this->updateContent($link->content, $public, $slug, $name, $description);
     }
 
 
@@ -73,7 +73,7 @@ final class LinkRepository extends AbstractRepository
      * @return LengthAwarePaginator|array
      * @throws Exception
      */
-    public static function paginateWithContent(int $perPage = 10, array $sort = []): LengthAwarePaginator|array
+    public function paginateWithContent(int $perPage = 10, array $sort = []): LengthAwarePaginator|array
     {
         $query = Link::with('content')
             ->select(Link::getField('*'))

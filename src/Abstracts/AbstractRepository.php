@@ -5,17 +5,24 @@ namespace Illegal\Linky\Abstracts;
 use Illegal\Linky\Enums\ContentType;
 use Illegal\Linky\Models\Auth\User;
 use Illegal\Linky\Models\Content;
+use Illegal\Linky\Services\SlugGenerator;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class AbstractRepository
 {
+    /**
+     * @param SlugGenerator $slugGenerator The slug generator service
+     */
+    public function __construct(private readonly SlugGenerator $slugGenerator)
+    {}
+
     /**
      * This function must be implemented by the child class.
      *
      * @param array $data The data to create the content with
      * @return Content
      */
-    abstract public static function create(array $data = []): Content;
+    abstract public function create(array $data = []): Content;
 
     /**
      * This function creates a new content, assigning the given contentable to it.
@@ -28,7 +35,7 @@ abstract class AbstractRepository
      * @param string|null $description The content description
      * @return Content
      */
-    public static function createContent(
+    public function createContent(
         Model       $contentable,
         ContentType $type,
         bool        $public = true,
@@ -37,12 +44,11 @@ abstract class AbstractRepository
         string      $description = null
     ): Content
     {
-        $slug = $slug ?? \Str::random();
 
         $content = new Content();
         $content->forceFill([
+            'slug'        => $this->slugGenerator->generate($slug),
             'type'        => $type,
-            'slug'        => $slug,
             'public'      => $public,
             'name'        => $name,
             'description' => $description,
@@ -74,7 +80,7 @@ abstract class AbstractRepository
      * @param string|null $description The content description
      * @return Content
      */
-    public static function updateContent(
+    public function updateContent(
         Content $content,
         bool    $public,
         string  $slug,

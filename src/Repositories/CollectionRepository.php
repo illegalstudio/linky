@@ -21,7 +21,7 @@ final class CollectionRepository extends AbstractRepository
      * @param string|null $description The description of the content.
      * @return Content
      */
-    public static function create(
+    public function create(
         array  $data = [],
         bool   $public = true,
         string $slug = null,
@@ -50,7 +50,7 @@ final class CollectionRepository extends AbstractRepository
      * @param string|null $description The description of the content.
      * @return Content
      */
-    public static function update(
+    public function update(
         Collection $collection,
         array      $data,
         bool       $public,
@@ -61,7 +61,7 @@ final class CollectionRepository extends AbstractRepository
     {
         $collection->update($data);
 
-        return parent::updateContent(
+        return $this->updateContent(
             $collection->content,
             $public,
             $slug,
@@ -78,7 +78,7 @@ final class CollectionRepository extends AbstractRepository
      * @return LengthAwarePaginator|array
      * @throws Exception
      */
-    public static function paginateWithContent(int $perPage = 10, array $sort = []): LengthAwarePaginator|array
+    public function paginateWithContent(int $perPage = 10, array $sort = []): LengthAwarePaginator|array
     {
         $query = Collection::with('content')
             ->select(Collection::getField('*'))
@@ -90,7 +90,7 @@ final class CollectionRepository extends AbstractRepository
                 /**
                  * If multi-tenant is enabled, only show the collections of the current user.
                  */
-                if(config('linky.auth.multi_tenant')) {
+                if (config('linky.auth.multi_tenant')) {
                     $join->where(Content::getField('user_id'), '=', auth()->id());
                 }
             });

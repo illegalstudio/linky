@@ -15,7 +15,7 @@ class HitRepository
      * @param Content $content The content to create the hit for
      * @return Hit
      */
-    public static function create(Request $request, Content $content): Hit
+    public function create(Request $request, Content $content): Hit
     {
         return Hit::forceCreate(
             [

@@ -16,7 +16,7 @@ class ContentRepository
      * @param int $limit The limit of results
      * @return EloquentCollection
      */
-    public static function search(string $searchString, array|Collection $excludeCollections = null, int $limit = 10): EloquentCollection
+    public function search(string $searchString, array|Collection $excludeCollections = null, int $limit = 10): EloquentCollection
     {
         if (empty($searchString)) {
             $query = Content::orderBy('created_at', 'DESC');

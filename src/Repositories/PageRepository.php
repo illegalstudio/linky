@@ -21,7 +21,7 @@ final class PageRepository extends AbstractRepository
      * @param string|null $description The description of the content.
      * @return Content
      */
-    public static function create(
+    public function create(
         array  $data = [],
         bool   $public = true,
         string $slug = null,
@@ -29,7 +29,7 @@ final class PageRepository extends AbstractRepository
         string $description = null
     ): Content
     {
-        return parent::createContent(
+        return $this->createContent(
             Page::forceCreate($data),
             ContentType::Page,
             $public,
@@ -50,7 +50,7 @@ final class PageRepository extends AbstractRepository
      * @param string|null $description The description of the content.
      * @return Content
      */
-    public static function update(
+    public function update(
         Page   $page,
         array  $data,
         bool   $public,
@@ -61,7 +61,7 @@ final class PageRepository extends AbstractRepository
     {
         $page->update($data);
 
-        return parent::updateContent(
+        return $this->updateContent(
             $page->content,
             $public,
             $slug,
@@ -78,7 +78,7 @@ final class PageRepository extends AbstractRepository
      * @return LengthAwarePaginator|array
      * @throws Exception
      */
-    public static function paginateWithContent(int $perPage = 10, array $sort = []): LengthAwarePaginator|array
+    public function paginateWithContent(int $perPage = 10, array $sort = []): LengthAwarePaginator|array
     {
         $query = Page::with('content')
             ->select(Page::getField('*'))
