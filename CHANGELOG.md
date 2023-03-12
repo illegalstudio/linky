@@ -6,16 +6,26 @@
 - Support for custome templates
 - Scrape of external URL for page content type
 
+# v0.2.1
+
+**Release date**: TBD
+
 # v0.2.0
+
+**Relase date**: 2023-03-05
 
 - Implements all authentication from linky module.
 - Correctly support authentication from the main laravel application.
 
 # v0.1.1
 
+**Relase date**: 2023-03-04
+
 Bug fixing
 
 # v0.1
+
+**Relase date**: 2023-03-04
 
 First realease, with basic functionality.
 It contains:
