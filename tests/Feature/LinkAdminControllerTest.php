@@ -2,7 +2,7 @@
 
 use Illegal\Linky\Http\Middleware\EncryptCookies;
 use Illegal\Linky\Http\Middleware\VerifyCsrfToken;
-use Illegal\Linky\Repositories\LinkRepository;
+use Illegal\Linky\Facades\Repositories\LinkRepository;
 use Illegal\Linky\Tests\Authenticated;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Foundation\Testing\WithFaker;
