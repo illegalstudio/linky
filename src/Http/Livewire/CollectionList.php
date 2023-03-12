@@ -2,9 +2,10 @@
 
 namespace Illegal\Linky\Http\Livewire;
 
+use Exception;
 use Illegal\Linky\Models\Content;
 use Illegal\Linky\Models\Contentable\Collection;
-use Illegal\Linky\Repositories\CollectionRepository;
+use Illegal\Linky\Facades\Repositories\CollectionRepository;
 use Illegal\Linky\Traits\Livewire\Sortable;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -25,6 +26,7 @@ class CollectionList extends Component
      * CollectionList constructor.
      *
      * @param null $id
+     * @throws Exception
      */
     public function __construct($id = null)
     {

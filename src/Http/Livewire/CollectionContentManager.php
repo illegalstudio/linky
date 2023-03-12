@@ -4,7 +4,7 @@ namespace Illegal\Linky\Http\Livewire;
 
 use Illegal\Linky\Models\Content;
 use Illegal\Linky\Models\Contentable\Collection;
-use Illegal\Linky\Repositories\ContentRepository;
+use Illegal\Linky\Facades\Repositories\ContentRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;

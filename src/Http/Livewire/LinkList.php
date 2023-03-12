@@ -2,10 +2,10 @@
 
 namespace Illegal\Linky\Http\Livewire;
 
-use Illegal\Linky\Enums\ContentType;
+use Exception;
+use Illegal\Linky\Facades\Repositories\LinkRepository;
 use Illegal\Linky\Models\Content;
 use Illegal\Linky\Models\Contentable\Link;
-use Illegal\Linky\Repositories\LinkRepository;
 use Illegal\Linky\Traits\Livewire\Sortable;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -26,6 +26,7 @@ class LinkList extends Component
      * LinkList constructor.
      *
      * @param null $id
+     * @throws Exception
      */
     public function __construct($id = null)
     {

@@ -5,7 +5,7 @@ namespace Illegal\Linky\Http\Controllers\Admin;
 use Illegal\Linky\Http\Controllers\Controller;
 use Illegal\Linky\Models\Content;
 use Illegal\Linky\Models\Contentable\Collection;
-use Illegal\Linky\Repositories\CollectionRepository;
+use Illegal\Linky\Facades\Repositories\CollectionRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
