@@ -14,7 +14,8 @@ abstract class AbstractRepository
      * @param SlugGenerator $slugGenerator The slug generator service
      */
     public function __construct(private readonly SlugGenerator $slugGenerator)
-    {}
+    {
+    }
 
     /**
      * This function must be implemented by the child class.
@@ -90,7 +91,7 @@ abstract class AbstractRepository
     {
         $content->forceFill([
             'public'      => $public,
-            'slug'        => $slug,
+            'slug'        => $this->slugGenerator->generate($slug),
             'name'        => $name,
             'description' => $description,
         ]);
