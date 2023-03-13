@@ -136,7 +136,7 @@ class ServiceProvider extends IlluminateServiceProvider
             return new PageRepository(App::make(SlugGenerator::class));
         });
         $this->app->singleton(SlugGenerator::class, function () {
-            return new SlugGenerator();
+            return new SlugGenerator(config('linky.slug_min_length'));
         });
     }
 

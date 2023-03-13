@@ -1,14 +1,16 @@
 # Unreleased
 
-- Customizable number of characters for the auto generated slug
 - Renderer for each type of content
 - Public page for collections
 - Support for custome templates
 - Scrape of external URL for page content type
+- Check uniqueness of both the custom and the generated slug
 
 # v0.2.1
 
 **Release date**: TBD
+
+- Customizable number of characters for the auto generated slug
 
 # v0.2.0
 
