@@ -5,7 +5,7 @@ namespace Illegal\Linky\Http\Controllers\Admin;
 use Illegal\Linky\Http\Controllers\Controller;
 use Illegal\Linky\Models\Content;
 use Illegal\Linky\Models\Contentable\Link;
-use Illegal\Linky\Facades\Repositories\LinkRepository;
+use Illegal\Linky\Repositories\LinkRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -40,12 +40,13 @@ class LinkAdminController extends Controller
      * @param Request $request The request
      * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request, LinkRepository $linkRepository)
     {
         $request->validate(array_merge(Content::getValidationRules(), [
             'url' => 'required|url'
         ]));
-        LinkRepository::create(
+
+        $linkRepository->create(
             $request->only(['url']),
             $request->get('public'),
             $request->get('slug'),
@@ -87,13 +88,13 @@ class LinkAdminController extends Controller
      * @param Link $link The link to update
      * @return RedirectResponse
      */
-    public function update(Request $request, Link $link)
+    public function update(Request $request, LinkRepository $linkRepository, Link $link)
     {
         $request->validate(array_merge(Content::getValidationRules($link->content->id), [
             'url' => 'required|url'
         ]));
 
-        LinkRepository::update(
+        $linkRepository->update(
             $link,
             $request->only(['url']),
             $request->get('public'),

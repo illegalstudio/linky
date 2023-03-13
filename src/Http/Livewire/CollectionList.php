@@ -5,7 +5,7 @@ namespace Illegal\Linky\Http\Livewire;
 use Exception;
 use Illegal\Linky\Models\Content;
 use Illegal\Linky\Models\Contentable\Collection;
-use Illegal\Linky\Facades\Repositories\CollectionRepository;
+use Illegal\Linky\Repositories\CollectionRepository;
 use Illegal\Linky\Traits\Livewire\Sortable;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -49,11 +49,12 @@ class CollectionList extends Component
      * Render the view.
      *
      * @return Factory|View|Application
+     * @throws Exception
      */
-    public function render(): Factory|View|Application
+    public function render(CollectionRepository $collectionRepository): Factory|View|Application
     {
         return view('linky::livewire.collection_list', [
-            'collections' => CollectionRepository::paginateWithContent(10, $this->getSort())
+            'collections' => $collectionRepository->paginateWithContent(10, $this->getSort())
         ]);
     }
 

@@ -5,7 +5,7 @@ namespace Illegal\Linky\Http\Controllers\Admin;
 use Illegal\Linky\Http\Controllers\Controller;
 use Illegal\Linky\Models\Content;
 use Illegal\Linky\Models\Contentable\Collection;
-use Illegal\Linky\Facades\Repositories\CollectionRepository;
+use Illegal\Linky\Repositories\CollectionRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -40,11 +40,11 @@ class CollectionAdminController extends Controller
      * @param Request $request The request
      * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request, CollectionRepository $collectionRepository)
     {
         $request->validate(array_merge(Content::getValidationRules(), []));
 
-        CollectionRepository::create(
+        $collectionRepository->create(
             [],
             $request->get('public'),
             $request->get('slug'),
@@ -86,11 +86,11 @@ class CollectionAdminController extends Controller
      * @param Collection $collection The collection to update
      * @return RedirectResponse
      */
-    public function update(Request $request, Collection $collection)
+    public function update(Request $request, CollectionRepository $collectionRepository, Collection $collection)
     {
         $request->validate(array_merge(Content::getValidationRules($collection->content->id), []));
 
-        CollectionRepository::update(
+        $collectionRepository->update(
             $collection,
             [],
             $request->get('public'),

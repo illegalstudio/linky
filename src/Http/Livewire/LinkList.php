@@ -3,9 +3,9 @@
 namespace Illegal\Linky\Http\Livewire;
 
 use Exception;
-use Illegal\Linky\Facades\Repositories\LinkRepository;
 use Illegal\Linky\Models\Content;
 use Illegal\Linky\Models\Contentable\Link;
+use Illegal\Linky\Repositories\LinkRepository;
 use Illegal\Linky\Traits\Livewire\Sortable;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -49,12 +49,14 @@ class LinkList extends Component
     /**
      * Render the view.
      *
+     * @param LinkRepository $linkRepository
      * @return Factory|View|Application
+     * @throws Exception
      */
-    public function render(): Factory|View|Application
+    public function render(LinkRepository $linkRepository): Factory|View|Application
     {
         return view('linky::livewire.link_list', [
-            'links' => LinkRepository::paginateWithContent(10, $this->getSort())
+            'links' => $linkRepository->paginateWithContent(10, $this->getSort())
         ]);
     }
 

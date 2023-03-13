@@ -5,7 +5,7 @@ namespace Illegal\Linky\Http\Livewire;
 use Exception;
 use Illegal\Linky\Models\Content;
 use Illegal\Linky\Models\Contentable\Page;
-use Illegal\Linky\Facades\Repositories\PageRepository;
+use Illegal\Linky\Repositories\PageRepository;
 use Illegal\Linky\Traits\Livewire\Sortable;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -48,12 +48,14 @@ class PageList extends Component
     /**
      * Render the view.
      *
+     * @param PageRepository $pageRepository
      * @return Factory|View|Application
+     * @throws Exception
      */
-    public function render(): Factory|View|Application
+    public function render(PageRepository $pageRepository): Factory|View|Application
     {
         return view('linky::livewire.page_list', [
-            'pages' => PageRepository::paginateWithContent(10, $this->getSort())
+            'pages' => $pageRepository->paginateWithContent(10, $this->getSort())
         ]);
     }
 
