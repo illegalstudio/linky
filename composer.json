@@ -2,27 +2,27 @@
     "name": "illegal/linky",
     "description": "Linky is a free and open source URL shortener and manager.",
     "type": "library",
-    "license": "GPL-3.0-only",
+    "license": "MIT",
     "authors": [
         {
             "name": "Vincenzo Petrucci",
             "email": "vincenzo.petrucci@gmail.com",
-            "role": "maintainer"
+            "role": "Maintainer"
         },
         {
             "name": "Andrea Pavone",
             "email": "info@andreapavone.com",
-            "role": "developer"
+            "role": "Developer"
         },
         {
             "name": "Mircha Emanuel D'Angelo",
             "email": "mirchaemanuel@gmail.com",
-            "role": "developer"
+            "role": "Developer"
         },
         {
             "name": "Fabrizio Bosica",
             "email": "fabrizio.bosica88@gmail.com",
-            "role": "graphic designer"
+            "role": "Graphic designer"
         }
     ],
     "minimum-stability": "stable",
