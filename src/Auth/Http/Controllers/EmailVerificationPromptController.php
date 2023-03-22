@@ -1,9 +1,9 @@
 <?php
 
-namespace Illegal\Linky\Http\Controllers\Auth;
+namespace Illegal\Linky\Auth\Http\Controllers;
 
-use Illegal\Linky\RouteServiceProvider;
 use Illegal\Linky\Http\Controllers\Controller;
+use Illegal\Linky\RouteServiceProvider;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
