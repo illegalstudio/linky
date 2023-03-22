@@ -25,7 +25,7 @@ class Authenticate extends Middleware
          * Authenticate only if a valid user is required
          */
         if(config('linky.auth.require_valid_user')) {
-            return parent::handle($request, $next, ...$guards);
+            $this->authenticate($request, ['linky_web']);
         }
 
         return $next($request);

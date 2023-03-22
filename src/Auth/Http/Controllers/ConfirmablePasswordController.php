@@ -1,6 +1,6 @@
 <?php
 
-namespace Illegal\Linky\Http\Controllers\Auth;
+namespace Illegal\Linky\Auth\Http\Controllers;
 
 use Illegal\Linky\Http\Controllers\Controller;
 use Illegal\Linky\RouteServiceProvider;
@@ -25,7 +25,7 @@ class ConfirmablePasswordController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        if (! Auth::guard('web')->validate([
+        if (! Auth::guard('linky_web')->validate([
             'email' => $request->user()->email,
             'password' => $request->password,
         ])) {
