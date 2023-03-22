@@ -1,14 +1,14 @@
 <?php
 
-use Illegal\Linky\Http\Controllers\Auth\AuthenticatedSessionController;
-use Illegal\Linky\Http\Controllers\Auth\ConfirmablePasswordController;
-use Illegal\Linky\Http\Controllers\Auth\EmailVerificationNotificationController;
-use Illegal\Linky\Http\Controllers\Auth\EmailVerificationPromptController;
-use Illegal\Linky\Http\Controllers\Auth\NewPasswordController;
-use Illegal\Linky\Http\Controllers\Auth\PasswordController;
-use Illegal\Linky\Http\Controllers\Auth\PasswordResetLinkController;
-use Illegal\Linky\Http\Controllers\Auth\RegisteredUserController;
-use Illegal\Linky\Http\Controllers\Auth\VerifyEmailController;
+use Illegal\Linky\Auth\Http\Controllers\AuthenticatedSessionController;
+use Illegal\Linky\Auth\Http\Controllers\ConfirmablePasswordController;
+use Illegal\Linky\Auth\Http\Controllers\EmailVerificationNotificationController;
+use Illegal\Linky\Auth\Http\Controllers\EmailVerificationPromptController;
+use Illegal\Linky\Auth\Http\Controllers\NewPasswordController;
+use Illegal\Linky\Auth\Http\Controllers\PasswordController;
+use Illegal\Linky\Auth\Http\Controllers\PasswordResetLinkController;
+use Illegal\Linky\Auth\Http\Controllers\RegisteredUserController;
+use Illegal\Linky\Auth\Http\Controllers\VerifyEmailController;
 use Illegal\Linky\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
