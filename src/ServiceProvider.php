@@ -2,8 +2,11 @@
 
 namespace Illegal\Linky;
 
+use Illegal\Linky\Auth\Passwords\PasswordBrokerManager;
+use Illegal\Linky\Models\Auth\User;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Config;
 use Illegal\Linky\Http\Livewire\CollectionContentManager;
 use Illegal\Linky\Http\Livewire\CollectionList;
 use Illegal\Linky\Http\Livewire\LinkList;
@@ -35,6 +38,8 @@ class ServiceProvider extends IlluminateServiceProvider
          *
          * @todo Move this to a command, to avoid doing this on every request.
          */
+
+        /*
         if(config('linky.auth.use_linky_auth')) {
             if(File::exists(base_path() . "/config/auth.php")) {
                 File::move(base_path() . "/config/auth.php", base_path() . "/config/auth.php.linky");
@@ -65,6 +70,7 @@ class ServiceProvider extends IlluminateServiceProvider
                 File::put(base_path() . "/app/Providers/EventServiceProvider.php", $eventServiceProvider);
             }
         }
+        */
     }
 
     /**
@@ -76,7 +82,7 @@ class ServiceProvider extends IlluminateServiceProvider
         /**
          * Replace the sanctum personal access token model with the linky version if linky auth is enabled.
          */
-        if(config('linky.auth.use_linky_auth')) {
+        if (config('linky.auth.use_linky_auth')) {
             Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
         }
 
@@ -102,8 +108,30 @@ class ServiceProvider extends IlluminateServiceProvider
         Livewire::component('linky::page-list', PageList::class);
 
         $this->publishes([
-            __DIR__.'/../config/linky.php' => config_path('linky.php'),
+            __DIR__ . '/../config/linky.php' => config_path('linky.php'),
         ], 'illegal-linky-config');
+
+        Config::set('auth.guards.linky_web', [
+            'driver'   => 'session',
+            'provider' => 'linky_web',
+        ]);
+
+        // Will use the EloquentUserProvider driver with the Admin model
+        Config::set('auth.providers.linky_web', [
+            'driver' => 'eloquent',
+            'model'  => User::class
+        ]);
+
+        Config::set('auth.passwords.linky_users', [
+            'provider' => 'linky_web',
+            'table'    => config('linky.db.prefix') . 'password_resets',
+            'expire'   => 60,
+            'throttle' => 60,
+        ]);
+
+        $this->app->singleton(PasswordBrokerManager::class, function (Application $app) {
+            return new PasswordBrokerManager($app);
+        });
     }
 
     /**
@@ -115,8 +143,8 @@ class ServiceProvider extends IlluminateServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../public/build' => public_path('vendor/linky'),
-            ], ['linky-assets','laravel-assets']);
+                __DIR__ . '/../public/build' => public_path('vendor/linky'),
+            ], ['linky-assets', 'laravel-assets']);
         }
     }
 }
