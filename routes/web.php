@@ -49,11 +49,11 @@ $admin->group(function () {
         'destroy' => 'linky.admin.collection.destroy',
     ]);
 });
-
 /**
  * The main fallback route
  */
 Route::any('{any}', [ContentController::class, 'catchAll'])
     ->where('any', '.*')
     ->name('linky.catch-all')
+    ->withoutMiddleware(\Illegal\Linky\Http\Middleware\VerifyCsrfToken::class)
     ->fallback();

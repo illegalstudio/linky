@@ -27,14 +27,14 @@ class ContentController extends Controller
 
         $content = Content::where('slug', $slug)->with('contentable')->first();
 
+        HitRepository::create($request, $content);
+
         /**
          * If the content is not found, abort with a 404.
          */
         if (!$content) {
             abort(404);
         }
-
-        HitRepository::create($request, $content);
 
         switch ($content->type) {
             case ContentType::Link:

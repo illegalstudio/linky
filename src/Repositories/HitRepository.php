@@ -12,14 +12,14 @@ class HitRepository
      * Create a new hit.
      *
      * @param Request $request The request, used to get the extra user information
-     * @param Content $content The content to create the hit for
+     * @param Content|null $content The content to create the hit for
      * @return Hit
      */
-    public function create(Request $request, Content $content): Hit
+    public static function create(Request $request, Content $content = null): Hit
     {
         return Hit::forceCreate(
             [
-                'content_id' => $content->id,
+                'content_id' => $content?->id,
                 'url'        => $request->fullUrl(),
                 'scheme'     => $request->getScheme(),
                 'host'       => $request->getHost(),
