@@ -67,6 +67,19 @@ class ServiceProvider extends IlluminateServiceProvider
             __DIR__ . '/../config/linky.php' => config_path('linky.php'),
         ], 'illegal-linky-config');
 
+        /**
+         * Blade components
+         */
+        Blade::componentNamespace('Illegal\\Linky\\View\\Components', 'linky');
+
+        /**
+         * LiveWire components
+         */
+        Livewire::component('linky::link-list', LinkList::class);
+        Livewire::component('linky::collection-list', CollectionList::class);
+        Livewire::component('linky::collection-content-manager', CollectionContentManager::class);
+        Livewire::component('linky::page-list', PageList::class);
+
     }
 
     /**
@@ -89,7 +102,7 @@ class ServiceProvider extends IlluminateServiceProvider
          *
          * @todo Move this to a command, to avoid doing this on every request.
          */
-         
+
         /*
         if(config('linky.auth.use_linky_auth')) {
             if(File::exists(base_path() . "/config/auth.php")) {
@@ -143,7 +156,7 @@ class ServiceProvider extends IlluminateServiceProvider
         });
         $this->app->singleton(SlugGenerator::class, function () {
             return new SlugGenerator(config('linky.slug_min_length'));
-        });          
+        });
         if (config('linky.auth.use_linky_auth')) {
             Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
         }
@@ -156,18 +169,6 @@ class ServiceProvider extends IlluminateServiceProvider
             __DIR__ . '/../database/migrations/'
         ]);
 
-        /**
-         * Blade components
-         */
-        Blade::componentNamespace('Illegal\\Linky\\View\\Components', 'linky');
-
-        /**
-         * LiveWire components
-         */
-        Livewire::component('linky::link-list', LinkList::class);
-        Livewire::component('linky::collection-list', CollectionList::class);
-        Livewire::component('linky::collection-content-manager', CollectionContentManager::class);
-        Livewire::component('linky::page-list', PageList::class);
 
         $this->publishes([
             __DIR__ . '/../config/linky.php' => config_path('linky.php'),
