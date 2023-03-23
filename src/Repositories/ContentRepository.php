@@ -16,7 +16,7 @@ class ContentRepository
      * @param int $limit The limit of results
      * @return EloquentCollection
      */
-    public static function search(string $searchString, array|Collection $excludeCollections = null, int $limit = 10): EloquentCollection
+    public function search(string $searchString, array|Collection $excludeCollections = null, int $limit = 10): EloquentCollection
     {
         if (empty($searchString)) {
             $query = Content::orderBy('created_at', 'DESC');
@@ -30,12 +30,12 @@ class ContentRepository
         /**
          * If multi tenant is enabled, only show the contents of the current user.
          */
-        if(config('linky.auth.multi_tenant')) {
+        if (config('linky.auth.multi_tenant')) {
             $query->where('user_id', '=', auth()->id());
         }
 
         if ($excludeCollections) {
-            $excludeCollections = is_array($excludeCollections) ? $excludeCollections: [$excludeCollections];
+            $excludeCollections = is_array($excludeCollections) ? $excludeCollections : [$excludeCollections];
 
             /**
              * Get the collection ids.

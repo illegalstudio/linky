@@ -14,6 +14,11 @@ use Livewire\Component;
 class CollectionContentManager extends Component
 {
     /**
+     * @var ContentRepository
+     */
+    protected ContentRepository $contentRepository;
+
+    /**
      * @var Collection $collection The collection to manage
      */
     public Collection $collection;
@@ -47,8 +52,20 @@ class CollectionContentManager extends Component
     public function mount(Collection $collection): void
     {
         $this->collection = $collection;
+
         $this->searchAvailableContentsAction();
         $this->filterCurrentContentsAction();
+    }
+
+    /**
+     * Boot the component.
+     *
+     * @param ContentRepository $contentRepository
+     * @return void
+     */
+    public function boot(ContentRepository $contentRepository): void
+    {
+        $this->contentRepository = $contentRepository;
     }
 
     /**
@@ -68,7 +85,7 @@ class CollectionContentManager extends Component
      */
     public function searchAvailableContentsAction(): void
     {
-        $this->availableContents = ContentRepository::search($this->searchAvailableContentsString, $this->collection);
+        $this->availableContents = $this->contentRepository->search($this->searchAvailableContentsString, $this->collection);
     }
 
     /**

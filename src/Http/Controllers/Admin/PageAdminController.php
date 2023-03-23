@@ -41,13 +41,13 @@ class PageAdminController extends Controller
      * @param Request $request The request
      * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request, PageRepository $pageRepository)
     {
         $request->validate(array_merge(Content::getValidationRules(), [
             'body' => 'required'
         ]));
 
-        PageRepository::create(
+        $pageRepository->create(
             $request->only(['body']),
             $request->get('public'),
             $request->get('slug'),
@@ -89,13 +89,13 @@ class PageAdminController extends Controller
      * @param Page $page The page to update
      * @return RedirectResponse
      */
-    public function update(Request $request, Page $page)
+    public function update(Request $request, PageRepository $pageRepository, Page $page)
     {
         $request->validate(array_merge(Content::getValidationRules($page->content->id), [
             'body' => 'required'
         ]));
 
-        PageRepository::update(
+        $pageRepository->update(
             $page,
             $request->only(['body']),
             $request->get('public'),

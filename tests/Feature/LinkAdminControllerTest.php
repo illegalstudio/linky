@@ -2,7 +2,6 @@
 
 use Illegal\Linky\Http\Middleware\EncryptCookies;
 use Illegal\Linky\Http\Middleware\VerifyCsrfToken;
-use Illegal\Linky\Repositories\LinkRepository;
 use Illegal\Linky\Tests\Authenticated;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -137,7 +136,10 @@ test('link edit page is not accessible without auth and redirect to login', func
 });
 
 test('link edit page is accessible with auth', function () {
-    $link = LinkRepository::create(
+
+    $linkRepository = app(\Illegal\Linky\Repositories\LinkRepository::class);
+
+    $link = $linkRepository->create(
         ['url' => $this->faker->url()],
         $this->faker->boolean(),
         $this->faker->slug(),

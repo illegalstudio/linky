@@ -2,6 +2,13 @@
 
 namespace Illegal\Linky;
 
+use App;
+use Illegal\Linky\Repositories\CollectionRepository;
+use Illegal\Linky\Repositories\ContentRepository;
+use Illegal\Linky\Repositories\HitRepository;
+use Illegal\Linky\Repositories\LinkRepository;
+use Illegal\Linky\Repositories\PageRepository;
+use Illegal\Linky\Services\SlugGenerator;
 use Illegal\Linky\Auth\Passwords\PasswordBrokerManager;
 use Illegal\Linky\Models\Auth\User;
 use Illuminate\Foundation\Application;
@@ -18,6 +25,50 @@ use Livewire\Livewire;
 
 class ServiceProvider extends IlluminateServiceProvider
 {
+
+    /**
+     * @return void
+     */
+    public function boot(): void
+    {
+
+        /**
+         * Replace the sanctum personal access token model with the linky version if linky auth is enabled.
+         */
+        if (config('linky.auth.use_linky_auth')) {
+            Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
+        }
+
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'linky');
+        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'linky');
+
+        $this->registerPublishing();
+        $this->loadMigrationsFrom([
+            __DIR__ . '/../database/migrations/'
+        ]);
+
+        /**
+         * Blade components
+         */
+        Blade::componentNamespace('Illegal\\Linky\\View\\Components', 'linky');
+
+        /**
+         * LiveWire components
+         */
+        Livewire::component('linky::link-list', LinkList::class);
+        Livewire::component('linky::collection-list', CollectionList::class);
+        Livewire::component('linky::collection-content-manager', CollectionContentManager::class);
+        Livewire::component('linky::page-list', PageList::class);
+
+        /**
+         * Publishing resources
+         */
+        $this->publishes([
+            __DIR__ . '/../config/linky.php' => config_path('linky.php'),
+        ], 'illegal-linky-config');
+
+    }
+
     /**
      * @return void
      */
@@ -38,7 +89,7 @@ class ServiceProvider extends IlluminateServiceProvider
          *
          * @todo Move this to a command, to avoid doing this on every request.
          */
-
+         
         /*
         if(config('linky.auth.use_linky_auth')) {
             if(File::exists(base_path() . "/config/auth.php")) {
@@ -46,7 +97,7 @@ class ServiceProvider extends IlluminateServiceProvider
             }
             $this->mergeConfigFrom(__DIR__ . "/../config/auth.php", "auth");
 
-            if(File::exists(base_path() . "/app/Providers/EventServiceProvider.php")) {
+            if (File::exists(base_path() . "/app/Providers/EventServiceProvider.php")) {
                 $eventServiceProvider = File::get(base_path() . "/app/Providers/EventServiceProvider.php");
                 $eventServiceProvider = str_replace(
                     "use Illuminate\Auth\Listeners\SendEmailVerificationNotification;",
@@ -56,11 +107,11 @@ class ServiceProvider extends IlluminateServiceProvider
                 File::put(base_path() . "/app/Providers/EventServiceProvider.php", $eventServiceProvider);
             }
         } else {
-            if(File::exists(base_path() . "/config/auth.php.linky")) {
+            if (File::exists(base_path() . "/config/auth.php.linky")) {
                 File::move(base_path() . "/config/auth.php.linky", base_path() . "/config/auth.php");
             }
 
-            if(File::exists(base_path() . "/app/Providers/EventServiceProvider.php")) {
+            if (File::exists(base_path() . "/app/Providers/EventServiceProvider.php")) {
                 $eventServiceProvider = File::get(base_path() . "/app/Providers/EventServiceProvider.php");
                 $eventServiceProvider = str_replace(
                     "use Illegal\Linky\Listeners\DummySendEmailVerificationNotification as SendEmailVerificationNotification;",
@@ -71,17 +122,28 @@ class ServiceProvider extends IlluminateServiceProvider
             }
         }
         */
-    }
-
-    /**
-     * @return void
-     */
-    public function boot(): void
-    {
 
         /**
-         * Replace the sanctum personal access token model with the linky version if linky auth is enabled.
+         * Singletons
          */
+        $this->app->singleton(CollectionRepository::class, function () {
+            return new CollectionRepository(App::make(SlugGenerator::class));
+        });
+        $this->app->singleton(ContentRepository::class, function () {
+            return new ContentRepository();
+        });
+        $this->app->singleton(HitRepository::class, function () {
+            return new HitRepository();
+        });
+        $this->app->singleton(LinkRepository::class, function () {
+            return new LinkRepository(App::make(SlugGenerator::class));
+        });
+        $this->app->singleton(PageRepository::class, function () {
+            return new PageRepository(App::make(SlugGenerator::class));
+        });
+        $this->app->singleton(SlugGenerator::class, function () {
+            return new SlugGenerator(config('linky.slug_min_length'));
+        });          
         if (config('linky.auth.use_linky_auth')) {
             Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
         }
