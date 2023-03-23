@@ -31,12 +31,12 @@
                 </div>
                 <div class="">
                     @if(config('linky.auth.use_linky_auth'))
-                        @guest()
+                        @guest('linky_web')
                             @if(Route::has('linky.auth.login'))
                                 <x-linky::menu-button-a href="{{ route('linky.auth.login') }}">Log in</x-linky::menu-button-a>
                             @endif
                         @endguest
-                        @auth()
+                        @auth('linky_web')
                             @if(Route::has('linky.auth.logout'))
                                 <form method="POST" action="{{ route('linky.auth.logout') }}">
                                     @csrf

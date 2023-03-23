@@ -1,9 +1,9 @@
 <?php
 
-namespace Illegal\Linky\Http\Controllers\Auth;
+namespace Illegal\Linky\Auth\Http\Controllers;
 
-use Illegal\Linky\RouteServiceProvider;
 use Illegal\Linky\Http\Controllers\Controller;
+use Illegal\Linky\RouteServiceProvider;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\RedirectResponse;

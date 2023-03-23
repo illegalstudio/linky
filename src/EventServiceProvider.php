@@ -2,8 +2,8 @@
 
 namespace Illegal\Linky;
 
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use Illegal\Linky\Auth\Events\Registered;
+use Illegal\Linky\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider

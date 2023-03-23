@@ -1,11 +1,11 @@
 <?php
 
-namespace Illegal\Linky\Http\Controllers\Auth;
+namespace Illegal\Linky\Auth\Http\Controllers;
 
+use Illegal\Linky\Auth\Events\Registered;
+use Illegal\Linky\Http\Controllers\Controller;
 use Illegal\Linky\Models\Auth\User;
 use Illegal\Linky\RouteServiceProvider;
-use Illegal\Linky\Http\Controllers\Controller;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -45,7 +45,7 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        Auth::login($user);
+        Auth::guard('linky_web')->login($user);
 
         return redirect(RouteServiceProvider::HOME);
     }

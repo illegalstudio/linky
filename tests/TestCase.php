@@ -92,7 +92,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
         /**
          * loading Linky auth config
          */
-        $app['config']['auth'] = require __DIR__ . '/../config/auth.php';
+        $app['config']['auth'] = require __DIR__ . '/config/auth.php';
     }
 
     protected function resolveApplicationCore($app)
