@@ -2,8 +2,6 @@
 
 namespace Illegal\Linky\Tests;
 
-use Illegal\Linky\AuthServiceProvider;
-use Illegal\Linky\EventServiceProvider;
 use Illegal\Linky\RouteServiceProvider;
 use Illegal\Linky\ServiceProvider;
 use Illuminate\Foundation\Application;
@@ -40,8 +38,6 @@ class NoAuthRequiredTestCase extends \Orchestra\Testbench\TestCase
             [
                 ServiceProvider::class,
                 RouteServiceProvider::class,
-                EventServiceProvider::class,
-                AuthServiceProvider::class,
                 LivewireServiceProvider::class
             ]
         );

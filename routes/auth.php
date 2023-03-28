@@ -10,9 +10,10 @@ use Illegal\Linky\Auth\Http\Controllers\PasswordResetLinkController;
 use Illegal\Linky\Auth\Http\Controllers\RegisteredUserController;
 use Illegal\Linky\Auth\Http\Controllers\VerifyEmailController;
 use Illegal\Linky\Http\Controllers\ProfileController;
+use Illegal\Linky\LinkyAuth;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('linky/auth')->middleware('linky-guest')->group(function () {
+Route::prefix('linky/auth')->middleware(LinkyAuth::guestMiddleware())->group(function () {
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('linky.auth.login');
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
@@ -31,7 +32,7 @@ Route::prefix('linky/auth')->middleware('linky-guest')->group(function () {
     }
 });
 
-Route::prefix('linky/auth')->middleware('linky-auth')->group(function () {
+Route::prefix('linky/auth')->middleware(LinkyAuth::isLoggedInMiddleware())->group(function () {
 
     if (config('linky.auth.functionalities.email_verification')) {
 
@@ -53,7 +54,7 @@ Route::prefix('linky/auth')->middleware('linky-auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('linky.auth.logout');
 });
 
-Route::prefix('linky/auth')->middleware('linky-authenticated')->group(function () {
+Route::prefix('linky/auth')->middleware(LinkyAuth::middleware())->group(function () {
     if (config('linky.auth.functionalities.user_profile')) {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('linky.auth.profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('linky.auth.profile.update');

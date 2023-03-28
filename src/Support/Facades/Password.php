@@ -2,7 +2,7 @@
 
 namespace Illegal\Linky\Support\Facades;
 
-use Illegal\Linky\Auth\Passwords\PasswordBrokerManager;
+use Illegal\InsideAuth\Passwords\PasswordBrokerManager;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Support\Facades\Facade;
 

@@ -4,6 +4,7 @@ return [
     'home_slug'       => env('LINKY_HOME_SLUG', '@'),
     'slug_min_length' => env('LINKY_SLUG_MIN_LENGTH', 5),
     'auth'            => [
+        'inside_auth_name'   => env('LINKY_AUTH_INSIDE_AUTH_NAME', 'linky'),
         'use_linky_auth'     => env('LINKY_AUTH_USE_LINKY_AUTH', true),
         'require_valid_user' => env('LINKY_AUTH_REQUIRE_VALID_USER', true),
         'multi_tenant'       => env('LINKY_AUTH_MULTI_TENANT', false),

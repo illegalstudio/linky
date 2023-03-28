@@ -2,7 +2,7 @@
 
 namespace Illegal\Linky\Http\Requests;
 
-use Illegal\Linky\Models\Auth\User;
+use Illegal\InsideAuth\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 

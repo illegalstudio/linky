@@ -2,8 +2,9 @@
 
 namespace Illegal\Linky\Auth\Http\Controllers;
 
+use Illegal\InsideAuth\Http\Requests\LoginRequest;
 use Illegal\Linky\Http\Controllers\Controller;
-use Illegal\Linky\Http\Requests\Auth\LoginRequest;
+use Illegal\Linky\LinkyAuth;
 use Illegal\Linky\RouteServiceProvider;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -37,7 +38,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        Auth::guard('linky_web')->logout();
+        Auth::guard(LinkyAuth::guard())->logout();
 
         $request->session()->invalidate();
 

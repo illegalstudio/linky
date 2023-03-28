@@ -1,15 +1,17 @@
 <?php
 
+use Illegal\InsideAuth\Http\Middleware\VerifyCsrfToken;
 use Illegal\Linky\Http\Controllers\Admin\CollectionAdminController;
 use Illegal\Linky\Http\Controllers\Admin\LinkAdminController;
 use Illegal\Linky\Http\Controllers\Admin\PageAdminController;
 use Illegal\Linky\Http\Controllers\ContentController;
+use Illegal\Linky\LinkyAuth;
 use Illuminate\Support\Facades\Route;
 
 $admin = Route::prefix('linky/admin');
 
 if (config('linky.auth.use_linky_auth') && config('linky.auth.require_valid_user')) {
-    $admin->middleware('linky-authenticated');
+    $admin->middleware(LinkyAuth::middleware());
 } elseif (config('linky.auth.require_valid_user')) {
     $admin->middleware('auth');
 }
@@ -55,5 +57,5 @@ $admin->group(function () {
 Route::any('{any}', [ContentController::class, 'catchAll'])
     ->where('any', '.*')
     ->name('linky.catch-all')
-    ->withoutMiddleware(\Illegal\Linky\Http\Middleware\VerifyCsrfToken::class)
+    ->withoutMiddleware(VerifyCsrfToken::class)
     ->fallback();

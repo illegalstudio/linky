@@ -2,8 +2,8 @@
 
 namespace Illegal\Linky\Abstracts;
 
+use Illegal\InsideAuth\Models\User;
 use Illegal\Linky\Enums\ContentType;
-use Illegal\Linky\Models\Auth\User;
 use Illegal\Linky\Models\Content;
 use Illegal\Linky\Services\SlugGenerator;
 use Illuminate\Database\Eloquent\Model;

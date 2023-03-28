@@ -2,13 +2,14 @@
 
 namespace Illegal\Linky;
 
+use Illegal\InsideAuth\Http\Middleware\Authenticate;
+use Illegal\InsideAuth\Http\Middleware\EncryptCookies;
+use Illegal\InsideAuth\Http\Middleware\RedirectIfAuthenticated;
+use Illegal\InsideAuth\Http\Middleware\VerifyCsrfToken;
+use Illegal\InsideAuth\InsideAuth;
 use Illegal\Linky\Commands\CreateCollectionCommand;
-use Illegal\Linky\Commands\CreatePageCommand;
 use Illegal\Linky\Commands\CreateLinkCommand;
-use Illegal\Linky\Http\Middleware\Authenticate;
-use Illegal\Linky\Http\Middleware\EncryptCookies;
-use Illegal\Linky\Http\Middleware\RedirectIfAuthenticated;
-use Illegal\Linky\Http\Middleware\VerifyCsrfToken;
+use Illegal\Linky\Commands\CreatePageCommand;
 use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as IlluminateRouteServiceProvider;
 use Illuminate\Support\Facades\Route;
@@ -27,28 +28,6 @@ class RouteServiceProvider extends IlluminateRouteServiceProvider
 
     public function boot(): void
     {
-        $this->aliasMiddleware('linky-guest', RedirectIfAuthenticated::class);
-        $this->aliasMiddleware('linky-auth', Authenticate::class);
-        $this->aliasMiddleware('ensure-email-is-verified', EnsureEmailIsVerified::class);
-
-        if(config('linky.auth.functionalities.email_verification')) {
-            $this->middlewareGroup('linky-authenticated', [
-                'linky-auth',
-                'ensure-email-is-verified:linky.auth.verification.notice',
-            ]);
-        } else {
-            $this->aliasMiddleware('linky-authenticated', Authenticate::class);
-        }
-
-        $this->middlewareGroup('linky-web', [
-            EncryptCookies::class,
-            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-            \Illuminate\Session\Middleware\StartSession::class,
-            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            VerifyCsrfToken::class,
-            \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        ]);
-
         $this->commands([
             CreateCollectionCommand::class,
             CreatePageCommand::class,
@@ -56,11 +35,11 @@ class RouteServiceProvider extends IlluminateRouteServiceProvider
         ]);
 
         if (config('linky.auth.use_linky_auth') && config('linky.auth.require_valid_user')) {
-            Route::middleware('linky-web')
+            Route::middleware(LinkyAuth::webMiddleware())
                 ->group(__DIR__ . '/../routes/auth.php');
         }
 
-        Route::middleware('linky-web')
+        Route::middleware(LinkyAuth::webMiddleware())
             ->group(__DIR__ . '/../routes/web.php');
     }
 }

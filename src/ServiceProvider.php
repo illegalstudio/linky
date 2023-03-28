@@ -3,22 +3,20 @@
 namespace Illegal\Linky;
 
 use App;
+use Illegal\InsideAuth\InsideAuth;
+use Illegal\InsideAuth\Models\PersonalAccessToken;
+use Illegal\Linky\Http\Livewire\CollectionContentManager;
+use Illegal\Linky\Http\Livewire\CollectionList;
+use Illegal\Linky\Http\Livewire\LinkList;
+use Illegal\Linky\Http\Livewire\PageList;
 use Illegal\Linky\Repositories\CollectionRepository;
 use Illegal\Linky\Repositories\ContentRepository;
 use Illegal\Linky\Repositories\HitRepository;
 use Illegal\Linky\Repositories\LinkRepository;
 use Illegal\Linky\Repositories\PageRepository;
 use Illegal\Linky\Services\SlugGenerator;
-use Illegal\Linky\Auth\Passwords\PasswordBrokerManager;
-use Illegal\Linky\Models\Auth\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Config;
-use Illegal\Linky\Http\Livewire\CollectionContentManager;
-use Illegal\Linky\Http\Livewire\CollectionList;
-use Illegal\Linky\Http\Livewire\LinkList;
-use Illegal\Linky\Http\Livewire\PageList;
-use Illegal\Linky\Models\PersonalAccessToken;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 use Laravel\Sanctum\Sanctum;
 use Livewire\Livewire;
@@ -80,6 +78,7 @@ class ServiceProvider extends IlluminateServiceProvider
         Livewire::component('linky::collection-content-manager', CollectionContentManager::class);
         Livewire::component('linky::page-list', PageList::class);
 
+
     }
 
     /**
@@ -139,8 +138,8 @@ class ServiceProvider extends IlluminateServiceProvider
         /**
          * Singletons
          */
-        $this->app->singleton(CollectionRepository::class, function () {
-            return new CollectionRepository(App::make(SlugGenerator::class));
+        $this->app->singleton(CollectionRepository::class, function (Application $app) {
+            return new CollectionRepository($app->make(SlugGenerator::class));
         });
         $this->app->singleton(ContentRepository::class, function () {
             return new ContentRepository();
@@ -148,11 +147,11 @@ class ServiceProvider extends IlluminateServiceProvider
         $this->app->singleton(HitRepository::class, function () {
             return new HitRepository();
         });
-        $this->app->singleton(LinkRepository::class, function () {
-            return new LinkRepository(App::make(SlugGenerator::class));
+        $this->app->singleton(LinkRepository::class, function (Application $app) {
+            return new LinkRepository($app->make(SlugGenerator::class));
         });
-        $this->app->singleton(PageRepository::class, function () {
-            return new PageRepository(App::make(SlugGenerator::class));
+        $this->app->singleton(PageRepository::class, function (Application $app) {
+            return new PageRepository($app->make(SlugGenerator::class));
         });
         $this->app->singleton(SlugGenerator::class, function () {
             return new SlugGenerator(config('linky.slug_min_length'));
@@ -174,27 +173,11 @@ class ServiceProvider extends IlluminateServiceProvider
             __DIR__ . '/../config/linky.php' => config_path('linky.php'),
         ], 'illegal-linky-config');
 
-        Config::set('auth.guards.linky_web', [
-            'driver'   => 'session',
-            'provider' => 'linky_web',
-        ]);
+        /**
+         * Register authentication
+         */
+        InsideAuth::register(config('linky.auth.inside_auth_name'));
 
-        // Will use the EloquentUserProvider driver with the Admin model
-        Config::set('auth.providers.linky_web', [
-            'driver' => 'eloquent',
-            'model'  => User::class
-        ]);
-
-        Config::set('auth.passwords.linky_users', [
-            'provider' => 'linky_web',
-            'table'    => config('linky.db.prefix') . 'password_resets',
-            'expire'   => 60,
-            'throttle' => 60,
-        ]);
-
-        $this->app->singleton(PasswordBrokerManager::class, function (Application $app) {
-            return new PasswordBrokerManager($app);
-        });
     }
 
     /**
