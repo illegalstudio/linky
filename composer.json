@@ -59,8 +59,6 @@
         "laravel": {
             "providers": [
                 "Illegal\\Linky\\ServiceProvider",
-                "Illegal\\Linky\\AuthServiceProvider",
-                "Illegal\\Linky\\EventServiceProvider",
                 "Illegal\\Linky\\RouteServiceProvider"
             ]
         }
