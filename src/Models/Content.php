@@ -2,11 +2,11 @@
 
 namespace Illegal\Linky\Models;
 
+use Illegal\InsideAuth\Models\User;
+use Illegal\LaravelUtils\Contracts\HasPrefix;
 use Illegal\Linky\Enums\ContentType;
-use Illegal\Linky\Models\Auth\User;
 use Illegal\Linky\Models\Contentable\Collection;
 use Illegal\Linky\Models\Statistics\Hit;
-use Illegal\Linky\Traits\HasLinkyTablePrefix;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -15,12 +15,15 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Content extends Model
 {
-    use HasLinkyTablePrefix;
+    use HasPrefix;
 
     /**
-     * @var string $tableName The table associated with the model.
+     * Override the db prefix for this model.
      */
-    protected string $tableName = 'contents';
+    public function getPrefix(): string
+    {
+        return config('linky.db.prefix');
+    }
 
     public $casts = [
         'type' => ContentType::class

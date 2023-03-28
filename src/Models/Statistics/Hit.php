@@ -2,17 +2,20 @@
 
 namespace Illegal\Linky\Models\Statistics;
 
-use Illegal\Linky\Traits\HasLinkyTablePrefix;
+use Illegal\LaravelUtils\Contracts\HasPrefix;
 use Illuminate\Database\Eloquent\Model;
 
 class Hit extends Model
 {
-    use HasLinkyTablePrefix;
+    use HasPrefix;
 
     /**
-     * @var string $tableName The table associated with the model.
+     * Override the db prefix for this model.
      */
-    protected string $tableName = "hits";
+    public function getPrefix(): string
+    {
+        return config('linky.db.prefix');
+    }
 
     /**
      * @var string[] $casts The casts of the model.
