@@ -1,11 +1,11 @@
 <?php
 
-use Illegal\InsideAuth\Http\Middleware\VerifyCsrfToken;
 use Illegal\Linky\Http\Controllers\Admin\CollectionAdminController;
 use Illegal\Linky\Http\Controllers\Admin\LinkAdminController;
 use Illegal\Linky\Http\Controllers\Admin\PageAdminController;
 use Illegal\Linky\Http\Controllers\ContentController;
 use Illegal\Linky\LinkyAuth;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Route;
 
 $admin = Route::prefix('linky/admin');
