@@ -2,44 +2,17 @@
 
 namespace Illegal\Linky;
 
-use Illegal\InsideAuth\InsideAuth;
+use Illegal\Linky\Auth\Authentication;
+use Illuminate\Support\Facades\Facade;
 
-final class LinkyAuth
+/**
+ * @mixin Authentication
+ * @see Authentication
+ */
+class LinkyAuth extends Facade
 {
-    /**
-     * Get the name of the guard used to authenticate users.
-     */
-    public static function guard(): string
+    public static function getFacadeAccessor(): string
     {
-        return InsideAuth::getGuardName(config('linky.auth.inside_auth_name'));
-    }
-
-    /**
-     * Get the name of the middleware used to authenticate users.
-     */
-    public static function middleware(): string
-    {
-        return InsideAuth::getMiddlewareName(config('linky.auth.inside_auth_name'));
-    }
-
-    public static function isLoggedInMiddleware(): string
-    {
-        return InsideAuth::getIsLoggedInMiddlewareName(config('linky.auth.inside_auth_name'));
-    }
-
-    /**
-     * Get the name of the middleware to allow guest users
-     */
-    public static function guestMiddleware(): string
-    {
-        return InsideAuth::getGuestMiddlewareName(config('linky.auth.inside_auth_name'));
-    }
-
-    /**
-     * Get the name of the middleware to manage standard web requests
-     */
-    public static function webMiddleware(): string
-    {
-        return InsideAuth::getWebMiddlewareName(config('linky.auth.inside_auth_name'));
+        return Authentication::class;
     }
 }
