@@ -96,7 +96,7 @@ class Content extends Model
     {
         return $this->belongsToMany(
             Collection::class,
-            config('linky.db.prefix') . 'collection_content',
+            Collection::getCollectionContentsTable(),
             'content_id',
             'collection_id'
         )->withPivot('position');
