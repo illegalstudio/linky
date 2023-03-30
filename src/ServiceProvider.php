@@ -84,6 +84,14 @@ class ServiceProvider extends IlluminateServiceProvider
          * Boot authentication
          */
         InsideAuth::boot(config('linky.auth.inside_auth_name'))
+            ->withoutRegistration()
+            ->withConfirmPasswordTemplate('linky::auth.confirm-password')
+            ->withForgotPasswordTemplate('linky::auth.forgot-password')
+            ->withLoginTemplate('linky::auth.login')
+            ->withRegisterTemplate('linky::auth.register')
+            ->withProfileEditTemplate('linky::profile.edit')
+            ->withResetPasswordTemplate('linky::auth.reset-password')
+            ->withVerifyEmailTemplate('linky::auth.verify-email')
             ->withDashboard('linky.admin.link.index');
     }
 
