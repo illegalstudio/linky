@@ -136,6 +136,7 @@ class ServiceProvider extends IlluminateServiceProvider
          * Boot authentication
          */
         InsideAuth::boot(config('linky.auth.name'))
+            ->enabled(config('linky.auth.enabled'))
             ->withoutEmailVerification(config('linky.auth.disable.email_verification'))
             ->withoutRegistration(config('linky.auth.disable.registration'))
             ->withoutForgotPassword(config('linky.auth.disable.forgot_password'))
@@ -150,7 +151,7 @@ class ServiceProvider extends IlluminateServiceProvider
             ->withDashboard('linky.admin.link.index');
 
         $this->app->singleton(Authentication::class, function () {
-            return new Authentication(config('linky.auth.name'));
+            return new Authentication(config('linky.auth.name'), config('linky.auth.enabled'));
         });
 
         /**
