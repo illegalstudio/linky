@@ -51,5 +51,5 @@ expect()->extend('toBeOne', function () {
 |
 */
 function login() : TestCase {
-    return test()->actingAs(\Illegal\Linky\Tests\Authenticated::user());
+    return test()->actingAs(\Illegal\Linky\Tests\Authenticated::user(), 'linky');
 }

@@ -80,15 +80,12 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         parent::resolveApplicationConfiguration($app);
 
+        $app['config']['inside_auth'] = require __DIR__ . '/config/inside_auth.php';
+
         /**
          * using linky auth
          */
-        $app['config']['linky'] = require __DIR__ . '/../config/linky.php';
-
-        /**
-         * loading Linky auth config
-         */
-        $app['config']['auth'] = require __DIR__ . '/config/auth.php';
+        $app['config']['linky'] = require __DIR__ . '/config/linky.php';
     }
 
     protected function resolveApplicationCore($app)
