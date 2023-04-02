@@ -1,11 +1,9 @@
 <?php
 
-use Illegal\Linky\Http\Middleware\EncryptCookies;
-use Illegal\Linky\Http\Middleware\VerifyCsrfToken;
-use Illegal\Linky\Tests\Authenticated;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Cookie\Middleware\EncryptCookies;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Foundation\Testing\WithFaker;
-use Livewire\LivewireServiceProvider;
 
 uses(WithFaker::class);
 

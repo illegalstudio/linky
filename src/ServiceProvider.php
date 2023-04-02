@@ -2,23 +2,22 @@
 
 namespace Illegal\Linky;
 
-use App;
+use Exception;
+use Illegal\InsideAuth\InsideAuth;
+use Illegal\InsideAuth\Models\PersonalAccessToken;
+use Illegal\Linky\Auth\Authentication;
+use Illegal\Linky\Http\Livewire\CollectionContentManager;
+use Illegal\Linky\Http\Livewire\CollectionList;
+use Illegal\Linky\Http\Livewire\LinkList;
+use Illegal\Linky\Http\Livewire\PageList;
 use Illegal\Linky\Repositories\CollectionRepository;
 use Illegal\Linky\Repositories\ContentRepository;
 use Illegal\Linky\Repositories\HitRepository;
 use Illegal\Linky\Repositories\LinkRepository;
 use Illegal\Linky\Repositories\PageRepository;
 use Illegal\Linky\Services\SlugGenerator;
-use Illegal\Linky\Auth\Passwords\PasswordBrokerManager;
-use Illegal\Linky\Models\Auth\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Config;
-use Illegal\Linky\Http\Livewire\CollectionContentManager;
-use Illegal\Linky\Http\Livewire\CollectionList;
-use Illegal\Linky\Http\Livewire\LinkList;
-use Illegal\Linky\Http\Livewire\PageList;
-use Illegal\Linky\Models\PersonalAccessToken;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 use Laravel\Sanctum\Sanctum;
 use Livewire\Livewire;
@@ -27,63 +26,7 @@ class ServiceProvider extends IlluminateServiceProvider
 {
 
     /**
-     * @return void
-     */
-    public function boot(): void
-    {
-
-        /**
-         * Replace the sanctum personal access token model with the linky version if linky auth is enabled.
-         */
-        if (config('linky.auth.use_linky_auth')) {
-            Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
-        }
-
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'linky');
-        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'linky');
-
-        $this->registerPublishing();
-        $this->loadMigrationsFrom([
-            __DIR__ . '/../database/migrations/'
-        ]);
-
-        /**
-         * Blade components
-         */
-        Blade::componentNamespace('Illegal\\Linky\\View\\Components', 'linky');
-
-        /**
-         * LiveWire components
-         */
-        Livewire::component('linky::link-list', LinkList::class);
-        Livewire::component('linky::collection-list', CollectionList::class);
-        Livewire::component('linky::collection-content-manager', CollectionContentManager::class);
-        Livewire::component('linky::page-list', PageList::class);
-
-        /**
-         * Publishing resources
-         */
-        $this->publishes([
-            __DIR__ . '/../config/linky.php' => config_path('linky.php'),
-        ], 'illegal-linky-config');
-
-        /**
-         * Blade components
-         */
-        Blade::componentNamespace('Illegal\\Linky\\View\\Components', 'linky');
-
-        /**
-         * LiveWire components
-         */
-        Livewire::component('linky::link-list', LinkList::class);
-        Livewire::component('linky::collection-list', CollectionList::class);
-        Livewire::component('linky::collection-content-manager', CollectionContentManager::class);
-        Livewire::component('linky::page-list', PageList::class);
-
-    }
-
-    /**
-     * @return void
+     * Register the application services.
      */
     public function register(): void
     {
@@ -91,56 +34,35 @@ class ServiceProvider extends IlluminateServiceProvider
          * Linky config file
          */
         $this->mergeConfigFrom(__DIR__ . "/../config/linky.php", "linky");
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'linky');
+        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'linky');
+        $this->loadMigrationsFrom([__DIR__ . '/../database/migrations/']);
 
-        /**
-         * Load authentication config file.
-         * If the system is using linky authentication, we will use the linky auth config file, backing up the original.
-         * Otherwise, we will restore the original config file.
-         *
-         * We will also try to remove the Event listener for the email verification notification, if the linky auth is enabled.
-         * Otherwise, we will add it back.
-         *
-         * @todo Move this to a command, to avoid doing this on every request.
-         */
+        $this->singletons();
+        $this->publishing();
+    }
 
-        /*
-        if(config('linky.auth.use_linky_auth')) {
-            if(File::exists(base_path() . "/config/auth.php")) {
-                File::move(base_path() . "/config/auth.php", base_path() . "/config/auth.php.linky");
-            }
-            $this->mergeConfigFrom(__DIR__ . "/../config/auth.php", "auth");
+    /**
+     * Bootstrap the application services.
+     * @throws Exception
+     */
+    public function boot(): void
+    {
+        $this->blade();
+        $this->livewire();
+        $this->auth();
+    }
 
-            if (File::exists(base_path() . "/app/Providers/EventServiceProvider.php")) {
-                $eventServiceProvider = File::get(base_path() . "/app/Providers/EventServiceProvider.php");
-                $eventServiceProvider = str_replace(
-                    "use Illuminate\Auth\Listeners\SendEmailVerificationNotification;",
-                    "use Illegal\Linky\Listeners\DummySendEmailVerificationNotification as SendEmailVerificationNotification;",
-                    $eventServiceProvider
-                );
-                File::put(base_path() . "/app/Providers/EventServiceProvider.php", $eventServiceProvider);
-            }
-        } else {
-            if (File::exists(base_path() . "/config/auth.php.linky")) {
-                File::move(base_path() . "/config/auth.php.linky", base_path() . "/config/auth.php");
-            }
-
-            if (File::exists(base_path() . "/app/Providers/EventServiceProvider.php")) {
-                $eventServiceProvider = File::get(base_path() . "/app/Providers/EventServiceProvider.php");
-                $eventServiceProvider = str_replace(
-                    "use Illegal\Linky\Listeners\DummySendEmailVerificationNotification as SendEmailVerificationNotification;",
-                    "use Illuminate\Auth\Listeners\SendEmailVerificationNotification;",
-                    $eventServiceProvider
-                );
-                File::put(base_path() . "/app/Providers/EventServiceProvider.php", $eventServiceProvider);
-            }
-        }
-        */
-
+    /**
+     * Register service singletons
+     */
+    private function singletons(): void
+    {
         /**
          * Singletons
          */
-        $this->app->singleton(CollectionRepository::class, function () {
-            return new CollectionRepository(App::make(SlugGenerator::class));
+        $this->app->singleton(CollectionRepository::class, function (Application $app) {
+            return new CollectionRepository($app->make(SlugGenerator::class));
         });
         $this->app->singleton(ContentRepository::class, function () {
             return new ContentRepository();
@@ -148,66 +70,95 @@ class ServiceProvider extends IlluminateServiceProvider
         $this->app->singleton(HitRepository::class, function () {
             return new HitRepository();
         });
-        $this->app->singleton(LinkRepository::class, function () {
-            return new LinkRepository(App::make(SlugGenerator::class));
+        $this->app->singleton(LinkRepository::class, function (Application $app) {
+            return new LinkRepository($app->make(SlugGenerator::class));
         });
-        $this->app->singleton(PageRepository::class, function () {
-            return new PageRepository(App::make(SlugGenerator::class));
+        $this->app->singleton(PageRepository::class, function (Application $app) {
+            return new PageRepository($app->make(SlugGenerator::class));
         });
         $this->app->singleton(SlugGenerator::class, function () {
             return new SlugGenerator(config('linky.slug_min_length'));
         });
-        if (config('linky.auth.use_linky_auth')) {
-            Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
-        }
-
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'linky');
-        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'linky');
-
-        $this->registerPublishing();
-        $this->loadMigrationsFrom([
-            __DIR__ . '/../database/migrations/'
-        ]);
-
-
-        $this->publishes([
-            __DIR__ . '/../config/linky.php' => config_path('linky.php'),
-        ], 'illegal-linky-config');
-
-        Config::set('auth.guards.linky_web', [
-            'driver'   => 'session',
-            'provider' => 'linky_web',
-        ]);
-
-        // Will use the EloquentUserProvider driver with the Admin model
-        Config::set('auth.providers.linky_web', [
-            'driver' => 'eloquent',
-            'model'  => User::class
-        ]);
-
-        Config::set('auth.passwords.linky_users', [
-            'provider' => 'linky_web',
-            'table'    => config('linky.db.prefix') . 'password_resets',
-            'expire'   => 60,
-            'throttle' => 60,
-        ]);
-
-        $this->app->singleton(PasswordBrokerManager::class, function (Application $app) {
-            return new PasswordBrokerManager($app);
-        });
     }
+
 
     /**
      * Register the package's publishable resources.
      *
      * @return void
      */
-    private function registerPublishing()
+    private function publishing(): void
     {
         if ($this->app->runningInConsole()) {
+            /**
+             * Configurations
+             */
+            $this->publishes([
+                __DIR__ . '/../config/linky.php' => config_path('linky.php'),
+            ], 'illegal-linky-config');
+
+            /**
+             * Assets
+             */
             $this->publishes([
                 __DIR__ . '/../public/build' => public_path('vendor/linky'),
             ], ['linky-assets', 'laravel-assets']);
+        }
+    }
+
+    /**
+     * Register blade components
+     */
+    private function blade(): void
+    {
+        Blade::componentNamespace('Illegal\\Linky\\View\\Components', 'linky');
+    }
+
+    /**
+     * Register livewire components
+     */
+    private function livewire(): void
+    {
+        Livewire::component('linky::link-list', LinkList::class);
+        Livewire::component('linky::collection-list', CollectionList::class);
+        Livewire::component('linky::collection-content-manager', CollectionContentManager::class);
+        Livewire::component('linky::page-list', PageList::class);
+    }
+
+    /**
+     * Register the authentication services.
+     *
+     * @throws Exception
+     */
+    private function auth(): void
+    {
+        /**
+         * Boot authentication
+         */
+        InsideAuth::boot(config('linky.auth.name'))
+            ->enabled(config('linky.auth.enabled'))
+            ->withoutEmailVerification(config('linky.auth.disable.email_verification'))
+            ->withoutRegistration(config('linky.auth.disable.registration'))
+            ->withoutForgotPassword(config('linky.auth.disable.forgot_password'))
+            ->withoutUserProfile(config('linky.auth.disable.user_profile'))
+            ->withConfirmPasswordTemplate('linky::auth.confirm-password')
+            ->withForgotPasswordTemplate('linky::auth.forgot-password')
+            ->withLoginTemplate('linky::auth.login')
+            ->withRegisterTemplate('linky::auth.register')
+            ->withProfileEditTemplate('linky::profile.edit')
+            ->withResetPasswordTemplate('linky::auth.reset-password')
+            ->withVerifyEmailTemplate('linky::auth.verify-email')
+            ->withDashboard('linky.admin.link.index');
+
+        $this->app->singleton(Authentication::class, function () {
+            return new Authentication(config('linky.auth.name'), config('linky.auth.enabled'));
+        });
+
+        /**
+         * Replace the sanctum personal access token model with the linky version if linky auth is enabled.
+         */
+        if (config('linky.auth.enabled')) {
+            Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
         }
     }
 }

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up()
     {
-        Schema::create(config('linky.db.prefix') . 'collection_content', function (Blueprint $table) {
+        Schema::create(Collection::getCollectionContentsTable(), function (Blueprint $table) {
             $table->id();
             $table
                 ->foreignIdFor(Collection::class, 'collection_id')
@@ -26,6 +26,6 @@ return new class extends Migration {
 
     public function down()
     {
-        Schema::dropIfExists(config('linky.db.prefix') . 'collection_content');
+        Schema::dropIfExists(Collection::getCollectionContentsTable());
     }
 };

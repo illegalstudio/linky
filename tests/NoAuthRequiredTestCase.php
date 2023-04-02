@@ -2,8 +2,6 @@
 
 namespace Illegal\Linky\Tests;
 
-use Illegal\Linky\AuthServiceProvider;
-use Illegal\Linky\EventServiceProvider;
 use Illegal\Linky\RouteServiceProvider;
 use Illegal\Linky\ServiceProvider;
 use Illuminate\Foundation\Application;
@@ -40,8 +38,6 @@ class NoAuthRequiredTestCase extends \Orchestra\Testbench\TestCase
             [
                 ServiceProvider::class,
                 RouteServiceProvider::class,
-                EventServiceProvider::class,
-                AuthServiceProvider::class,
                 LivewireServiceProvider::class
             ]
         );
@@ -95,25 +91,12 @@ class NoAuthRequiredTestCase extends \Orchestra\Testbench\TestCase
     {
         parent::resolveApplicationConfiguration($app);
 
+        $app['config']['inside_auth'] = require __DIR__ . '/config/inside_auth.php';
+
         /**
          * using linky auth
          */
-        $app['config']['linky'] = [
-            'home_slug' => env('LINKY_HOME_SLUG', '@'),
-            'auth'      => [
-                'use_linky_auth'     => env('LINKY_AUTH_USE_LINKY_AUTH', true),
-                'require_valid_user' => env('LINKY_AUTH_REQUIRE_VALID_USER', false),
-                'multi_tenant'       => env('LINKY_AUTH_MULTI_TENANT', false),
-            ],
-            'db'        => [
-                'prefix' => env('LINKY_DB_PREFIX', 'linky_'),
-            ]
-        ];
-
-        /**
-         * loading Linky auth config
-         */
-        $app['config']['auth'] = require __DIR__ . '/config/auth.php';
+        $app['config']['linky'] = require __DIR__ . '/config/linky_noauth.php';
     }
 
 }

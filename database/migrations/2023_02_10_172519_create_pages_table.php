@@ -1,5 +1,6 @@
 <?php
 
+use Illegal\Linky\Models\Contentable\Page;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -8,7 +9,7 @@ return new class extends Migration {
 
     public function up(): void
     {
-        Schema::create(config('linky.db.prefix') . 'pages', function (Blueprint $table) {
+        Schema::create(Page::getTableName(), function (Blueprint $table) {
             $table->id();
             $table->longText('body');
             $table->timestamps();
@@ -17,6 +18,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists(config('linky.db.prefix') . 'pages');
+        Schema::dropIfExists(Page::getTableName());
     }
 };

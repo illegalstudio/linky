@@ -2,18 +2,21 @@
 
 namespace Illegal\Linky\Models\Contentable;
 
+use Illegal\LaravelUtils\Contracts\HasPrefix;
 use Illegal\Linky\Traits\Contentable;
-use Illegal\Linky\Traits\HasLinkyTablePrefix;
 use Illuminate\Database\Eloquent\Model;
 
 class Page extends Model
 {
-    use Contentable, HasLinkyTablePrefix;
+    use Contentable, HasPrefix;
 
     /**
-     * @var string $tableName The table associated with the model.
+     * Override the db prefix for this model.
      */
-    protected string $tableName = 'pages';
+    public function getPrefix(): string
+    {
+        return config('linky.db.prefix');
+    }
 
     /**
      * @var array $fillable The attributes that are mass assignable.

@@ -2,21 +2,41 @@
 
 namespace Illegal\Linky\Models\Contentable;
 
+use Illegal\LaravelUtils\Contracts\HasPrefix;
 use Illegal\Linky\Models\Content;
 use Illegal\Linky\Traits\Contentable;
-use Illegal\Linky\Traits\HasLinkyTablePrefix;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class Collection extends Model
 {
-    use Contentable, HasLinkyTablePrefix;
+    use Contentable, HasPrefix;
 
     /**
-     * @var string $tableName The table associated with the model.
+     * Override the db prefix for this model.
      */
-    protected string $tableName = 'collections';
+    public function getPrefix(): string
+    {
+        return config('linky.db.prefix');
+    }
+
+    /**
+     * Returns the table name for the collection_contents table.
+     */
+    private function collectionContentsTable(): string
+    {
+        return $this->getPrefix() . 'collection_contents';
+    }
+
+    /**
+     * Returns the table name for the collection_contents table.
+     * Static version of the above method.
+     */
+    public static function getCollectionContentsTable(): string
+    {
+        return ( new self() )->collectionContentsTable();
+    }
 
     protected static function boot()
     {
@@ -39,7 +59,7 @@ class Collection extends Model
     {
         return $this->belongsToMany(
             Content::class,
-            config('linky.db.prefix') . 'collection_content',
+            $this->collectionContentsTable(),
             'collection_id',
             'content_id'
         )->withPivot('position')->orderBy('position');

@@ -1,9 +1,9 @@
 <?php
 
-use Illegal\Linky\Http\Middleware\EncryptCookies;
-use Illegal\Linky\Http\Middleware\VerifyCsrfToken;
 use Illegal\Linky\Tests\Authenticated;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Cookie\Middleware\EncryptCookies;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\LivewireServiceProvider;
 
@@ -21,7 +21,7 @@ beforeEach(function () {
 test('link page is not accessible without auth and redirect to login', function () {
     $this->get(route('linky.admin.link.index'))
         ->assertStatus(302)
-        ->assertRedirect('/linky/auth/login')
+        ->assertRedirect('/linky/login')
         ->assertSessionDoesntHaveErrors();
 });
 
@@ -34,7 +34,7 @@ test('link page is accessible with auth', function () {
 test('link create page is not accessible without auth and redirect to login', function () {
     $this->get(route('linky.admin.link.create'))
         ->assertStatus(302)
-        ->assertRedirect('/linky/auth/login')
+        ->assertRedirect('/linky/login')
         ->assertSessionDoesntHaveErrors();
 });
 
@@ -131,7 +131,7 @@ test('post a link with slug length gt 255 returns a validation error', function 
 test('link edit page is not accessible without auth and redirect to login', function () {
     $this->get(route('linky.admin.link.edit', ['link' => 1]))
         ->assertStatus(302)
-        ->assertRedirect('/linky/auth/login')
+        ->assertRedirect('/linky/login')
         ->assertSessionDoesntHaveErrors();
 });
 
