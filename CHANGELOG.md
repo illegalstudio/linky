@@ -8,9 +8,10 @@
 
 # v0.2.1
 
-**Release date**: TBD
+**Release date**: 2023-04-02
 
-- Customizable number of characters for the auto generated slug
+- Customizable number of characters for the auto generated slug (LINKY_SLUG_MIN_LENGTH)
+- Uses `illegal/insideauth` to provide authentication
 
 # v0.2.0
 
