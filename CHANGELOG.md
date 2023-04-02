@@ -6,6 +6,12 @@
 - Scrape of external URL for page content type
 - Check uniqueness of both the custom and the generated slug
 
+# v0.2.2
+
+**Release date**: 2023-04-02
+
+- Updated dependencies, added support for laravel 10
+
 # v0.2.1
 
 **Release date**: 2023-04-02
