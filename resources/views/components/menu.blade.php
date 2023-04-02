@@ -34,7 +34,7 @@
                     @endif
                 </div>
                 <div class="">
-                    @if(config('linky.auth.require_valid_user'))
+                    @if(config('linky.auth.require_user'))
                         @if(insideauth_booted())
                             @guest(insideauth()->security_guard)
                                 <x-linky::menu-button-a href="{{ route(insideauth()->route_login) }}">Log in

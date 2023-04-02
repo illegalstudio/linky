@@ -3,10 +3,16 @@
 return [
     'home_slug' => '@',
     'auth'      => [
-        'inside_auth_name'   => 'linky',
-        'use_linky_auth'     => true,
-        'require_valid_user' => true,
-        'multi_tenant'       => false,
+        'name'         => 'linky',
+        'enabled'      => true,
+        'require_user' => true,
+        'multi_tenant' => false,
+        'disable'      => [
+            'registration'       => false,
+            'forgot_password'    => false,
+            'email_verification' => false,
+            'user_profile'       => false,
+        ]
     ],
     'db'        => [
         'prefix' => 'linky_'

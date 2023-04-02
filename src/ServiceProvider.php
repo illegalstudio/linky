@@ -35,7 +35,7 @@ class ServiceProvider extends IlluminateServiceProvider
         /**
          * Replace the sanctum personal access token model with the linky version if linky auth is enabled.
          */
-        if (config('linky.auth.use_linky_auth')) {
+        if (config('linky.auth.enabled')) {
             Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
         }
 
@@ -83,7 +83,11 @@ class ServiceProvider extends IlluminateServiceProvider
         /**
          * Boot authentication
          */
-        InsideAuth::boot(config('linky.auth.inside_auth_name'))
+        InsideAuth::boot(config('linky.auth.name'))
+            ->withoutEmailVerification(config('linky.auth.disable.email_verification'))
+            ->withoutRegistration(config('linky.auth.disable.registration'))
+            ->withoutForgotPassword(config('linky.auth.disable.forgot_password'))
+            ->withoutUserProfile(config('linky.auth.disable.user_profile'))
             ->withConfirmPasswordTemplate('linky::auth.confirm-password')
             ->withForgotPasswordTemplate('linky::auth.forgot-password')
             ->withLoginTemplate('linky::auth.login')
@@ -127,11 +131,11 @@ class ServiceProvider extends IlluminateServiceProvider
             return new SlugGenerator(config('linky.slug_min_length'));
         });
         $this->app->singleton(Authentication::class, function () {
-            return new Authentication(config('linky.auth.inside_auth_name'));
+            return new Authentication(config('linky.auth.name'));
         });
 
 
-        if (config('linky.auth.use_linky_auth')) {
+        if (config('linky.auth.enabled')) {
             Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
         }
 
