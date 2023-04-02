@@ -13,12 +13,15 @@ class Authentication
     /**
      * The InsideAuth authenticator instance
      */
-    private Authenticator $authenticator;
+    private ?Authenticator $authenticator;
 
     /**
      * Retrieve the authenticator instance from the authName
      */
-    public function __construct(private readonly string $authName)
+    public function __construct(
+        private readonly string $authName,
+        private readonly bool $authEnabled = true
+    )
     {
         $this->authenticator = InsideAuth::getAuthenticator($this->authName);
     }
@@ -28,7 +31,7 @@ class Authentication
      */
     public function guard(): string
     {
-        return $this->authenticator->security_guard;
+        return $this->authEnabled ? $this->authenticator->security_guard : 'web';
     }
 
     /**
@@ -36,7 +39,7 @@ class Authentication
      */
     public function middleware(): string
     {
-        return $this->authenticator->middleware_verified;
+        return $this->authEnabled ? $this->authenticator->middleware_verified : 'auth';
     }
 
     /**
