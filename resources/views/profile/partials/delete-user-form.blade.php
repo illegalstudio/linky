@@ -15,7 +15,7 @@
     >{{ __('Delete Account') }}</x-linky::danger-button>
 
     <x-linky::modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable="">
-        <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
+        <form method="post" action="{{ route(insideauth()->route_profile_destroy) }}" class="p-6">
             @csrf
             @method('delete')
 

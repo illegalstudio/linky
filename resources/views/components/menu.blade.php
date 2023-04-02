@@ -25,24 +25,22 @@
                     <x-linky::menu-link href="{{ route('linky.admin.link.index') }}">Links</x-linky::menu-link>
                     <x-linky::menu-link href="{{ route('linky.admin.collection.index') }}">Collections</x-linky::menu-link>
                     <x-linky::menu-link href="{{ route('linky.admin.page.index') }}">Pages</x-linky::menu-link>
-                    @if (Route::has('linky.auth.profile.edit'))
-                        <x-linky::menu-link href="{{ route('linky.auth.profile.edit') }}">Profile</x-linky::menu-link>
+                    @if(config('linky.auth.use_linky_auth'))
+                        @if (insideauth()->user_profile_enabled)
+                            <x-linky::menu-link href="{{ route(insideauth()->route_profile_edit) }}">Profile</x-linky::menu-link>
+                        @endif
                     @endif
                 </div>
                 <div class="">
                     @if(config('linky.auth.use_linky_auth'))
-                        @guest(\Illegal\Linky\LinkyAuth::guard())
-                            @if(Route::has('linky.auth.login'))
-                                <x-linky::menu-button-a href="{{ route('linky.auth.login') }}">Log in</x-linky::menu-button-a>
-                            @endif
+                        @guest(insideauth()->security_guard)
+                            <x-linky::menu-button-a href="{{ route(insideauth()->route_login) }}">Log in</x-linky::menu-button-a>
                         @endguest
-                        @auth(\Illegal\Linky\LinkyAuth::guard())
-                            @if(Route::has('linky.auth.logout'))
-                                <form method="POST" action="{{ route('linky.auth.logout') }}">
-                                    @csrf
-                                    <x-linky::menu-button>Logout</x-linky::menu-button>
-                                </form>
-                            @endif
+                        @auth(insideauth()->security_guard)
+                            <form method="POST" action="{{ route(insideauth()->route_logout) }}">
+                                @csrf
+                                <x-linky::menu-button>Logout</x-linky::menu-button>
+                            </form>
                         @endauth
                     @else
                         @auth()
