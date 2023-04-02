@@ -2,6 +2,7 @@
 
 namespace Illegal\Linky\Abstracts;
 
+use Illegal\InsideAuth\InsideAuth;
 use Illegal\InsideAuth\Models\User;
 use Illegal\Linky\Enums\ContentType;
 use Illegal\Linky\Models\Content;
@@ -60,7 +61,7 @@ abstract class AbstractRepository
          * If the system is configured to use linky auth and
          * the user is logged in, associate the content with the user.
          */
-        if (config('linky.auth.use_linky_auth') && auth()->user() && auth()->user() instanceof User) {
+        if (InsideAuth::booted() && auth()->user() && auth()->user() instanceof User) {
             $content->user()->associate(auth()->user());
         }
 
