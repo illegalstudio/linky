@@ -4,6 +4,7 @@ namespace Illegal\Linky\Http\Controllers;
 
 use Illegal\Linky\Enums\ContentType;
 use Illegal\Linky\Models\Content;
+use Illegal\Linky\Models\Contentable\Collection;
 use Illegal\Linky\Repositories\HitRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
@@ -41,6 +42,12 @@ class ContentController extends Controller
                 return Redirect::to($content->contentable->url);
             case ContentType::Page:
                 return Response::make($content->contentable->body);
+            case ContentType::Collection:
+                /** @var Collection $collection */
+                $collection = $content->contentable;
+                return view('linky::collection', [
+                    'collection' => $collection,
+                ]);
             default:
                 abort(404);
         }
