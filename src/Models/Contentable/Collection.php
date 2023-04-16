@@ -14,6 +14,14 @@ class Collection extends Model
     use Contentable, HasPrefix;
 
     /**
+     * This is just a placeholder, has the name will be set by
+     * the HasPrefix trait.
+     *
+     * @var string The table name.
+     */
+    protected $table = "linky_collections";
+
+    /**
      * Override the db prefix for this model.
      */
     public function getPrefix(): string
