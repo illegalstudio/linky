@@ -145,7 +145,7 @@ class ServiceProvider extends IlluminateServiceProvider
             ->withForgotPasswordTemplate('linky::auth.forgot-password')
             ->withLoginTemplate('linky::auth.login')
             ->withRegisterTemplate('linky::auth.register')
-            ->withProfileEditTemplate('linky::profile.edit')
+            ->withProfileEditTemplate('linky::auth.profile.edit')
             ->withResetPasswordTemplate('linky::auth.reset-password')
             ->withVerifyEmailTemplate('linky::auth.verify-email')
             ->withDashboard('linky.admin.link.index');
