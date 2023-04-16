@@ -3,11 +3,11 @@
 namespace Illegal\Linky\Models\Contentable;
 
 use Illegal\LaravelUtils\Contracts\HasPrefix;
+use Illegal\Linky\Contracts\Contentable;
 use Illegal\Linky\Models\Content;
-use Illegal\Linky\Traits\Contentable;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class Collection extends Model
 {
