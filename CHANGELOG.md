@@ -6,6 +6,14 @@
 - Scrape of external URL for page content type
 - Check uniqueness of both the custom and the generated slug
 
+# v0.2.3
+
+**Release date**: 2023-04-23
+
+- Introduced renderer for each type of content
+- Introduced public page for collections
+- Fixed a bug that allowed to view a content also if it was not published
+
 # v0.2.2
 
 **Release date**: 2023-04-02
