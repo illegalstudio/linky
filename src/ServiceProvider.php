@@ -101,7 +101,7 @@ class ServiceProvider extends IlluminateServiceProvider
              * Assets
              */
             $this->publishes([
-                __DIR__ . '/../public/build' => public_path('vendor/linky'),
+                __DIR__ . '/../public/build' => public_path('vendor/illegal/linky'),
             ], ['linky-assets', 'laravel-assets']);
         }
     }
