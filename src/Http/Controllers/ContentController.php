@@ -37,19 +37,11 @@ class ContentController extends Controller
             abort(404);
         }
 
-        switch ($content->type) {
-            case ContentType::Link:
-                return Redirect::to($content->contentable->url);
-            case ContentType::Page:
-                return Response::make($content->contentable->body);
-            case ContentType::Collection:
-                /** @var Collection $collection */
-                $collection = $content->contentable;
-                return view('linky::public.collection.default', [
-                    'collection' => $collection,
-                ]);
-            default:
-                abort(404);
-        }
+        /**
+         * Use the content type to render the content.
+         * If the content type is not supported, abort with a 404.
+         * The content type render function will call the correct renderer.
+         */
+        return $content->type->render($request, $content);
     }
 }
