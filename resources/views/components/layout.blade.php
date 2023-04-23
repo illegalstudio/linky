@@ -1,10 +1,9 @@
 <html lang="en">
 <head>
     <title>Linky</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-    @vite('resources/js/app.js', 'vendor/linky')
-    @livewireScripts
+    {{ Vite::useHotFile(base_path() . '/vendor/illegal/linky/public/hot')->useBuildDirectory('vendor/illegal/linky')->withEntryPoints([ 'resources/css/app.scss' ]) }}
     @livewireStyles
 </head>
 <body>
@@ -15,5 +14,7 @@
     {{ $slot }}
 </div>
 
+{{ Vite::useHotFile(base_path() . '/vendor/illegal/linky/public/hot')->useBuildDirectory('vendor/illegal/linky')->withEntryPoints([ 'resources/js/app.js' ]) }}
+@livewireScripts
 </body>
 </html>

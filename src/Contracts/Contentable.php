@@ -1,6 +1,6 @@
 <?php
 
-namespace Illegal\Linky\Traits;
+namespace Illegal\Linky\Contracts;
 
 use Illegal\Linky\Models\Content;
 use Illuminate\Database\Eloquent\Relations\MorphOne;

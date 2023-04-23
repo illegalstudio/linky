@@ -3,15 +3,23 @@
 namespace Illegal\Linky\Models\Contentable;
 
 use Illegal\LaravelUtils\Contracts\HasPrefix;
+use Illegal\Linky\Contracts\Contentable;
 use Illegal\Linky\Models\Content;
-use Illegal\Linky\Traits\Contentable;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class Collection extends Model
 {
     use Contentable, HasPrefix;
+
+    /**
+     * This is just a placeholder, has the name will be set by
+     * the HasPrefix trait.
+     *
+     * @var string The table name.
+     */
+    protected $table = "linky_collections";
 
     /**
      * Override the db prefix for this model.

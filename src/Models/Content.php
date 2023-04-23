@@ -18,6 +18,14 @@ class Content extends Model
     use HasPrefix;
 
     /**
+     * This is just a placeholder, has the name will be set by
+     * the HasPrefix trait.
+     *
+     * @var string The table name.
+     */
+    protected $table = "linky_contents";
+
+    /**
      * Override the db prefix for this model.
      */
     public function getPrefix(): string

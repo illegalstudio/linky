@@ -3,12 +3,20 @@
 namespace Illegal\Linky\Models\Contentable;
 
 use Illegal\LaravelUtils\Contracts\HasPrefix;
-use Illegal\Linky\Traits\Contentable;
+use Illegal\Linky\Contracts\Contentable;
 use Illuminate\Database\Eloquent\Model;
 
 class Link extends Model
 {
     use Contentable, HasPrefix;
+
+    /**
+     * This is just a placeholder, has the name will be set by
+     * the HasPrefix trait.
+     *
+     * @var string The table name.
+     */
+    protected $table = "linky_links";
 
     /**
      * Override the db prefix for this model.

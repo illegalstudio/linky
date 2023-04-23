@@ -4,6 +4,7 @@ namespace Illegal\Linky\Http\Controllers;
 
 use Illegal\Linky\Enums\ContentType;
 use Illegal\Linky\Models\Content;
+use Illegal\Linky\Models\Contentable\Collection;
 use Illegal\Linky\Repositories\HitRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
@@ -32,17 +33,15 @@ class ContentController extends Controller
         /**
          * If the content is not found, abort with a 404.
          */
-        if (!$content) {
+        if (!$content || !$content->public) {
             abort(404);
         }
 
-        switch ($content->type) {
-            case ContentType::Link:
-                return Redirect::to($content->contentable->url);
-            case ContentType::Page:
-                return Response::make($content->contentable->body);
-            default:
-                abort(404);
-        }
+        /**
+         * Use the content type to render the content.
+         * If the content type is not supported, abort with a 404.
+         * The content type render function will call the correct renderer.
+         */
+        return $content->type->render($request, $content);
     }
 }

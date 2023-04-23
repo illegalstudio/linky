@@ -3,10 +3,10 @@
 namespace Illegal\Linky\Http\Livewire;
 
 use Exception;
+use Illegal\Linky\Contracts\Livewire\Sortable;
 use Illegal\Linky\Models\Content;
 use Illegal\Linky\Models\Contentable\Page;
 use Illegal\Linky\Repositories\PageRepository;
-use Illegal\Linky\Traits\Livewire\Sortable;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Illegal\Linky\Abstracts;
+namespace Illegal\Linky\Contracts;
 
 use Illegal\InsideAuth\InsideAuth;
 use Illegal\InsideAuth\Models\User;
@@ -9,7 +9,7 @@ use Illegal\Linky\Models\Content;
 use Illegal\Linky\Services\SlugGenerator;
 use Illuminate\Database\Eloquent\Model;
 
-abstract class AbstractRepository
+abstract class AbstractContentableRepository
 {
     /**
      * @param SlugGenerator $slugGenerator The slug generator service

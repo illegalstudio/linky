@@ -101,7 +101,7 @@ class ServiceProvider extends IlluminateServiceProvider
              * Assets
              */
             $this->publishes([
-                __DIR__ . '/../public/build' => public_path('vendor/linky'),
+                __DIR__ . '/../public/build' => public_path('vendor/illegal/linky'),
             ], ['linky-assets', 'laravel-assets']);
         }
     }
@@ -145,7 +145,7 @@ class ServiceProvider extends IlluminateServiceProvider
             ->withForgotPasswordTemplate('linky::auth.forgot-password')
             ->withLoginTemplate('linky::auth.login')
             ->withRegisterTemplate('linky::auth.register')
-            ->withProfileEditTemplate('linky::profile.edit')
+            ->withProfileEditTemplate('linky::auth.profile.edit')
             ->withResetPasswordTemplate('linky::auth.reset-password')
             ->withVerifyEmailTemplate('linky::auth.verify-email')
             ->withDashboard('linky.admin.link.index');

@@ -1,8 +1,6 @@
 <?php
 
-namespace Illegal\Linky\Traits\Livewire;
-
-use Illegal\Linky\Models\Contentable\Link;
+namespace Illegal\Linky\Contracts\Livewire;
 
 trait Sortable
 {

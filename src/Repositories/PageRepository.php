@@ -3,13 +3,13 @@
 namespace Illegal\Linky\Repositories;
 
 use Exception;
-use Illegal\Linky\Abstracts\AbstractRepository;
+use Illegal\Linky\Contracts\AbstractContentableRepository;
 use Illegal\Linky\Enums\ContentType;
 use Illegal\Linky\Models\Content;
 use Illegal\Linky\Models\Contentable\Page;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
-final class PageRepository extends AbstractRepository
+final class PageRepository extends AbstractContentableRepository
 {
     /**
      * Create a new page.
