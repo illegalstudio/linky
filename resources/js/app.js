@@ -1,5 +1,3 @@
-import '../css/app.scss';
-
 /**
  * Alpine JS
  */
