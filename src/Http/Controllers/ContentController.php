@@ -45,7 +45,7 @@ class ContentController extends Controller
             case ContentType::Collection:
                 /** @var Collection $collection */
                 $collection = $content->contentable;
-                return view('linky::collection', [
+                return view('linky::public.collection.default', [
                     'collection' => $collection,
                 ]);
             default:
