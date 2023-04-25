@@ -148,7 +148,8 @@ class ServiceProvider extends IlluminateServiceProvider
             ->withProfileEditTemplate('linky::auth.profile.edit')
             ->withResetPasswordTemplate('linky::auth.reset-password')
             ->withVerifyEmailTemplate('linky::auth.verify-email')
-            ->withDashboard('linky.admin.link.index');
+            ->withDashboard('linky.admin.link.index')
+            ->withHomepage('linky.admin.link.index');
 
         $this->app->singleton(Authentication::class, function () {
             return new Authentication(config('linky.auth.name'), config('linky.auth.enabled'));
