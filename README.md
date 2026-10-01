@@ -1,30 +1,41 @@
-<img width="151" alt="Linky-w@2x" src="https://user-images.githubusercontent.com/1971953/222575552-97a0a0ac-82f6-40f6-b50e-2ebf8077bbf1.png#gh-dark-mode-only">
-<img width="151" alt="linky-darkgrey" src="https://user-images.githubusercontent.com/436702/222921659-7cc67321-2177-442b-8572-a76e926bdff2.png#gh-light-mode-only">
+<p align="center">
+  <img src="assets/logo-mark-light.svg#gh-light-mode-only" alt="Linky logo" width="130">
+  <img src="assets/logo-mark-dark.svg#gh-dark-mode-only" alt="Linky logo" width="130">
+</p>
 
-![TEST](https://github.com/Illegal-Studio/Linky/actions/workflows/test.yml/badge.svg)
+<h1 align="center">Linky</h1>
 
+<p align="center">
+  <em>Your links, your rules.</em>
+</p>
 
-_THIS REPOSITORY IS UNDER ACTIVE DEVELOPMENT AND IS NOT READY FOR PRODUCTION USE._
+<p align="center">
+  <a href="https://github.com/illegalstudio/linky/actions/workflows/test.yml"><img src="https://img.shields.io/github/actions/workflow/status/illegalstudio/linky/test.yml?branch=main&amp;style=flat-square&amp;label=tests&amp;color=000000&amp;logo=github&amp;logoColor=white" alt="Tests"></a>
+  <a href="https://packagist.org/packages/illegal/linky"><img src="https://img.shields.io/packagist/v/illegal/linky?style=flat-square&amp;label=packagist&amp;color=000000&amp;logo=packagist&amp;logoColor=white" alt="Packagist version"></a>
+  <a href="https://packagist.org/packages/illegal/linky"><img src="https://img.shields.io/packagist/dt/illegal/linky?style=flat-square&amp;label=downloads&amp;color=000000" alt="Downloads"></a>
+  <a href="https://github.com/illegalstudio/linky/stargazers"><img src="https://img.shields.io/github/stars/illegalstudio/linky?style=flat-square&amp;label=stars&amp;color=000000&amp;logo=github&amp;logoColor=white" alt="GitHub stars"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/illegalstudio/linky?style=flat-square&amp;label=license&amp;color=000000" alt="License: MIT"></a>
+</p>
 
---------
+<p align="center">
+  <strong>Short links &middot; Collections &middot; Custom pages &middot; Request tracking</strong>
+</p>
 
-**Linky** is an open-source Laravel package that started as a free alternative to Linktree,
-but quickly evolved into a powerful web enthusiast's Swiss Army knife. With Linky, you
-can intercept traffic to a Laravel application, analyze it, act as a honeypot, and 
-create custom workflows and action pipelines based on incoming HTTP requests.
+<p align="center">
+  Linky is a free, open-source Laravel package for managing links and publishing collections and pages.
+  Choose custom URLs, record incoming requests, and manage your content through an admin interface
+  with configurable authentication.
+</p>
 
-Linky's traffic interception and analysis capabilities make it an invaluable tool for 
-developers, security researchers, and web enthusiasts who want to gain insights into 
-their application's behavior and protect it from malicious actors. Its honeypot 
-functionality allows you to attract and trap attackers, while its workflow and pipeline 
-features enable you to automate complex tasks and responses based on incoming requests. 
-Additionally, Linky can also be used in offensive cyber security activities to simulate 
-attacks and test the security of web applications.
+<p align="center">
+  <a href="https://opensource.nahi.me"><strong>Website</strong></a>
+</p>
 
-Whether you're a seasoned Laravel developer, a security researcher, or a cyber security 
-professional looking to enhance your offensive capabilities, Linky is the perfect 
-solution for you. Best of all, it's free and open-source, so you can contribute to 
-its development and customize it to suit your needs.
+<p align="center">
+  <em>This project is under active development and is not ready for production use.</em>
+</p>
+
+---
 
 # Installation
 
