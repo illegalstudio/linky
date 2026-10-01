@@ -1,5 +1,7 @@
 # Unreleased
 
+- Replace the laravel-utils dependency with a local HasPrefix trait.
+- Require InsideAuth 0.2.14 or later to avoid its former laravel-utils dependency.
 - Renderer for each type of content
 - Public page for collections
 - Support for custome templates

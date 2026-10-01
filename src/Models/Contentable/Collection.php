@@ -2,8 +2,8 @@
 
 namespace Illegal\Linky\Models\Contentable;
 
-use Illegal\LaravelUtils\Contracts\HasPrefix;
 use Illegal\Linky\Contracts\Contentable;
+use Illegal\Linky\Contracts\HasPrefix;
 use Illegal\Linky\Models\Content;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Model;

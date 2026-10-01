@@ -2,7 +2,7 @@
 
 namespace Illegal\Linky\Models\Statistics;
 
-use Illegal\LaravelUtils\Contracts\HasPrefix;
+use Illegal\Linky\Contracts\HasPrefix;
 use Illuminate\Database\Eloquent\Model;
 
 class Hit extends Model

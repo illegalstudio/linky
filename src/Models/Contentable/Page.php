@@ -2,8 +2,8 @@
 
 namespace Illegal\Linky\Models\Contentable;
 
-use Illegal\LaravelUtils\Contracts\HasPrefix;
 use Illegal\Linky\Contracts\Contentable;
+use Illegal\Linky\Contracts\HasPrefix;
 use Illuminate\Database\Eloquent\Model;
 
 class Page extends Model

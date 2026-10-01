@@ -3,7 +3,7 @@
 namespace Illegal\Linky\Models;
 
 use Illegal\InsideAuth\Models\User;
-use Illegal\LaravelUtils\Contracts\HasPrefix;
+use Illegal\Linky\Contracts\HasPrefix;
 use Illegal\Linky\Enums\ContentType;
 use Illegal\Linky\Models\Contentable\Collection;
 use Illegal\Linky\Models\Statistics\Hit;
