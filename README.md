@@ -28,7 +28,7 @@
 </p>
 
 <p align="center">
-  <a href="https://opensource.nahi.me"><strong>Website</strong></a>
+  <a href="https://illegal.studio/en/products/linky"><strong>Website</strong></a>
 </p>
 
 <p align="center">
